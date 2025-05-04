@@ -7,4 +7,3 @@ build/
 
 # Environment
 .env
-.env.template
