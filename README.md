@@ -13,4 +13,57 @@
 - React
 - Vite
 - Vitest
-- CSS
+- CSS  
+
+## Getting Started
+
+To get started you can simply clone this `ECOMM` repository and install the dependencies.
+
+Clone the `ECOMM` repository using git:
+
+```
+git clone https://github.com/ZhenyaGri/ECOMM
+cd ECOMM
+cd eCommerce
+```
+
+Install dependencies with this command:
+
+```
+npm install
+```
+
+Run the application with this command:
+
+```
+npm run dev
+```
+
+Run ESLint to check the code for potential issues or style violations:  
+
+```
+npm run lint
+```  
+
+Run the tests using Vitest:  
+
+```
+npm run test
+```  
+
+Start Vite to preview the production build:  
+
+```
+npm run preview
+```
+
+Build the production-ready files using Vite:
+
+```
+npm run build
+```  
+
+Run a custom script to enforce tasks like linting or testing before commits or pushes:  
+```
+npm run prepare
+```  
