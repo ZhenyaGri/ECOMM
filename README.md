@@ -67,3 +67,9 @@ Run a custom script to enforce tasks like linting or testing before commits or p
 ```
 npm run prepare
 ```  
+
+Run application:
+
+  - Copy and rename .env.template to .env and set variables with your data
+  - Install dependencies by running command ```npm install``` in your terminal
+  - Run command in your terminal ```npm run dev```
