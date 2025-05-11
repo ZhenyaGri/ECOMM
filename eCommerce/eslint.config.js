@@ -7,9 +7,7 @@ import prettierPlugin from 'eslint-plugin-prettier';
 export default tseslint.config(
   { ignores: ['dist', 'vite.config.ts', 'vitest.config.ts'] },
   {
-    extends: [js.configs.recommended, 
-              ...tseslint.configs.recommended,
-            ],
+    extends: [js.configs.recommended, ...tseslint.configs.recommended],
     files: ['**/*.{ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
@@ -34,12 +32,15 @@ export default tseslint.config(
       '@typescript-eslint/explicit-function-return-type': 'error',
       '@typescript-eslint/explicit-module-boundary-types': 'error',
       '@typescript-eslint/no-unnecessary-type-assertion': 'error',
-      'prettier/prettier': ['error', {
-        singleQuote: true,
-        semi: true,
-        trailingComma: 'es5',
-        arrowParens: 'always',
-      }],
+      'prettier/prettier': [
+        'error',
+        {
+          singleQuote: true,
+          semi: true,
+          trailingComma: 'es5',
+          arrowParens: 'always',
+        },
+      ],
     },
   }
 );
