@@ -11,6 +11,7 @@
     "preview": "vite preview",
     "prepare": "cd .. && husky ./eCommerce/.husky",
     "format": "prettier --write ."
+
   },
   "dependencies": {
     "react": "^19.0.0",
