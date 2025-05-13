@@ -1,0 +1,21 @@
+@use './auth-create-account';
+@use './auth-log-in';
+@use '../../../../style/mixins' as *;
+.create-account,
+.auth-log-in {
+  max-width: 1440px;
+  width: 100%;
+
+  height: 562px; //!
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 40px;
+  .create-account__title,
+  .auth-log-in__title {
+    @include fontStyle(50px, 400, 1px, var(--font-color));
+  }
+}
