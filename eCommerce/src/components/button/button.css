@@ -1,6 +1,8 @@
 .btn {
   padding: 0.8rem 2rem;
   font-size: 1.5rem;
+  font-family: 'CenturyOld', serif;
+  letter-spacing: 0.05rem;
 }
 
 .btn-light {
