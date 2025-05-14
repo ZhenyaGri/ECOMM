@@ -1,0 +1,32 @@
+.heading {
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  color: var(--color-black);
+  text-align: center;
+}
+
+.heading-secondary {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+}
+
+.heading-tertiary {
+  font-size: 3rem;
+}
+
+.heading-quaternary {
+  font-size: 1.8rem;
+}
+
+.heading-light {
+  color: var(--color-background);
+}
+
+.heading-shop {
+  font-size: 3.5rem;
+  color: var(--color-background);
+  position: absolute;
+  left: 50%;
+  top: 4rem;
+  transform: translateX(-50%);
+}
