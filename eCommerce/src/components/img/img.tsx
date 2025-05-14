@@ -1,3 +1,4 @@
+import './img.css';
 import React, { Component } from 'react';
 
 type ImgProps = {

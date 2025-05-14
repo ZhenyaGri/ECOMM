@@ -22,3 +22,19 @@
   width: 2.4rem;
   margin: 0.75rem;
 }
+
+.link-hero,
+.link-collection {
+  margin: 0.96rem;
+}
+
+.link-hero:link,
+.link-hero:visited {
+  font-size: 1.6rem;
+  color: var(--color-background);
+}
+
+.link-collection:link,
+.link-collection:visited {
+  font-size: 1.6rem;
+}

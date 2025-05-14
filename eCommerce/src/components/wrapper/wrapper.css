@@ -18,3 +18,97 @@
   align-items: center;
   padding: 0.5rem 5rem;
 }
+
+.wrapper-hero,
+.wrapper-banner {
+  background: url('../../assets/img/main-hero.jpg');
+  background-size: 100vw;
+  width: 152.0rem;
+  height: 85.5rem;
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.wrapper-collection {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.wrapper-img {
+  width: 44rem;
+}
+
+.wrapper-collection-text {
+  width: 36rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4rem;
+}
+
+.wrapper-shop {
+  display: flex;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.wrapper-shop-img {
+  width: 33rem;
+  position: relative;
+}
+
+.wrapper-banner {
+  background: url('../../assets/img/main-banner.jpg');
+  background-size: 100vw;
+}
+
+.wrapper-new-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wrapper-new-items-img {
+  width: 63.5rem;
+}
+
+.wrapper-new-items-text {
+  width: 55.5rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  padding: 4rem;
+}
+
+.wrapper-house {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.wrapper-house-text {
+  display: flex;
+  flex-direction: column;
+  width: 36.5rem;
+  padding: 4rem;
+  text-align: center;
+}
+
+.wrapper-house-img {
+  width: 44.5rem;
+  height: 55.8rem;
+}
+
+.wrapper-house-img .house-img {
+  object-fit: cover;
+}
+
+.wrapper-footer-item {
+  display: flex;
+  flex-direction: column;
+  width: 32.5rem;
+}
