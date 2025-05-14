@@ -29,7 +29,7 @@ const CreateUserComponent = (): ReactElement => {
             <input
               className="create-account__input"
               id="email"
-              type="text"
+              type="email"
               placeholder="Email"
             />
           </li>

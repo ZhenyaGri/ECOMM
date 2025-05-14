@@ -11,28 +11,35 @@ const LogInComponent = (): ReactElement => {
             <li className="auth-log-in__input-item">
               <input
                 className="auth-log-in__input"
-                type="text"
-                placeholder="First name"
+                type="email"
+                placeholder="Email"
               />
             </li>
 
             <li className="auth-log-in__input-item">
               <input
                 className="auth-log-in__input"
-                type="text"
-                placeholder="Last name"
+                type="password"
+                placeholder="Password"
               />
             </li>
           </ul>
 
-          <h2 className="auth-log-in__forgot-password">Forgot your password</h2>
+          <div className="auth-log-in__forgot-password-btn">
+            <h2 className="auth-log-in__forgot-password">
+              Forgot your password ?
+            </h2>
+          </div>
         </div>
 
         <div className="auth-log-in__btn-wrapper">
           <div className="auth-log-in__btn">
             <h2 className="auth-log-in__btn-title">Create</h2>
           </div>
-          <h2 className="auth-log-in__to-create-account"> Create account</h2>
+
+          <div className="auth-log-in__to-create-account-btn">
+            <h2 className="auth-log-in__to-create-account"> Create account</h2>
+          </div>
         </div>
       </div>
     </>

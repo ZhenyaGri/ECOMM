@@ -1,8 +1,10 @@
 @use './auth-create-account';
 @use './auth-log-in';
-@use '../../../../style/mixins' as *;
+@use './auth-reset-pass';
+@use '../../../../styles/mixins' as *;
 .create-account,
-.auth-log-in {
+.auth-log-in,
+.auth-reset {
   max-width: 1440px;
   width: 100%;
 

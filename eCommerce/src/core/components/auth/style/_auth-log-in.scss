@@ -1,4 +1,4 @@
-@use '../../../../style/mixins' as *;
+@use '../../../../styles/mixins' as *;
 @use './auth_mixin' as *;
 .auth-log-in__list-wrapper {
   width: 500px;
@@ -20,10 +20,18 @@
       '.auth-log-in__input'
     );
   }
-  .auth-log-in__forgot-password {
+  .auth-log-in__forgot-password-btn {
     width: 100%;
-    text-align: start;
-    @include fontStyle(14px, 400, 1px, var(--font-color));
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    .auth-log-in__forgot-password {
+      position: relative;
+      cursor: pointer;
+      @include fontStyle(14px, 400, 1px, #121212d9);
+      @include underlineOnHover;
+    }
   }
 }
 
@@ -35,7 +43,17 @@
   align-items: center;
   gap: 10px;
   @include btn-base('.auth-log-in__btn', '.auth-log-in__btn-title');
-  .auth-log-in__to-create-account {
-    @include fontStyle(14px, 400, 1px, var(--font-color));
+  .auth-log-in__to-create-account-btn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .auth-log-in__to-create-account {
+      position: relative;
+      cursor: pointer;
+      @include fontStyle(14px, 400, 1px, #121212d9);
+      @include underlineOnHover;
+    }
   }
 }
