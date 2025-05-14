@@ -1,0 +1,16 @@
+.header {
+  padding: 1.25rem 5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo {
+  width: 8rem;
+  margin-right: 25rem;
+}
+
+.header-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+}
