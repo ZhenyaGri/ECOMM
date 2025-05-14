@@ -1,0 +1,23 @@
+.btn {
+  padding: 0.8rem 2rem;
+  font-size: 1.5rem;
+}
+
+.btn-light {
+  background-color: var(--color-background);
+  color: var(--color-black);
+  border: 1px solid var(--color-black);
+  transition: all 0.3s ease-in-out;
+}
+
+.btn-light:hover,
+.btn-light:active {
+  cursor: pointer;
+  background-color: var(--color-black);
+  color: var(--color-background);
+}
+
+.btn-dark {
+  background-color: var(--color-footer-text);
+  color: var(--color-white);
+}
