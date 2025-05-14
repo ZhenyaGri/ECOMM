@@ -1,0 +1,24 @@
+.link:link,
+.link:visited {
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in;
+  color: var(--color-black);
+}
+
+.link:hover,
+.link:active {
+  cursor: pointer;
+  font-style: italic;
+}
+
+.link-logo {
+  padding: 0 0.75rem;
+}
+
+.link-icon {
+  display: block;
+  height: 2.4rem;
+  width: 2.4rem;
+  margin: 0.75rem;
+}
