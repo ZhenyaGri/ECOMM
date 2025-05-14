@@ -1,0 +1,11 @@
+.list {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  font-family: 'Grot12', sans-serif;
+  list-style: none;
+  display: flex;
+}
+
+.list-item {
+  margin: 0.75rem 4rem 0.75rem 0;
+}
