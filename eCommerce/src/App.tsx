@@ -1,33 +1,18 @@
-import { ReactElement, useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '/vite.svg';
-import './App.css';
+import { Wrapper } from './components/wrapper/wrapper';
+import { Header } from './components/header/header';
+import { Text } from './components/text/text';
+import { Main } from './pages/main-page/main-page';
+import { Footer } from './components/footer/footer';
 
-function App(): ReactElement<Element> {
-  const [count, setCount] = useState(0);
-
+function App(): React.ReactNode {
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count: number): number => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Wrapper className="wrapper-shipping">
+        <Text content="Free shipping above €150" />
+      </Wrapper>
+      <Header />
+      <Main />
+      <Footer />
     </>
   );
 }
