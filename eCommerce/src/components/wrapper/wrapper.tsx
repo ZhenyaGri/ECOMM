@@ -1,3 +1,4 @@
+import './wrapper.css';
 import React, { Component } from 'react';
 
 type wrapperProps = {
