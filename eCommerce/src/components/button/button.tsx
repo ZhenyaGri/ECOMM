@@ -10,10 +10,10 @@ type ButtonProps = {
 export class Button extends Component<ButtonProps> {
   render(): React.ReactNode {
     const { type, text, className } = this.props;
-    const combinedClassName = className ? `btn ${className}` : 'btn';
+    const completeClassName = className ? `btn ${className}` : 'btn';
 
     return (
-      <button className={combinedClassName} type={type}>
+      <button className={completeClassName} type={type}>
         {text}
       </button>
     );
