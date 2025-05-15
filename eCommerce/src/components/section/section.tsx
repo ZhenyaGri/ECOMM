@@ -1,11 +1,7 @@
 import React, { Component } from 'react';
+import { BaseProps } from '../../types/types';
 
-type sectionProps = {
-  className?: string;
-  children: React.ReactNode;
-};
-
-export class Section extends Component<sectionProps> {
+export class Section extends Component<BaseProps> {
   render(): React.ReactNode {
     const { className, children } = this.props;
     const completeClassName = className ? `section ${className}` : 'section';

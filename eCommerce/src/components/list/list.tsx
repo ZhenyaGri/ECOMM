@@ -1,12 +1,8 @@
 import './list.css';
 import React, { Component } from 'react';
+import { BaseProps } from '../../types/types';
 
-export type ListProps = {
-  children: React.ReactNode;
-  className?: string;
-};
-
-export class List extends Component<ListProps> {
+export class List extends Component<BaseProps> {
   render(): React.ReactNode {
     const { children, className } = this.props;
     const completeClassName = className ? `list ${className}` : 'list';

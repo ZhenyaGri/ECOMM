@@ -1,11 +1,6 @@
 import './heading.css';
 import React, { Component } from 'react';
-
-type headingProps = {
-  tag: 'h2' | 'h3' | 'h4';
-  className?: string;
-  content: string;
-};
+import { headingProps } from '../../types/types';
 
 export class Heading extends Component<headingProps> {
   render(): React.ReactNode {

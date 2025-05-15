@@ -1,11 +1,6 @@
 import './link.css';
 import React, { Component } from 'react';
-
-type LinkProps = {
-  children: React.ReactNode;
-  href: string;
-  className?: string;
-};
+import { LinkProps } from '../../types/types';
 
 export class Link extends Component<LinkProps> {
   render(): React.ReactNode {

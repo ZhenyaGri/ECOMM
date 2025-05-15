@@ -1,11 +1,6 @@
 import './button.css';
 import React, { Component } from 'react';
-
-type ButtonProps = {
-  type: 'button' | 'submit' | 'reset';
-  text: string;
-  className?: string;
-};
+import { ButtonProps } from '../../types/types';
 
 export class Button extends Component<ButtonProps> {
   render(): React.ReactNode {

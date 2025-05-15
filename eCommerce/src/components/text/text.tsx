@@ -1,10 +1,6 @@
 import './text.css';
 import React, { Component } from 'react';
-
-type textProps = {
-  className?: string;
-  content: string;
-};
+import { textProps } from '../../types/types';
 
 export class Text extends Component<textProps> {
   render(): React.ReactNode {

@@ -1,12 +1,8 @@
 import './wrapper.css';
 import React, { Component } from 'react';
+import { BaseProps } from '../../types/types';
 
-type wrapperProps = {
-  children?: React.ReactNode;
-  className?: string;
-};
-
-export class Wrapper extends Component<wrapperProps> {
+export class Wrapper extends Component<BaseProps> {
   render(): React.ReactNode {
     const { children, className } = this.props;
     const completeClassName = className ? `wrapper ${className}` : 'wrapper';

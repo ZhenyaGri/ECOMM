@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { ListProps } from './list';
+import { BaseProps } from '../../types/types';
 
-export class ListItem extends Component<ListProps> {
+export class ListItem extends Component<BaseProps> {
   render(): React.ReactNode {
     return <li className="list-item">{this.props.children}</li>;
   }

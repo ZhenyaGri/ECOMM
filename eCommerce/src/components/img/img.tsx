@@ -1,11 +1,6 @@
 import './img.css';
 import React, { Component } from 'react';
-
-type ImgProps = {
-  className: string;
-  src: string;
-  alt: string;
-};
+import { ImgProps } from '../../types/types';
 
 export class Img extends Component<ImgProps> {
   render(): React.ReactNode {
