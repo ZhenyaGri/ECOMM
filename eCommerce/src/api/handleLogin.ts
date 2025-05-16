@@ -1,12 +1,27 @@
-import { createAuthCustomer } from './authService';
+import {
+  createAnonymousToken,
+  //createAuthCustomer,
+  signUpCustomer,
+} from './authService';
 
 export const handleLogin = async (): Promise<void> => {
   try {
-    const response = await createAuthCustomer('1@gmail.com', '11111');
-    // for Anonymous Token
-    //const response = await createAnonymousToken();
+    // for Auth Token
+    //const response = await createAuthCustomer('1@gmail.com', '11111');
+    const response = await createAnonymousToken();
     if (response && 'access_token' in response) {
       console.log(response.access_token);
+      const token = response.access_token;
+      const signUp = await signUpCustomer(
+        {
+          email: '1@example.com',
+          firstName: 'John',
+          lastName: 'Doe',
+          password: 'secret123',
+        },
+        token
+      );
+      console.log(signUp);
     }
   } catch (error) {
     if (typeof error === 'object' && error !== null && 'message' in error) {

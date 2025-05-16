@@ -2,9 +2,12 @@ import { ReactElement, useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
 import './App.css';
+import { handleLogin } from './api/handleLogin';
 
 function App(): ReactElement<Element> {
   const [count, setCount] = useState(0);
+
+  handleLogin();
 
   return (
     <>
