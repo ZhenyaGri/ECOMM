@@ -1,7 +1,15 @@
-import { ReactElement } from 'react';
-import './style/auth.scss';
+import { ReactElement, useState } from 'react';
+import { ILogIn, ICreateAccount, IRemaindPass } from './type/auth-types';
+import { inputHandler, getUserDataObj } from './form-handler';
 
 const CreateUserComponent = (): ReactElement => {
+  const [, setNewAccount] = useState<ILogIn | ICreateAccount | IRemaindPass>({
+    firstName: undefined,
+    lastName: undefined,
+    email: undefined,
+    password: undefined,
+  });
+
   return (
     <>
       <div className="create-account">
@@ -13,6 +21,9 @@ const CreateUserComponent = (): ReactElement => {
               id="first-name"
               type="text"
               placeholder="First name"
+              onInput={(e) => {
+                inputHandler(e, 'firstName', setNewAccount);
+              }}
             />
           </li>
 
@@ -22,6 +33,9 @@ const CreateUserComponent = (): ReactElement => {
               id="last-name"
               type="text"
               placeholder="Last name"
+              onInput={(e) => {
+                inputHandler(e, 'lastName', setNewAccount);
+              }}
             />
           </li>
 
@@ -31,6 +45,9 @@ const CreateUserComponent = (): ReactElement => {
               id="email"
               type="email"
               placeholder="Email"
+              onInput={(e) => {
+                inputHandler(e, 'email', setNewAccount);
+              }}
             />
           </li>
 
@@ -40,11 +57,14 @@ const CreateUserComponent = (): ReactElement => {
               id="password"
               type="password"
               placeholder="Password"
+              onInput={(e) => {
+                inputHandler(e, 'password', setNewAccount);
+              }}
             />
           </li>
         </ul>
 
-        <div className="create-account__btn">
+        <div className="create-account__btn" onClick={getUserDataObj}>
           <h2 className="create-account__btn-title">Create</h2>
         </div>
       </div>

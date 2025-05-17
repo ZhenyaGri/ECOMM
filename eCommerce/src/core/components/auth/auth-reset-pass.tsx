@@ -1,6 +1,11 @@
-import { ReactElement } from 'react';
+import { ReactElement, useState } from 'react';
+import { IRemaindPass } from './type/auth-types';
+import { inputHandler, getUserDataObj } from './form-handler';
 
 const PassRecoveryComponent = (): ReactElement => {
+  const [, setEmail] = useState<IRemaindPass>({
+    email: undefined,
+  });
   return (
     <>
       <div className="auth-reset">
@@ -20,12 +25,15 @@ const PassRecoveryComponent = (): ReactElement => {
               className="auth-reset__input"
               type="email"
               placeholder="Email"
+              onInput={(e) => {
+                inputHandler(e, 'email', setEmail);
+              }}
             />
           </li>
         </ul>
 
         <div className="auth-reset__actions">
-          <div className="auth-reset__btn">
+          <div className="auth-reset__btn" onClick={getUserDataObj}>
             <h2 className="auth-reset__btn-title">Submit</h2>
           </div>
 
