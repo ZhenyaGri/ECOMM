@@ -1,11 +1,18 @@
-import { ReactElement, useState } from 'react';
-import { IRemaindPass } from './type/auth-types';
-import { inputHandler, getUserDataObj } from './form-handler';
-
+import { ReactElement, useRef, useState } from 'react';
+import { IRemaindPass, IWarnRefObj } from './type/auth-types';
+import {
+  inputHandler,
+  getUserDataObj,
+  showErrorMessages,
+} from './form-handler';
 const PassRecoveryComponent = (): ReactElement => {
   const [, setEmail] = useState<IRemaindPass>({
     email: undefined,
   });
+
+  const warnRef: IWarnRefObj = {
+    email: useRef(null),
+  };
   return (
     <>
       <div className="auth-reset">
@@ -26,14 +33,23 @@ const PassRecoveryComponent = (): ReactElement => {
               type="email"
               placeholder="Email"
               onInput={(e) => {
-                inputHandler(e, 'email', setEmail);
+                if (warnRef.email) {
+                  inputHandler(e, 'email', setEmail, warnRef.email.current);
+                }
               }}
             />
+            <h2 ref={warnRef.email} className="input-item-warning"></h2>
           </li>
         </ul>
 
         <div className="auth-reset__actions">
-          <div className="auth-reset__btn" onClick={getUserDataObj}>
+          <div
+            className="auth-reset__btn"
+            onClick={() => {
+              getUserDataObj();
+              showErrorMessages(warnRef);
+            }}
+          >
             <h2 className="auth-reset__btn-title">Submit</h2>
           </div>
 

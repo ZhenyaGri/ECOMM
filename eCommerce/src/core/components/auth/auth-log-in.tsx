@@ -1,12 +1,21 @@
-import { ReactElement, useState } from 'react';
-import { inputHandler, getUserDataObj } from './form-handler';
-import type { ILogIn, IRemaindPass } from './type/auth-types';
+import { ReactElement, useRef, useState } from 'react';
+import {
+  inputHandler,
+  getUserDataObj,
+  showErrorMessages,
+} from './form-handler';
+import type { ILogIn, IRemaindPass, IWarnRefObj } from './type/auth-types';
 
 const LogInComponent = (): ReactElement => {
   const [, setLogInData] = useState<ILogIn | IRemaindPass>({
     email: undefined,
     password: undefined,
   });
+
+  const warnRef: IWarnRefObj = {
+    email: useRef(null),
+    password: useRef(null),
+  };
 
   return (
     <>
@@ -21,9 +30,17 @@ const LogInComponent = (): ReactElement => {
                 type="email"
                 placeholder="Email"
                 onInput={(e) => {
-                  inputHandler(e, 'email', setLogInData);
+                  if (warnRef.email) {
+                    inputHandler(
+                      e,
+                      'email',
+                      setLogInData,
+                      warnRef.email.current
+                    );
+                  }
                 }}
               />
+              <h2 ref={warnRef.email} className="input-item-warning"></h2>
             </li>
 
             <li className="auth-log-in__input-item">
@@ -33,9 +50,17 @@ const LogInComponent = (): ReactElement => {
                 placeholder="Password"
                 minLength={8}
                 onInput={(e) => {
-                  inputHandler(e, 'password', setLogInData);
+                  if (warnRef.password) {
+                    inputHandler(
+                      e,
+                      'password',
+                      setLogInData,
+                      warnRef.password.current
+                    );
+                  }
                 }}
               />
+              <h2 ref={warnRef.password} className="input-item-warning"></h2>
             </li>
           </ul>
 
@@ -47,7 +72,13 @@ const LogInComponent = (): ReactElement => {
         </div>
 
         <div className="auth-log-in__btn-wrapper">
-          <div className="auth-log-in__btn" onClick={getUserDataObj}>
+          <div
+            className="auth-log-in__btn"
+            onClick={() => {
+              getUserDataObj();
+              showErrorMessages(warnRef);
+            }}
+          >
             <h2 className="auth-log-in__btn-title">LogIn</h2>
           </div>
 

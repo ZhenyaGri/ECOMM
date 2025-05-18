@@ -13,3 +13,15 @@ export interface ICreateAccount {
 export interface IRemaindPass {
   email: string | undefined;
 }
+
+export interface IWarnRefObj {
+  firstName?: React.RefObject<HTMLHeadingElement | null>;
+  lastName?: React.RefObject<HTMLHeadingElement | null>;
+  email?: React.RefObject<HTMLHeadingElement | null>;
+  password?: React.RefObject<HTMLHeadingElement | null>;
+}
+
+export interface IErrorField {
+  key: string;
+  message: string;
+}
