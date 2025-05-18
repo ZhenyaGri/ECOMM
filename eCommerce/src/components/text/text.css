@@ -6,3 +6,9 @@
 .collection-text {
   margin-top: 1.5rem;
 }
+
+.accent-text {
+  font-family: 'Grot12', sans-serif;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+}

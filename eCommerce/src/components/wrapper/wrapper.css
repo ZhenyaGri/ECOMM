@@ -113,3 +113,10 @@
   align-items: flex-start;
   width: 32.5rem;
 }
+
+.wrapper-404 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
