@@ -1,3 +1,4 @@
+import './index.scss';
 import { Wrapper } from './components/wrapper/wrapper';
 import { Header } from './components/header/header';
 import { Text } from './components/text/text';
