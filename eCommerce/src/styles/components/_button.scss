@@ -4,32 +4,32 @@
   font-family: 'CenturyOld', serif;
   letter-spacing: 0.05rem;
   border: 1px solid var(--color-black);
-}
 
-.btn:hover,
-.btn:active {
-  cursor: pointer;
+  &:hover,
+  &:active {
+    cursor: pointer;
+  }
 }
 
 .btn-light {
   background-color: var(--color-background);
   color: var(--color-black);
   transition: all 0.3s ease-in-out;
-}
 
-.btn-light:hover,
-.btn-light:active {
-  background-color: var(--color-black);
-  color: var(--color-background);
+  &:hover,
+  &:active {
+    background-color: var(--color-black);
+    color: var(--color-background);
+  }
 }
 
 .btn-dark {
   background-color: var(--color-footer-text);
   color: var(--color-white);
   transition: all 0.3s ease-in-out;
-}
 
-.btn-dark:hover,
-.btn-dark:active {
-  transform: scale(1.05);
+  &:hover,
+  &:active {
+    transform: scale(1.05);
+  }
 }
