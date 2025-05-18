@@ -1,6 +1,7 @@
 import {
   TokenResponse,
   CustomerDraft,
+  Customer,
   AuthParams,
   ImportMetaEnv,
   CustomerSignInResult,
@@ -138,5 +139,23 @@ export async function getClientCredentialsToken(): Promise<TokenResponse> {
     throw errorData;
   }
 
+  return await response.json();
+}
+
+export async function getCustomerInfo(token: string): Promise<Customer> {
+  const response = await fetch(
+    `${EnvParams.VITE_CTP_API_URL}/${EnvParams.VITE_CTP_PROJECT_KEY}/me`,
+    {
+      method: 'GET',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error('Error fetching customer data:', errorData);
+    throw errorData;
+  }
   return await response.json();
 }
