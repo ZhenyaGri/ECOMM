@@ -33,6 +33,7 @@ export class Header extends Component {
           <Link href="#">
             <Button className="btn-light" type="button" text="Sign Up" />
           </Link>
+          <Button className="btn-light hidden" type="button" text="Log Out" />
         </Wrapper>
       </header>
     );
