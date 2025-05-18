@@ -13,10 +13,10 @@
   text-transform: none;
   display: flex;
   flex-direction: column;
-}
 
-.footer-list .list-item {
-  margin-bottom: 0;
+  & .list-item {
+    margin-bottom: 0;
+  }
 }
 
 .footer-text {

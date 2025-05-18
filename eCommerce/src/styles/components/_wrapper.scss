@@ -101,10 +101,10 @@
 .wrapper-house-img {
   width: 44.5rem;
   height: 55.8rem;
-}
 
-.wrapper-house-img .house-img {
-  object-fit: cover;
+  & .house-img {
+    object-fit: cover;
+  }
 }
 
 .wrapper-footer-item {
