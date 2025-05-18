@@ -12,6 +12,7 @@ import { Link } from '../link/link';
 import logoFacebook from '../../assets/icons/logo-facebook.svg';
 import logoInstagram from '../../assets/icons/logo-instagram.svg';
 import logoPinterest from '../../assets/icons/logo-pinterest.svg';
+import logoAudo from '../../assets/icons/audo-logo.svg';
 
 export class Footer extends Component {
   render(): React.ReactNode {
@@ -95,11 +96,7 @@ export class Footer extends Component {
           </Wrapper>
         </Wrapper>
         <Wrapper className="footer-contacts">
-          <Img
-            className="footer-logo"
-            src="../src/assets/icons/audo-logo.svg"
-            alt="Audo Logo"
-          />
+          <Img className="footer-logo" src={logoAudo} alt="Audo Logo" />
           <Text
             className="footer-address"
             content="Audo A/S, Aarhusgade 130, Floor 1, 2150 Nordhavn, Denmark"

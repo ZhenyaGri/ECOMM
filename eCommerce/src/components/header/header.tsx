@@ -5,6 +5,9 @@ import { Link } from '../link/link';
 import { Img } from '../img/img';
 import { Wrapper } from '../wrapper/wrapper';
 import { Button } from '../button/button';
+import logoAudo from '../../assets/icons/audo-logo.svg';
+import iconSearch from '../../assets/icons/icon-search.svg';
+import iconBag from '../../assets/icons/icon-bag.svg';
 
 export class Header extends Component {
   render(): React.ReactNode {
@@ -13,27 +16,15 @@ export class Header extends Component {
         <h1 className="hidden">Audo: Online Furniture Store</h1>
         <Nav />
         <Link href="#" className="link-logo">
-          <Img
-            className="header-logo"
-            src="../src/assets/icons/audo-logo.svg"
-            alt="Audo Logo"
-          />
+          <Img className="header-logo" src={logoAudo} alt="Audo Logo" />
         </Link>
         <Wrapper className="wrapper-header">
           <Wrapper className="wrapper-icons">
             <Link href="#" className="link-icon">
-              <Img
-                className="header-icon"
-                src="../src/assets/icons/icon-search.svg"
-                alt="Search Icon"
-              />
+              <Img className="header-icon" src={iconSearch} alt="Search Icon" />
             </Link>
             <Link href="#" className="link-icon">
-              <Img
-                className="header-icon"
-                src="../src/assets/icons/icon-bag.svg"
-                alt="Bag Icon"
-              />
+              <Img className="header-icon" src={iconBag} alt="Bag Icon" />
             </Link>
           </Wrapper>
           <Link href="#">
