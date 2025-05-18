@@ -1,4 +1,3 @@
-import './heading.css';
 import React, { Component } from 'react';
 import { headingProps } from '../../types/types';
 

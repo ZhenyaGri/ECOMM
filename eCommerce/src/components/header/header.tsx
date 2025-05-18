@@ -1,4 +1,3 @@
-import './header.css';
 import React, { Component } from 'react';
 import { Nav } from '../nav/nav';
 import { Link } from '../link/link';

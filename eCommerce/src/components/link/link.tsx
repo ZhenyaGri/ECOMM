@@ -1,4 +1,3 @@
-import './link.css';
 import React, { Component } from 'react';
 import { LinkProps } from '../../types/types';
 

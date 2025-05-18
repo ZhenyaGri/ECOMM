@@ -1,4 +1,3 @@
-import './wrapper.css';
 import React, { Component } from 'react';
 import { BaseProps } from '../../types/types';
 

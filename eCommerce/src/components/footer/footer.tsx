@@ -1,4 +1,3 @@
-import './footer.css';
 import React, { Component } from 'react';
 import { Wrapper } from '../wrapper/wrapper';
 import { Heading } from '../heading/heading';

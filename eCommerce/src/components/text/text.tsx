@@ -1,4 +1,3 @@
-import './text.css';
 import React, { Component } from 'react';
 import { textProps } from '../../types/types';
 
