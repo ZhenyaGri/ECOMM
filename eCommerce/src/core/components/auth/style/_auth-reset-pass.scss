@@ -32,7 +32,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 5px;
+  gap: 10px;
   @include btn-base('.auth-reset__btn', '.auth-reset__btn-title');
   .auth-reset__cancel-text {
     position: relative;

@@ -42,12 +42,11 @@ export const inputHandler = (
 
 //formHandler main func to get whole data obj
 const updateFormState = (
-  value: string | undefined,
+  value: string ,
   inputType: string,
   setState: React.Dispatch<React.SetStateAction<ILogIn | IRemaindPass>>,
   ref: HTMLHeadingElement | null
 ): void => {
-  if (value) {
     const inputVal = getValidInputValue(value, inputType, ref);
     setState((prev) => {
       const stateObj = { ...prev, [inputType]: inputVal };
@@ -55,10 +54,6 @@ const updateFormState = (
       console.log(userDataObj);
       return stateObj;
     });
-  } else {
-    console.error('value is undefind');
-    return;
-  }
 };
 
 //function to get valid value from inpue
@@ -67,24 +62,24 @@ const getValidInputValue = (
   inputType: string,
   ref: HTMLHeadingElement | null
 ): string | undefined => {
-  if (value) {
+  if (value && ref) {
     if (inputType === 'firstName' || inputType === 'lastName') {
       if (value.length > 0) {
-        ref ?ref.textContent = '' : null;
+        ref.textContent = '';
         return value;
       } else {
         if (inputType === 'firstName') {
-          ref ?ref.textContent = 'Please enter your first name': null;
+          ref.textContent = 'Please enter your first name';
         }
         if (inputType === 'lastName') {
-          ref ?ref.textContent = 'Please enter your last name': null;
+          ref.textContent = 'Please enter your last name';
         }
         return undefined;
       }
     } else if (inputType === 'email') {
       const isValid: boolean = /^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(value);
       if (isValid) {
-        ref ?ref.textContent = '': null;
+        ref.textContent = '';
         return value;
       } else {
         return undefined;
@@ -94,11 +89,13 @@ const getValidInputValue = (
         value
       );
       if (isPassValid) {
-        ref ?ref.textContent = '': null;
+        if (ref) {
+          ref.textContent = '';
+        }
         return value;
       } else {
-        ref
-        ? ref.textContent ='Invalid password: min 8 chars, include uppercase and number.': null;
+        ref.textContent =
+          'Invalid password: min 8 chars, include uppercase and number.';
         return undefined;
       }
     } else {
@@ -107,11 +104,12 @@ const getValidInputValue = (
     }
   } else {
     console.error('value is undefined');
+    return undefined;
   }
 };
 
 // error message render
-export const showErrorMessages = (warnRefObj: IWarnRefObj):void => {
+export const showErrorMessages = (warnRefObj: IWarnRefObj): void => {
   const errorFields: IErrorField[] = [
     { key: 'firstName', message: 'Please enter your first name' },
     { key: 'lastName', message: 'Please enter your last name' },

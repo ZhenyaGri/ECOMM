@@ -111,8 +111,9 @@ const CreateUserComponent = (): ReactElement => {
                 }
               }}
             />
+            <h2 ref={warnRef.password} className="input-item-warning"></h2>
           </li>
-          <h2 ref={warnRef.password} className="input-item-warning"></h2>
+
         </ul>
 
         <div
