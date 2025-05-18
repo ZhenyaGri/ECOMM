@@ -21,9 +21,9 @@
 
 .wrapper-hero,
 .wrapper-banner {
-  background: url('../../assets/img/main-hero.jpg');
-  background-size: 100vw;
-  width: 152.0rem;
+  background: url('../../assets/img/main-hero.jpg') no-repeat;
+  background-size: cover;
+  max-width: 152.0rem;
   height: 85.5rem;
   padding: 4rem;
   display: flex;
@@ -63,7 +63,6 @@
 
 .wrapper-banner {
   background: url('../../assets/img/main-banner.jpg');
-  background-size: 100vw;
 }
 
 .wrapper-new-items {
