@@ -11,6 +11,14 @@
     '.create-account__input-item',
     '.create-account__input'
   );
+
+  .create-account-option {
+        @include fontStyle(14px, 400, 1px, var(--font-color));
+  }
+
+  .create-account-option-title {
+    @include fontStyle(14px, 600, 1px, var(--font-color));
+  }
 }
 
 @include btn-base('.create-account__btn', '.create-account__btn-title');

@@ -50,7 +50,7 @@ const PassRecoveryComponent = (): ReactElement => {
               showErrorMessages(warnRef);
             }}
           >
-           <h2 className="auth-reset__btn-title">Submit</h2>
+            <h2 className="auth-reset__btn-title">Submit</h2>
           </div>
 
           <h2 className="auth-reset__cancel-text">Cancel</h2>

@@ -33,7 +33,7 @@
     #{$selector2} {
       width: 100%;
       height: 45px;
-      padding: 15px;
+      padding: 10px 15px;
       @include fontStyle(16px, 400, 1px, var(--font-color));
     }
 
