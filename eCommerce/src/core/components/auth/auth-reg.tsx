@@ -1,5 +1,5 @@
 import { ReactElement, useRef, useState } from 'react';
-import { countries} from './data-list';
+import { countries } from './data-list';
 
 import type {
   ILogIn,
@@ -167,7 +167,12 @@ const CreateUserComponent = (): ReactElement => {
               placeholder="Street"
               onInput={(e) => {
                 if (warnRef.street) {
-                  inputHandler(e, 'street', setNewAccount, warnRef.street.current);
+                  inputHandler(
+                    e,
+                    'street',
+                    setNewAccount,
+                    warnRef.street.current
+                  );
                 }
               }}
             />
@@ -182,12 +187,7 @@ const CreateUserComponent = (): ReactElement => {
               placeholder="City"
               onInput={(e) => {
                 if (warnRef.city) {
-                  inputHandler(
-                    e,
-                    'city',
-                    setNewAccount,
-                    warnRef.city.current
-                  );
+                  inputHandler(e, 'city', setNewAccount, warnRef.city.current);
                 }
               }}
             />
@@ -214,9 +214,10 @@ const CreateUserComponent = (): ReactElement => {
           </li>
 
           <li className="create-account__input-item">
-            <select className="create-account__input" 
-                    name="country"
-                    onChange={(e) => {
+            <select
+              className="create-account__input"
+              name="country"
+              onChange={(e) => {
                 if (warnRef.country) {
                   inputHandler(
                     e,
@@ -225,10 +226,17 @@ const CreateUserComponent = (): ReactElement => {
                     warnRef.country.current
                   );
                 }
-              }}>
-              <option className='create-account-option-title' value="">Chose your country</option>
+              }}
+            >
+              <option className="create-account-option-title" value="">
+                Chose your country
+              </option>
               {countries.map((country) => (
-                <option className='create-account-option' key={country} value={country}>
+                <option
+                  className="create-account-option"
+                  key={country}
+                  value={country}
+                >
                   {country}
                 </option>
               ))}

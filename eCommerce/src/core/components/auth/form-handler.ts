@@ -1,4 +1,4 @@
-import {errorFields } from './data-list';
+import { errorFields } from './data-list';
 import {
   ICreateAccount,
   ILogIn,
@@ -34,7 +34,10 @@ export const inputHandler = (
   ref: HTMLHeadingElement | null
 ): void => {
   const element = e.target;
-  if (element instanceof HTMLInputElement || element instanceof HTMLSelectElement) {
+  if (
+    element instanceof HTMLInputElement ||
+    element instanceof HTMLSelectElement
+  ) {
     const value = element.value;
     updateFormState(value, type, setState, ref);
   }
@@ -63,45 +66,55 @@ const getValidInputValue = (
   ref: HTMLHeadingElement | null
 ): string | undefined => {
   if (value && ref) {
-    if (inputType === 'firstName' || 
-        inputType === 'lastName' || 
-        inputType === 'city' || 
-        inputType === 'street') {
+    if (
+      inputType === 'firstName' ||
+      inputType === 'lastName' ||
+      inputType === 'city' ||
+      inputType === 'street'
+    ) {
       if (value.length > 0) {
         ref.textContent = '';
         return value;
       } else {
         if (inputType === 'firstName') {
-          ref.textContent = 'First name: Must contain at least one character and no special characters or numbers';
+          ref.textContent =
+            'First name: Must contain at least one character and no special characters or numbers';
         }
         if (inputType === 'lastName') {
-          ref.textContent = 'Last name: Must contain at least one character and no special characters or numbers';
+          ref.textContent =
+            'Last name: Must contain at least one character and no special characters or numbers';
         }
         if (inputType === 'street') {
           ref.textContent = 'Street: Must contain at least one character';
         }
         if (inputType === 'city') {
-          ref.textContent = 'City: Must contain at least one character and no special characters or numbers';
+          ref.textContent =
+            'City: Must contain at least one character and no special characters or numbers';
         }
         return undefined;
       }
-    }else if (inputType === 'birthDate') {
-        console.log(value)
-        const isValid: boolean = /^(19\d{2}|200\d|201[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
-        if (isValid) {
-          ref.textContent = '';
-          return value;
-        }else {
-          ref.textContent = 'Date of birth: A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)';
-          return undefined;
-        }
+    } else if (inputType === 'birthDate') {
+      console.log(value);
+      const isValid: boolean =
+        /^(19\d{2}|200\d|201[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(
+          value
+        );
+      if (isValid) {
+        ref.textContent = '';
+        return value;
+      } else {
+        ref.textContent =
+          'Date of birth: A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)';
+        return undefined;
+      }
     } else if (inputType === 'email') {
       const isValid: boolean = /^[^@\s]+@[^@\s]+\.[A-Za-z]{2,}$/.test(value);
       if (isValid) {
         ref.textContent = '';
         return value;
       } else {
-         ref.textContent = 'Email: A properly formatted email address (e.g., example@email.com)';
+        ref.textContent =
+          'Email: A properly formatted email address (e.g., example@email.com)';
         return undefined;
       }
     } else if (inputType === 'password') {
@@ -109,7 +122,7 @@ const getValidInputValue = (
         value
       );
       if (isPassValid) {
-          ref.textContent = '';
+        ref.textContent = '';
         return value;
       } else {
         ref.textContent =
@@ -117,17 +130,18 @@ const getValidInputValue = (
         return undefined;
       }
     } else if (inputType === 'postCode') {
-        const isValid = /^[A-Za-z0-9\s-]{3,10}$/.test(value)
+      const isValid = /^[A-Za-z0-9\s-]{3,10}$/.test(value);
       if (isValid) {
         ref.textContent = '';
         return value;
       } else {
-        ref.textContent = 'Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)';
+        ref.textContent =
+          'Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)';
         return undefined;
       }
     } else if (inputType === 'country') {
       ref.textContent = '';
-      return value
+      return value;
     } else {
       console.error('invalid input type');
       return undefined;

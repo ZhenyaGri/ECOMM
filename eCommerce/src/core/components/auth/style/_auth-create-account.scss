@@ -13,7 +13,7 @@
   );
 
   .create-account-option {
-        @include fontStyle(14px, 400, 1px, var(--font-color));
+    @include fontStyle(14px, 400, 1px, var(--font-color));
   }
 
   .create-account-option-title {

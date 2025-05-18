@@ -21,7 +21,7 @@
     @include fontStyle(50px, 400, 1px, var(--font-color));
   }
   .address-title {
-     @include fontStyle(28px, 400, 1px, var(--font-color));
+    @include fontStyle(28px, 400, 1px, var(--font-color));
   }
 }
 
@@ -30,4 +30,3 @@
   padding: 0 15px;
   @include fontStyle(10px, 600, 1px, rgb(212, 0, 0));
 }
-

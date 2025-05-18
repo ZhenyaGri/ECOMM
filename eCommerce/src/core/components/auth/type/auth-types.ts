@@ -10,10 +10,10 @@ export interface ICreateAccount {
   email: string | undefined;
   password: string | undefined;
 
-  street: string | undefined,
-  city: string | undefined, 
-  postCode: string | undefined, 
-  country: string | undefined,
+  street: string | undefined;
+  city: string | undefined;
+  postCode: string | undefined;
+  country: string | undefined;
 }
 
 export interface IRemaindPass {
@@ -26,7 +26,7 @@ export interface IWarnRefObj {
   birthDate?: React.RefObject<HTMLHeadingElement | null>;
   email?: React.RefObject<HTMLHeadingElement | null>;
   password?: React.RefObject<HTMLHeadingElement | null>;
-  
+
   street?: React.RefObject<HTMLHeadingElement | null>;
   city?: React.RefObject<HTMLHeadingElement | null>;
   postCode?: React.RefObject<HTMLHeadingElement | null>;
