@@ -7,23 +7,11 @@ import {
 
 export const handleLogin = async (): Promise<void> => {
   try {
-    // for Auth Token
-    //const response = await createAuthCustomer('1@gmail.com', '11111');
     const response = await createAnonymousToken();
     if (response && 'access_token' in response) {
       console.log(response);
       const authResponse = await createAuthCustomer('1@gmail.com', '11111');
-      /*const token = response.access_token;
-      const signUp = await signUpCustomer(
-        {
-          email: '1@example.com',
-          firstName: 'John',
-          lastName: 'Doe',
-          password: 'secret123',
-        },
-        token
-      );
-      */
+
       console.log(authResponse);
       if (authResponse && authResponse.access_token) {
         const userInfo = await getCustomerInfo(authResponse.access_token);
