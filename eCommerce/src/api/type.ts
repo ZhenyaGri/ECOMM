@@ -25,11 +25,19 @@ export type ImportMetaEnv = {
   VITE_CTP_SCOPES: string;
 };
 
-export type AuthErrorResponse = {
+export type ErrorResponse = {
   statusCode: number;
   message: string;
   errors: Array<{ code: string; message: string }>;
-  error: string;
+};
+
+export type ErrorObject = {
+  code: number;
+  message: string;
+};
+
+export type AuthErrorResponse = ErrorResponse & {
+  error?: string;
   error_description?: string;
 };
 
