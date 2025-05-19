@@ -2,6 +2,9 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+
+  @media screen and (max-width: 395px) {
+  }
 }
 
 .wrapper-icons {
@@ -22,6 +25,7 @@
 .wrapper-hero,
 .wrapper-banner {
   background: url('./assets/img/main-hero.jpg') no-repeat;
+  background-position: center;
   background-size: cover;
   max-width: 152.0rem;
   height: 85.5rem;
@@ -36,10 +40,18 @@
   display: flex;
   align-items: center;
   gap: 2rem;
+
+  @media screen and (max-width: 1100px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .wrapper-img {
   width: 44rem;
+  @media screen and (max-width: 1100px) {
+    width: 50rem;
+  }
 }
 
 .wrapper-collection-text {
@@ -48,21 +60,30 @@
   flex-direction: column;
   align-items: center;
   margin: 4rem;
+
+  @media screen and (max-width: 1100px) {
+    width: 50rem;
+  }
 }
 
 .wrapper-shop {
   display: flex;
   gap: 1rem;
   margin-top: 2rem;
+
+  @media screen and (max-width: 1490px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .wrapper-shop-img {
-  width: 33rem;
+  max-width: 33rem;
   position: relative;
 }
 
 .wrapper-banner {
-  background: url('./assets/img/main-banner.jpg');
+  background: url('./assets/img/main-banner.jpg') no-repeat;
   background-size: cover;
 }
 
@@ -70,6 +91,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media screen and (max-width: 855px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
 }
 
 .wrapper-new-items-img {
@@ -82,12 +108,25 @@
   flex-direction: column;
   text-align: center;
   padding: 4rem;
+
+  @media screen and (max-width: 1330px) {
+    padding-left: 8rem;
+  }
+
+  @media screen and (max-width: 855px) {
+    width: 45.5rem;
+    padding: 4rem 0;
+  }
 }
 
 .wrapper-house {
   display: flex;
   align-items: center;
   gap: 1rem;
+
+  @media screen and (max-width: 855px) {
+    flex-direction: column-reverse;
+  }
 }
 
 .wrapper-house-text {
@@ -105,6 +144,14 @@
   & .house-img {
     object-fit: cover;
   }
+
+  @media screen and (max-width: 460px) {
+      width: 35rem;
+  }
+
+  @media screen and (max-width: 360px) {
+      width: 30rem;
+  }
 }
 
 .wrapper-footer-item {
@@ -112,6 +159,10 @@
   flex-direction: column;
   align-items: flex-start;
   width: 32.5rem;
+
+  @media screen and (max-width: 650px) {
+    max-width: 25rem;
+  }
 }
 
 .wrapper-404 {

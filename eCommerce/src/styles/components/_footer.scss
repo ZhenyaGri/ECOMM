@@ -7,6 +7,12 @@
   display: flex;
   gap: 1.6rem;
   margin-bottom: 5rem;
+
+  @media screen and (max-width: 650px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2.4rem;
+  }
 }
 
 .footer-list {

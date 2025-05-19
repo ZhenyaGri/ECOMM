@@ -12,4 +12,9 @@
 
 .list-item {
   margin: 0.75rem 4rem 0.75rem 0;
+
+  @media screen and (max-width: 650px) {
+    margin: 0;
+    margin-bottom: 2rem;
+  }
 }

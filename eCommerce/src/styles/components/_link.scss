@@ -14,6 +14,10 @@
 
 .link-logo {
   padding: 0 0.75rem;
+
+  @media screen and (max-width: 530px) {
+    margin: 0 auto;
+  }
 }
 
 .link-icon {
@@ -32,9 +36,27 @@
 .link-hero:visited {
   font-size: 1.6rem;
   color: var(--color-background);
+
+  @media screen and (max-width: 650px) {
+    font-size: 1.4rem;
+  }
 }
 
 .link-collection:link,
 .link-collection:visited {
   font-size: 1.6rem;
+  
+  @media screen and (max-width: 650px) {
+    font-size: 1.4rem;
+  }
+}
+
+.link-shop {
+  display: flex;
+  max-width: 33rem;
+}
+
+.link-shop:hover,
+.link-shop:active {
+  font-style: normal;
 }
