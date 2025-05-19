@@ -1,0 +1,24 @@
+@use './mixins' as *;
+@use './auth_mixin' as *;
+.create-account__input-list {
+  width: 500px; //!
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  @include input-item-style(
+    '.create-account__input-item',
+    '.create-account__input'
+  );
+
+  .create-account-option {
+    @include fontStyle(14px, 400, 1px, var(--font-color));
+  }
+
+  .create-account-option-title {
+    @include fontStyle(14px, 600, 1px, var(--font-color));
+  }
+}
+
+@include btn-base('.create-account__btn', '.create-account__btn-title');

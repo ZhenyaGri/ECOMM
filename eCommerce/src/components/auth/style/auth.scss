@@ -1,0 +1,32 @@
+@use './auth-create-account';
+@use './auth-log-in';
+@use './auth-reset-pass';
+@use './mixins' as *;
+.create-account,
+.auth-log-in,
+.auth-reset {
+  max-width: 1440px;
+  width: 100%;
+
+  min-height: 562px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 40px;
+  .create-account__title,
+  .auth-log-in__title {
+    @include fontStyle(50px, 400, 1px, var(--font-color));
+  }
+  .address-title {
+    @include fontStyle(28px, 400, 1px, var(--font-color));
+  }
+}
+
+.input-item-warning {
+  width: 100%;
+  padding: 0 15px;
+  @include fontStyle(10px, 600, 1px, rgb(212, 0, 0));
+}
