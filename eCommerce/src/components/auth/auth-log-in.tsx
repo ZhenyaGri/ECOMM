@@ -6,6 +6,8 @@ import {
   showErrorMessages,
 } from './form-handler';
 import type { ILogIn, IRemaindPass, IWarnRefObj } from './type/auth-types';
+import { handleLogin } from '../../api/authHandlers';
+import { parseError } from '../../api/errorHandler';
 
 const LogInComponent = (): ReactElement => {
   const [, setLogInData] = useState<ILogIn | IRemaindPass>({
@@ -16,6 +18,23 @@ const LogInComponent = (): ReactElement => {
   const warnRef: IWarnRefObj = {
     email: useRef(null),
     password: useRef(null),
+  };
+
+  const [loginError, setLoginError] = useState('');
+
+  const onLoginClick = async (): Promise<void> => {
+    const userData = getUserDataObj();
+    showErrorMessages(warnRef);
+
+    try {
+      if (userData && userData.email && 'password' in userData) {
+        await handleLogin(userData.email, userData.password);
+      }
+      setLoginError(''); // очищаем ошибку при успехе
+    } catch (error) {
+      const errorMessage = parseError(error);
+      setLoginError(errorMessage); // сохраняем ошибку
+    }
   };
 
   return (
@@ -73,13 +92,7 @@ const LogInComponent = (): ReactElement => {
         </div>
 
         <div className="auth-log-in__btn-wrapper">
-          <div
-            className="auth-log-in__btn"
-            onClick={() => {
-              getUserDataObj();
-              showErrorMessages(warnRef);
-            }}
-          >
+          <div className="auth-log-in__btn" onClick={onLoginClick}>
             <h2 className="auth-log-in__btn-title">LogIn</h2>
           </div>
 
@@ -87,6 +100,14 @@ const LogInComponent = (): ReactElement => {
             <h2 className="auth-log-in__to-create-account"> Create account</h2>
           </div>
         </div>
+        {loginError && (
+          <h3
+            className="auth-log-in__error-message"
+            style={{ color: 'red', fontSize: '20px' }}
+          >
+            {loginError}
+          </h3>
+        )}
       </div>
     </>
   );
