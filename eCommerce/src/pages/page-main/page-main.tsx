@@ -76,30 +76,36 @@ export class Main extends Component {
                 <Img className="shop-img" src={seating} alt="Chair" />
               </Wrapper>
             </Link>
-            <Wrapper className="wrapper-shop-img">
-              <Heading
-                tag="h3"
-                className="heading-tertiary heading-shop"
-                content="Tables"
-              />
-              <Img className="shop-img" src={tables} alt="Tables" />
-            </Wrapper>
-            <Wrapper className="wrapper-shop-img">
-              <Heading
-                tag="h3"
-                className="heading-tertiary heading-shop"
-                content="Lighting"
-              />
-              <Img className="shop-img" src={lighting} alt="Lighting" />
-            </Wrapper>
-            <Wrapper className="wrapper-shop-img">
-              <Heading
-                tag="h3"
-                className="heading-tertiary heading-shop"
-                content="Accessories"
-              />
-              <Img className="shop-img" src={accessories} alt="Accessories" />
-            </Wrapper>
+            <Link className="link-shop" href="#">
+              <Wrapper className="wrapper-shop-img">
+                <Heading
+                  tag="h3"
+                  className="heading-tertiary heading-shop"
+                  content="Tables"
+                />
+                <Img className="shop-img" src={tables} alt="Tables" />
+              </Wrapper>
+            </Link>
+            <Link className="link-shop" href="#">
+              <Wrapper className="wrapper-shop-img">
+                <Heading
+                  tag="h3"
+                  className="heading-tertiary heading-shop"
+                  content="Lighting"
+                />
+                <Img className="shop-img" src={lighting} alt="Lighting" />
+              </Wrapper>
+            </Link>
+            <Link className="link-shop" href="#">
+              <Wrapper className="wrapper-shop-img">
+                <Heading
+                  tag="h3"
+                  className="heading-tertiary heading-shop"
+                  content="Accessories"
+                />
+                <Img className="shop-img" src={accessories} alt="Accessories" />
+              </Wrapper>
+            </Link>
           </Wrapper>
         </Section>
         <Section className="section-banner">
