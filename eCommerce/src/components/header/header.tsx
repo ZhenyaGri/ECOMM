@@ -27,12 +27,16 @@ export class Header extends Component {
             </Link>
           </Wrapper>
           <Link href="#">
-            <Button className="btn-light" type="button" text="Log In" />
+            <Button className="btn-light" type="button" children="Log In" />
           </Link>
           <Link href="#">
-            <Button className="btn-light" type="button" text="Sign Up" />
+            <Button className="btn-light" type="button" children="Sign Up" />
           </Link>
-          <Button className="btn-light hidden" type="button" text="Log Out" />
+          <Button
+            className="btn-light hidden"
+            type="button"
+            children="Log Out"
+          />
         </Wrapper>
       </header>
     );

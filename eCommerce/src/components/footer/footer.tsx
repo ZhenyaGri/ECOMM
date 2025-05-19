@@ -68,7 +68,7 @@ export class Footer extends Component {
               content="Newsletter"
             />
             <Text className="footer-text" content={newsletter} />
-            <Button className="btn-dark" type="button" text="Subscribe" />
+            <Button className="btn-dark" type="button" children="Subscribe" />
             <Wrapper className="footer-icons">
               <Link href="#">
                 <Img

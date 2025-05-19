@@ -5,8 +5,9 @@ export type BaseProps = {
 
 export type ButtonProps = {
   type: 'button' | 'submit' | 'reset';
-  text: string;
   className?: string;
+  children: React.ReactNode;
+  onClick?: () => void;
 };
 
 export type headingProps = {
