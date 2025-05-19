@@ -1,4 +1,4 @@
-@use '../../../../styles/mixins' as *;
+@use './mixins' as *;
 
 @mixin btn-base($selector1, $selector2) {
   #{$selector1} {

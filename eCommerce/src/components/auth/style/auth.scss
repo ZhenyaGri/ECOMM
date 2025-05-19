@@ -1,7 +1,7 @@
 @use './auth-create-account';
 @use './auth-log-in';
 @use './auth-reset-pass';
-@use '../../../../styles/mixins' as *;
+@use './mixins' as *;
 .create-account,
 .auth-log-in,
 .auth-reset {

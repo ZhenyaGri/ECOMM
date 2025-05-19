@@ -1,3 +1,4 @@
+import './style/auth.scss';
 import { ReactElement, useRef, useState } from 'react';
 import { IRemaindPass, IWarnRefObj } from './type/auth-types';
 import {
