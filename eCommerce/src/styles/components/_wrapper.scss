@@ -1,22 +1,20 @@
-.wrapper-header {
+.wrapper {
   display: flex;
+}
+
+.wrapper-header,
+.wrapper-icons,
+.wrapper-collection {
   align-items: center;
   gap: 2rem;
-
-  @media screen and (max-width: 395px) {
-  }
 }
 
 .wrapper-icons {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
   margin-right: 1rem;
 }
 
 .wrapper-shipping {
   height: 4rem;
-  display: flex;
   justify-content: center;
   align-items: center;
   padding: 0.5rem 5rem;
@@ -30,17 +28,12 @@
   max-width: 152.0rem;
   height: 85.5rem;
   padding: 4rem;
-  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-end;
 }
 
 .wrapper-collection {
-  display: flex;
-  align-items: center;
-  gap: 2rem;
-
   @media screen and (max-width: 1100px) {
     flex-wrap: wrap;
     justify-content: center;
@@ -49,16 +42,22 @@
 
 .wrapper-img {
   width: 44rem;
+
   @media screen and (max-width: 1100px) {
     width: 50rem;
   }
 }
 
-.wrapper-collection-text {
-  width: 36rem;
-  display: flex;
+.wrapper-collection-text,
+.wrapper-new-items-text,
+.wrapper-house-text,
+.wrapper-404 {
   flex-direction: column;
   align-items: center;
+}
+
+.wrapper-collection-text {
+  width: 36rem;
   margin: 4rem;
 
   @media screen and (max-width: 1100px) {
@@ -67,7 +66,6 @@
 }
 
 .wrapper-shop {
-  display: flex;
   gap: 1rem;
   margin-top: 2rem;
 
@@ -88,7 +86,6 @@
 }
 
 .wrapper-new-items {
-  display: flex;
   align-items: center;
   justify-content: space-between;
 
@@ -104,9 +101,6 @@
 
 .wrapper-new-items-text {
   width: 55.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   text-align: center;
   padding: 4rem;
 
@@ -121,7 +115,6 @@
 }
 
 .wrapper-house {
-  display: flex;
   align-items: center;
   gap: 1rem;
 
@@ -131,9 +124,6 @@
 }
 
 .wrapper-house-text {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   width: 36.5rem;
   padding: 4rem;
   text-align: center;
@@ -157,7 +147,6 @@
 }
 
 .wrapper-footer-item {
-  display: flex;
   flex-direction: column;
   align-items: flex-start;
   width: 32.5rem;
@@ -168,8 +157,5 @@
 }
 
 .wrapper-404 {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   gap: 2rem;
 }
