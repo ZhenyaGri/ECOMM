@@ -22,7 +22,7 @@ export class Page404 extends Component {
             <Button
               className="btn btn-dark"
               type="button"
-              text="Continue browsing"
+              children="Continue browsing"
             />
           </Link>
         </Wrapper>
