@@ -32,7 +32,8 @@
   @include fontStyle(12px, 600, 1px, rgb(212, 0, 0));
 }
 
-.auth-log-in__error-message, .create-account__error-message {
+.auth-log-in__error-message,
+.create-account__error-message {
   @include fontStyle(20px, 600, 1px, rgb(212, 0, 0));
 }
 

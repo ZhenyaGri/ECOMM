@@ -10,6 +10,7 @@ function App(): React.ReactNode {
   const [mainState, setMainState] = useState<
     'main' | 'login' | 'signUp' | 'recovery'
   >('main');
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
 
   const toggleView = (view: 'main' | 'login' | 'signUp' | 'recovery'): void =>
     setMainState(view);
@@ -20,10 +21,15 @@ function App(): React.ReactNode {
       </Wrapper>
 
       <Header
+        isLoggedIn={isLoggedIn}
         onLogIn={() => toggleView('login')}
         onSignUp={() => toggleView('signUp')}
+        onLogOut={() => {
+          setIsLoggedIn(false);
+          toggleView('main');
+        }}
       />
-      {mainStateRender(mainState, toggleView)}
+      {mainStateRender(mainState, toggleView, setIsLoggedIn)}
       <Footer />
     </>
   );
