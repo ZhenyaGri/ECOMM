@@ -28,14 +28,16 @@ html {
 
 @font-face {
   font-family: 'CenturyOld';
-  src: url('./assets/fonts/font-CenturyOldStylestd-regular.woff2') format('woff2');
+  src: url('./assets/fonts/font-CenturyOldStylestd-regular.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: normal;
 }
 
 @font-face {
   font-family: 'CenturyOld';
-  src: url('./assets/fonts/font_CenturyOldStylestd-italic.woff2') format('woff2');
+  src: url('./assets/fonts/font_CenturyOldStylestd-italic.woff2')
+    format('woff2');
   font-weight: normal;
   font-style: italic;
 }

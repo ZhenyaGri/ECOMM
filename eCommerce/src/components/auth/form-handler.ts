@@ -54,7 +54,7 @@ const updateFormState = (
   setState((prev) => {
     const stateObj = { ...prev, [inputType]: inputVal };
     userDataObj = { ...stateObj };
-    console.log(userDataObj);
+    //console.log(userDataObj);
     return stateObj;
   });
 };
@@ -94,7 +94,6 @@ const getValidInputValue = (
         return undefined;
       }
     } else if (inputType === 'birthDate') {
-      console.log(value);
       const isValid: boolean =
         /^(19\d{2}|200\d|201[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(
           value

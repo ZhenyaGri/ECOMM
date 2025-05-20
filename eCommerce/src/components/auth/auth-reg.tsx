@@ -13,6 +13,8 @@ import {
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
+import { handleSignup, mapToCustomerDraft } from '../../api/authHandlers';
+import { parseError } from '../../api/errorHandler';
 
 type CreateAccountProps = {
   onCreateAccount: () => void;
@@ -32,6 +34,22 @@ const CreateUserComponent = ({
     postCode: undefined,
     country: undefined,
   });
+
+  const [signupError, setSignupError] = useState('');
+
+  const onSigInClick = async (): Promise<void> => {
+    const formData = getUserDataObj();
+    showErrorMessages(warnRef);
+
+    try {
+      const customerDraft = mapToCustomerDraft(formData);
+      await handleSignup(customerDraft);
+      setSignupError('');
+    } catch (error) {
+      const errorMsg = parseError(error);
+      setSignupError(errorMsg);
+    }
+  };
 
   const warnRef: IWarnRefObj = {
     firstName: useRef(null),
@@ -241,25 +259,19 @@ const CreateUserComponent = ({
               {countries.map((country) => (
                 <option
                   className="create-account-option"
-                  key={country}
-                  value={country}
+                  key={country.code}
+                  value={country.code}
                 >
-                  {country}
+                  {country.name}
                 </option>
               ))}
             </select>
             <h2 ref={warnRef.country} className="input-item-warning"></h2>
           </li>
         </ul>
-
+        
         <div className="create-account__btn-wrapper">
-          <div
-            className="create-account__btn"
-            onClick={() => {
-              getUserDataObj();
-              showErrorMessages(warnRef);
-            }}
-          >
+          <div className="create-account__btn" onClick={onSigInClick}>
             <h2 className="create-account__btn-title">Create</h2>
           </div>
 
@@ -267,6 +279,10 @@ const CreateUserComponent = ({
             Cancel
           </h2>
         </div>
+        
+        {signupError && (
+          <h3 className="create-account__error-message">{signupError}</h3>
+        )}
       </div>
     </>
   );
