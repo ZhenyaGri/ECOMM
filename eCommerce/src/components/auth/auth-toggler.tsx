@@ -5,7 +5,8 @@ import PassRecoveryComponent from './auth-reset-pass';
 export const mainStateRender = (
   mainState: 'main' | 'login' | 'signUp' | 'recovery',
   toggleView: (view: 'main' | 'login' | 'signUp' | 'recovery') => void,
-  setIsLoggedIn: (status: boolean) => void
+  setIsLoggedIn: (status: boolean) => void,
+  setSuccessMessage: (msg: string) => void
 ): React.ReactNode => {
   if (mainState === 'main') {
     return <Main />;
@@ -17,6 +18,7 @@ export const mainStateRender = (
         onSuccessLogin={() => {
           setIsLoggedIn(true);
           toggleView('main');
+          setSuccessMessage('Logged in successfully!');
         }}
       />
     );
@@ -27,6 +29,7 @@ export const mainStateRender = (
         onSuccessSignUp={() => {
           setIsLoggedIn(true);
           toggleView('main');
+          setSuccessMessage('Account created successfully!');
         }}
       />
     );
