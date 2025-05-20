@@ -70,21 +70,21 @@ export class Footer extends Component {
             <Text className="footer-text" content={newsletter} />
             <Button className="btn-dark" type="button" children="Subscribe" />
             <Wrapper className="footer-icons">
-              <Link href="#">
+              <Link href="https://www.facebook.com/">
                 <Img
                   className="footer-icon"
                   src={logoFacebook}
                   alt="Facebook Logo"
                 />
               </Link>
-              <Link href="#">
+              <Link href="https://www.instagram.com/">
                 <Img
                   className="footer-icon"
                   src={logoInstagram}
                   alt="Instagram Logo"
                 />
               </Link>
-              <Link href="#">
+              <Link href="https://www.pinterest.com/">
                 <Img
                   className="footer-icon"
                   src={logoPinterest}
