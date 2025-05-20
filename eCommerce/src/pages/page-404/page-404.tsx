@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Section } from '../../components/section/section';
 import { Text } from '../../components/text/text';
 import { Heading } from '../../components/heading/heading';
-import { Link } from '../../components/link/link';
 import { Button } from '../../components/button/button';
 import { Wrapper } from '../../components/wrapper/wrapper';
 
@@ -18,7 +18,7 @@ export class Page404 extends Component {
             content="Page not found"
           />
           <Text content="The page you're looking for cannot be found." />
-          <Link href="#">
+          <Link to="/">
             <Button
               className="btn btn-dark"
               type="button"
