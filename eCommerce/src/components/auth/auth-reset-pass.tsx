@@ -6,7 +6,14 @@ import {
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
-const PassRecoveryComponent = (): ReactElement => {
+
+type RecoveryPassProps = {
+  onCancel: () => void;
+};
+
+const PassRecoveryComponent = ({
+  onCancel,
+}: RecoveryPassProps): ReactElement => {
   const [, setEmail] = useState<IRemaindPass>({
     email: undefined,
   });
@@ -54,7 +61,9 @@ const PassRecoveryComponent = (): ReactElement => {
             <h2 className="auth-reset__btn-title">Submit</h2>
           </div>
 
-          <h2 className="auth-reset__cancel-text">Cancel</h2>
+          <h2 className="auth-reset__cancel-text" onClick={onCancel}>
+            Cancel
+          </h2>
         </div>
       </div>
     </>

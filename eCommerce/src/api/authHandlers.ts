@@ -1,4 +1,9 @@
 import {
+  ICreateAccount,
+  ILogIn,
+  IRemaindPass,
+} from '../components/auth/type/auth-types';
+import {
   createAnonymousToken,
   createAuthCustomer,
   getCustomerInfo,
@@ -14,8 +19,8 @@ export const handleLogin = async (
   if (response && 'access_token' in response) {
     console.log(response);
     const authResponse = await createAuthCustomer(email, password);
+    console.log('LogIn Success:', authResponse);
 
-    console.log(authResponse);
     if (authResponse && authResponse.access_token) {
       const userInfo = await getCustomerInfo(authResponse.access_token);
       console.log('Customer Info:', userInfo);
@@ -34,7 +39,53 @@ export const handleSignup = async (
     const signupResponse = await signUpCustomer(customerDraft, token);
     console.log('SignUp Success:', signupResponse);
 
-    const userInfo = await getCustomerInfo(token);
+    const authResponse = await createAuthCustomer(
+      customerDraft.email,
+      customerDraft.password
+    );
+    const authorizedToken = authResponse.access_token;
+
+    const userInfo = await getCustomerInfo(authorizedToken);
     console.log('Customer Info:', userInfo);
   }
 };
+
+export function mapToCustomerDraft(
+  data: ICreateAccount | ILogIn | IRemaindPass | undefined
+): CustomerDraft {
+  if (!isCreateAccount(data)) {
+    throw new Error('Invalid data: expected ICreateAccount');
+  }
+  const CustomerDraft = {
+    email: data.email!,
+    password: data.password!,
+    firstName: data.firstName,
+    lastName: data.lastName,
+    dateOfBirth: data.birthDate,
+    addresses: [
+      {
+        streetName: data.street,
+        city: data.city,
+        postalCode: data.postCode,
+        country: data.country || 'RU',
+      },
+    ],
+  };
+  console.log(CustomerDraft);
+  return CustomerDraft;
+}
+
+function isCreateAccount(
+  data: ICreateAccount | ILogIn | IRemaindPass | undefined
+): data is ICreateAccount {
+  return (
+    !!data &&
+    'firstName' in data &&
+    'lastName' in data &&
+    'birthDate' in data &&
+    'street' in data &&
+    'city' in data &&
+    'postCode' in data &&
+    'country' in data
+  );
+}

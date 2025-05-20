@@ -5,7 +5,6 @@
 .create-account,
 .auth-log-in,
 .auth-reset {
-  max-width: 1440px;
   width: 100%;
 
   min-height: 562px;
@@ -15,7 +14,9 @@
   justify-content: center;
   align-items: center;
 
-  gap: 40px;
+  gap: 20px;
+
+  padding: 20px 0;
   .create-account__title,
   .auth-log-in__title {
     @include fontStyle(50px, 400, 1px, var(--font-color));
@@ -28,5 +29,14 @@
 .input-item-warning {
   width: 100%;
   padding: 0 15px;
-  @include fontStyle(10px, 600, 1px, rgb(212, 0, 0));
+  @include fontStyle(12px, 600, 1px, rgb(212, 0, 0));
+}
+
+.auth-log-in__error-message,
+.create-account__error-message {
+  @include fontStyle(20px, 600, 1px, rgb(212, 0, 0));
+}
+
+.create-account__error-message {
+  margin-bottom: 40px;
 }

@@ -9,8 +9,16 @@ import logoAudo from '../../assets/icons/audo-logo.svg';
 import iconSearch from '../../assets/icons/icon-search.svg';
 import iconBag from '../../assets/icons/icon-bag.svg';
 
-export class Header extends Component {
+type HeaderProps = {
+  isLoggedIn: boolean;
+  onLogIn: () => void;
+  onSignUp: () => void;
+  onLogOut: () => void;
+};
+
+export class Header extends Component<HeaderProps> {
   render(): React.ReactNode {
+    const { isLoggedIn, onLogIn, onSignUp, onLogOut } = this.props;
     return (
       <header className="header">
         <h1 className="hidden">Audo: Online Furniture Store</h1>
@@ -27,16 +35,27 @@ export class Header extends Component {
               <Img className="header-icon" src={iconBag} alt="Bag Icon" />
             </AnchorLink>
           </Wrapper>
-          <AnchorLink href="#">
-            <Button className="btn-light" type="button" children="Log In" />
-          </AnchorLink>
-          <AnchorLink href="#">
-            <Button className="btn-light" type="button" children="Sign Up" />
-          </AnchorLink>
+          <Link to="/login">
+            <Button
+              className={`btn-light ${isLoggedIn ? 'hidden' : ''}`}
+              type="button"
+              children="Log In"
+              onClick={onLogIn}
+            />
+          </Link>
+          <Link to="/registration">
+            <Button
+              className={`btn-light ${isLoggedIn ? 'hidden' : ''}`}
+              type="button"
+              children="Sign Up"
+              onClick={onSignUp}
+            />
+          </Link>
           <Button
-            className="btn-light hidden"
+            className={`btn-light ${isLoggedIn ? '' : 'hidden'}`}
             type="button"
             children="Log Out"
+            onClick={onLogOut}
           />
         </Wrapper>
       </header>

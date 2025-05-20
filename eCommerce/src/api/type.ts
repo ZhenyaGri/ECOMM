@@ -53,7 +53,7 @@ export type CustomerDraft = {
   dateOfBirth?: string;
   companyName?: string;
   vatId?: string;
-  addresses?: string;
+  addresses?: Array<Address>;
   defaultShippingAddress?: number;
   shippingAddresses?: Array<number>;
   defaultBillingAddress?: number;
@@ -87,7 +87,7 @@ export type Address = {
   streetName?: string;
   streetNumber?: string;
   additionalStreetInfo?: string;
-  postalCode: string;
+  postalCode?: string;
   city?: string;
   region?: string;
   state?: string;

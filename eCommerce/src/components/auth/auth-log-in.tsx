@@ -6,8 +6,20 @@ import {
   showErrorMessages,
 } from './form-handler';
 import type { ILogIn, IRemaindPass, IWarnRefObj } from './type/auth-types';
+import { handleLogin } from '../../api/authHandlers';
+import { parseError } from '../../api/errorHandler';
 
-const LogInComponent = (): ReactElement => {
+type logInProps = {
+  onSignUp: () => void;
+  onRecovery: () => void;
+  onSuccessLogin: () => void;
+};
+
+const LogInComponent = ({
+  onSignUp,
+  onRecovery,
+  onSuccessLogin,
+}: logInProps): ReactElement => {
   const [, setLogInData] = useState<ILogIn | IRemaindPass>({
     email: undefined,
     password: undefined,
@@ -16,6 +28,24 @@ const LogInComponent = (): ReactElement => {
   const warnRef: IWarnRefObj = {
     email: useRef(null),
     password: useRef(null),
+  };
+
+  const [loginError, setLoginError] = useState('');
+
+  const onLoginClick = async (): Promise<void> => {
+    const userData = getUserDataObj();
+    showErrorMessages(warnRef);
+
+    try {
+      if (userData && userData.email && 'password' in userData) {
+        await handleLogin(userData.email, userData.password);
+        onSuccessLogin();
+      }
+      setLoginError('');
+    } catch (error) {
+      const errorMessage = parseError(error);
+      setLoginError(errorMessage);
+    }
   };
 
   return (
@@ -65,7 +95,10 @@ const LogInComponent = (): ReactElement => {
             </li>
           </ul>
 
-          <div className="auth-log-in__forgot-password-btn">
+          <div
+            className="auth-log-in__forgot-password-btn"
+            onClick={onRecovery}
+          >
             <h2 className="auth-log-in__forgot-password">
               Forgot your password ?
             </h2>
@@ -73,20 +106,20 @@ const LogInComponent = (): ReactElement => {
         </div>
 
         <div className="auth-log-in__btn-wrapper">
-          <div
-            className="auth-log-in__btn"
-            onClick={() => {
-              getUserDataObj();
-              showErrorMessages(warnRef);
-            }}
-          >
+          <div className="auth-log-in__btn" onClick={onLoginClick}>
             <h2 className="auth-log-in__btn-title">LogIn</h2>
           </div>
 
-          <div className="auth-log-in__to-create-account-btn">
+          <div
+            className="auth-log-in__to-create-account-btn"
+            onClick={onSignUp}
+          >
             <h2 className="auth-log-in__to-create-account"> Create account</h2>
           </div>
         </div>
+        {loginError && (
+          <h3 className="auth-log-in__error-message">{loginError}</h3>
+        )}
       </div>
     </>
   );
