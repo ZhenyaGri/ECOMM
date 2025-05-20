@@ -14,7 +14,13 @@ import {
   showErrorMessages,
 } from './form-handler';
 
-const CreateUserComponent = (): ReactElement => {
+type CreateAccountProps = {
+  onCreateAccount: () => void;
+};
+
+const CreateUserComponent = ({
+  onCreateAccount,
+}: CreateAccountProps): ReactElement => {
   const [, setNewAccount] = useState<ILogIn | ICreateAccount | IRemaindPass>({
     firstName: undefined,
     lastName: undefined,
@@ -246,14 +252,20 @@ const CreateUserComponent = (): ReactElement => {
           </li>
         </ul>
 
-        <div
-          className="create-account__btn"
-          onClick={() => {
-            getUserDataObj();
-            showErrorMessages(warnRef);
-          }}
-        >
-          <h2 className="create-account__btn-title">Create</h2>
+        <div className="create-account__btn-wrapper">
+          <div
+            className="create-account__btn"
+            onClick={() => {
+              getUserDataObj();
+              showErrorMessages(warnRef);
+            }}
+          >
+            <h2 className="create-account__btn-title">Create</h2>
+          </div>
+
+          <h2 className="create-account__cancel-text" onClick={onCreateAccount}>
+            Cancel
+          </h2>
         </div>
       </div>
     </>

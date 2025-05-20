@@ -7,7 +7,12 @@ import {
 } from './form-handler';
 import type { ILogIn, IRemaindPass, IWarnRefObj } from './type/auth-types';
 
-const LogInComponent = (): ReactElement => {
+type logInProps = {
+  onSignUp: () => void;
+  onRecovery: () => void;
+};
+
+const LogInComponent = ({ onSignUp, onRecovery }: logInProps): ReactElement => {
   const [, setLogInData] = useState<ILogIn | IRemaindPass>({
     email: undefined,
     password: undefined,
@@ -65,7 +70,10 @@ const LogInComponent = (): ReactElement => {
             </li>
           </ul>
 
-          <div className="auth-log-in__forgot-password-btn">
+          <div
+            className="auth-log-in__forgot-password-btn"
+            onClick={onRecovery}
+          >
             <h2 className="auth-log-in__forgot-password">
               Forgot your password ?
             </h2>
@@ -83,7 +91,10 @@ const LogInComponent = (): ReactElement => {
             <h2 className="auth-log-in__btn-title">LogIn</h2>
           </div>
 
-          <div className="auth-log-in__to-create-account-btn">
+          <div
+            className="auth-log-in__to-create-account-btn"
+            onClick={onSignUp}
+          >
             <h2 className="auth-log-in__to-create-account"> Create account</h2>
           </div>
         </div>
@@ -93,3 +104,4 @@ const LogInComponent = (): ReactElement => {
 };
 
 export default LogInComponent;
+
