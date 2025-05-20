@@ -1,7 +1,8 @@
-@use '../../../../styles/mixins' as *;
+@use './mixins' as *;
 @use './auth_mixin' as *;
 .auth-log-in__list-wrapper {
-  width: 500px;
+  max-width: 500px;
+  width: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
