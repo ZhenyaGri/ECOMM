@@ -7,7 +7,7 @@ import { List } from '../list/list';
 import { ListItem } from '../list/list-item';
 import { newsletter } from './footer-data';
 import { Button } from '../button/button';
-import { Link } from '../link/link';
+import { AnchorLink } from '../link/link';
 import logoFacebook from '../../assets/icons/logo-facebook.svg';
 import logoInstagram from '../../assets/icons/logo-instagram.svg';
 import logoPinterest from '../../assets/icons/logo-pinterest.svg';
@@ -70,27 +70,27 @@ export class Footer extends Component {
             <Text className="footer-text" content={newsletter} />
             <Button className="btn-dark" type="button" children="Subscribe" />
             <Wrapper className="footer-icons">
-              <Link href="https://www.facebook.com/">
+              <AnchorLink href="https://www.facebook.com/">
                 <Img
                   className="footer-icon"
                   src={logoFacebook}
                   alt="Facebook Logo"
                 />
-              </Link>
-              <Link href="https://www.instagram.com/">
+              </AnchorLink>
+              <AnchorLink href="https://www.instagram.com/">
                 <Img
                   className="footer-icon"
                   src={logoInstagram}
                   alt="Instagram Logo"
                 />
-              </Link>
-              <Link href="https://www.pinterest.com/">
+              </AnchorLink>
+              <AnchorLink href="https://www.pinterest.com/">
                 <Img
                   className="footer-icon"
                   src={logoPinterest}
                   alt="Pinterest Logo"
                 />
-              </Link>
+              </AnchorLink>
             </Wrapper>
           </Wrapper>
         </Wrapper>
