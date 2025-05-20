@@ -71,3 +71,4 @@ const PassRecoveryComponent = ({
 };
 
 export default PassRecoveryComponent;
+

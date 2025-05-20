@@ -104,3 +104,4 @@ const LogInComponent = ({ onSignUp, onRecovery }: logInProps): ReactElement => {
 };
 
 export default LogInComponent;
+

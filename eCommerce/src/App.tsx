@@ -11,7 +11,7 @@ function App(): React.ReactNode {
     'main' | 'login' | 'signUp' | 'recovery'
   >('main');
 
-  const toggleView = (view: 'main' | 'login' | 'signUp' | 'recovery'):void =>
+  const toggleView = (view: 'main' | 'login' | 'signUp' | 'recovery'): void =>
     setMainState(view);
   return (
     <>
