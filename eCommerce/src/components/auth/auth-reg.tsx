@@ -16,7 +16,13 @@ import {
 import { handleSignup, mapToCustomerDraft } from '../../api/authHandlers';
 import { parseError } from '../../api/errorHandler';
 
-const CreateUserComponent = (): ReactElement => {
+type CreateAccountProps = {
+  onCreateAccount: () => void;
+};
+
+const CreateUserComponent = ({
+  onCreateAccount,
+}: CreateAccountProps): ReactElement => {
   const [, setNewAccount] = useState<ILogIn | ICreateAccount | IRemaindPass>({
     firstName: undefined,
     lastName: undefined,
@@ -263,10 +269,17 @@ const CreateUserComponent = (): ReactElement => {
             <h2 ref={warnRef.country} className="input-item-warning"></h2>
           </li>
         </ul>
+        
+        <div className="create-account__btn-wrapper">
+          <div className="create-account__btn" onClick={onSigInClick}>
+            <h2 className="create-account__btn-title">Create</h2>
+          </div>
 
-        <div className="create-account__btn" onClick={onSigInClick}>
-          <h2 className="create-account__btn-title">Create</h2>
+          <h2 className="create-account__cancel-text" onClick={onCreateAccount}>
+            Cancel
+          </h2>
         </div>
+        
         {signupError && (
           <h3 className="create-account__error-message">{signupError}</h3>
         )}

@@ -8,8 +8,14 @@ import logoAudo from '../../assets/icons/audo-logo.svg';
 import iconSearch from '../../assets/icons/icon-search.svg';
 import iconBag from '../../assets/icons/icon-bag.svg';
 
-export class Header extends Component {
+type HeaderProps = {
+  onLogIn: () => void;
+  onSignUp: () => void;
+};
+
+export class Header extends Component<HeaderProps> {
   render(): React.ReactNode {
+    const { onLogIn, onSignUp } = this.props;
     return (
       <header className="header">
         <h1 className="hidden">Audo: Online Furniture Store</h1>
@@ -27,10 +33,20 @@ export class Header extends Component {
             </Link>
           </Wrapper>
           <Link href="#">
-            <Button className="btn-light" type="button" children="Log In" />
+            <Button
+              className="btn-light"
+              type="button"
+              children="Log In"
+              onClick={onLogIn}
+            />
           </Link>
           <Link href="#">
-            <Button className="btn-light" type="button" children="Sign Up" />
+            <Button
+              className="btn-light"
+              type="button"
+              children="Sign Up"
+              onClick={onSignUp}
+            />
           </Link>
           <Button
             className="btn-light hidden"
