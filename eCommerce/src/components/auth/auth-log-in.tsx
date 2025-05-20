@@ -12,9 +12,14 @@ import { parseError } from '../../api/errorHandler';
 type logInProps = {
   onSignUp: () => void;
   onRecovery: () => void;
+  onSuccessLogin: () => void;
 };
 
-const LogInComponent = ({ onSignUp, onRecovery }: logInProps): ReactElement => {
+const LogInComponent = ({
+  onSignUp,
+  onRecovery,
+  onSuccessLogin,
+}: logInProps): ReactElement => {
   const [, setLogInData] = useState<ILogIn | IRemaindPass>({
     email: undefined,
     password: undefined,
@@ -34,6 +39,7 @@ const LogInComponent = ({ onSignUp, onRecovery }: logInProps): ReactElement => {
     try {
       if (userData && userData.email && 'password' in userData) {
         await handleLogin(userData.email, userData.password);
+        onSuccessLogin();
       }
       setLoginError('');
     } catch (error) {
@@ -120,4 +126,3 @@ const LogInComponent = ({ onSignUp, onRecovery }: logInProps): ReactElement => {
 };
 
 export default LogInComponent;
-

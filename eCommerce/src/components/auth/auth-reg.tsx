@@ -18,10 +18,12 @@ import { parseError } from '../../api/errorHandler';
 
 type CreateAccountProps = {
   onCreateAccount: () => void;
+  onSuccessSignUp: () => void;
 };
 
 const CreateUserComponent = ({
   onCreateAccount,
+  onSuccessSignUp,
 }: CreateAccountProps): ReactElement => {
   const [, setNewAccount] = useState<ILogIn | ICreateAccount | IRemaindPass>({
     firstName: undefined,
@@ -44,6 +46,7 @@ const CreateUserComponent = ({
     try {
       const customerDraft = mapToCustomerDraft(formData);
       await handleSignup(customerDraft);
+      onSuccessSignUp();
       setSignupError('');
     } catch (error) {
       const errorMsg = parseError(error);
@@ -269,7 +272,7 @@ const CreateUserComponent = ({
             <h2 ref={warnRef.country} className="input-item-warning"></h2>
           </li>
         </ul>
-        
+
         <div className="create-account__btn-wrapper">
           <div className="create-account__btn" onClick={onSigInClick}>
             <h2 className="create-account__btn-title">Create</h2>
@@ -279,7 +282,7 @@ const CreateUserComponent = ({
             Cancel
           </h2>
         </div>
-        
+
         {signupError && (
           <h3 className="create-account__error-message">{signupError}</h3>
         )}
