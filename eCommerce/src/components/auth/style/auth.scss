@@ -30,3 +30,11 @@
   padding: 0 15px;
   @include fontStyle(10px, 600, 1px, rgb(212, 0, 0));
 }
+
+.auth-log-in__error-message, .create-account__error-message {
+  @include fontStyle(20px, 600, 1px, rgb(212, 0, 0));
+}
+
+.create-account__error-message {
+  margin-bottom: 40px;
+}

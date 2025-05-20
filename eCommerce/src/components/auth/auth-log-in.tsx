@@ -101,12 +101,7 @@ const LogInComponent = (): ReactElement => {
           </div>
         </div>
         {loginError && (
-          <h3
-            className="auth-log-in__error-message"
-            style={{ color: 'red', fontSize: '20px' }}
-          >
-            {loginError}
-          </h3>
+          <h3 className="auth-log-in__error-message">{loginError}</h3>
         )}
       </div>
     </>

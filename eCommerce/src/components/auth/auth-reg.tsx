@@ -268,12 +268,7 @@ const CreateUserComponent = (): ReactElement => {
           <h2 className="create-account__btn-title">Create</h2>
         </div>
         {signupError && (
-          <div
-            className="create-account__error-message"
-            style={{ color: 'red', fontSize: '20px' }}
-          >
-            {signupError}
-          </div>
+          <h3 className="create-account__error-message">{signupError}</h3>
         )}
       </div>
     </>
