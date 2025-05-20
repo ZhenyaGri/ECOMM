@@ -30,10 +30,10 @@ const LogInComponent = (): ReactElement => {
       if (userData && userData.email && 'password' in userData) {
         await handleLogin(userData.email, userData.password);
       }
-      setLoginError(''); // очищаем ошибку при успехе
+      setLoginError('');
     } catch (error) {
       const errorMessage = parseError(error);
-      setLoginError(errorMessage); // сохраняем ошибку
+      setLoginError(errorMessage);
     }
   };
 

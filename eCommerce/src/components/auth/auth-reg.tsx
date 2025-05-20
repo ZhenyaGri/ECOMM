@@ -13,6 +13,8 @@ import {
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
+import { handleSignup, mapToCustomerDraft } from '../../api/authHandlers';
+import { parseError } from '../../api/errorHandler';
 
 const CreateUserComponent = (): ReactElement => {
   const [, setNewAccount] = useState<ILogIn | ICreateAccount | IRemaindPass>({
@@ -26,6 +28,22 @@ const CreateUserComponent = (): ReactElement => {
     postCode: undefined,
     country: undefined,
   });
+
+  const [signupError, setSignupError] = useState('');
+
+  const onSigInClick = async (): Promise<void> => {
+    const formData = getUserDataObj();
+    showErrorMessages(warnRef);
+
+    try {
+      const customerDraft = mapToCustomerDraft(formData);
+      await handleSignup(customerDraft);
+      setSignupError('');
+    } catch (error) {
+      const errorMsg = parseError(error);
+      setSignupError(errorMsg);
+    }
+  };
 
   const warnRef: IWarnRefObj = {
     firstName: useRef(null),
@@ -235,10 +253,10 @@ const CreateUserComponent = (): ReactElement => {
               {countries.map((country) => (
                 <option
                   className="create-account-option"
-                  key={country}
-                  value={country}
+                  key={country.code}
+                  value={country.code}
                 >
-                  {country}
+                  {country.name}
                 </option>
               ))}
             </select>
@@ -246,15 +264,17 @@ const CreateUserComponent = (): ReactElement => {
           </li>
         </ul>
 
-        <div
-          className="create-account__btn"
-          onClick={() => {
-            getUserDataObj();
-            showErrorMessages(warnRef);
-          }}
-        >
+        <div className="create-account__btn" onClick={onSigInClick}>
           <h2 className="create-account__btn-title">Create</h2>
         </div>
+        {signupError && (
+          <div
+            className="create-account__error-message"
+            style={{ color: 'red', fontSize: '20px' }}
+          >
+            {signupError}
+          </div>
+        )}
       </div>
     </>
   );

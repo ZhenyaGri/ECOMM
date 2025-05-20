@@ -18,7 +18,7 @@ export const getUserDataObj = ():
     const objValues = Object.values(userDataObj);
     const isObjValues = objValues.every((val) => val !== undefined);
     if (isObjValues) {
-      console.log('!== undefined', userDataObj);
+      console.log(userDataObj);
       return userDataObj;
     } else {
       console.error('obj is undefined or somting went wrong');
