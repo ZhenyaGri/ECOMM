@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { Nav } from '../nav/nav';
-import { Link } from '../link/link';
+import { AnchorLink } from '../link/link';
 import { Img } from '../img/img';
 import { Wrapper } from '../wrapper/wrapper';
 import { Button } from '../button/button';
@@ -22,19 +23,19 @@ export class Header extends Component<HeaderProps> {
       <header className="header">
         <h1 className="hidden">Audo: Online Furniture Store</h1>
         <Nav />
-        <Link href="#" className="link-logo">
+        <Link to="/" className="link-logo">
           <Img className="header-logo" src={logoAudo} alt="Audo Logo" />
         </Link>
         <Wrapper className="wrapper-header">
           <Wrapper className="wrapper-icons">
-            <Link href="#" className="link-icon">
+            <AnchorLink href="#" className="link-icon">
               <Img className="header-icon" src={iconSearch} alt="Search Icon" />
-            </Link>
-            <Link href="#" className="link-icon">
+            </AnchorLink>
+            <AnchorLink href="#" className="link-icon">
               <Img className="header-icon" src={iconBag} alt="Bag Icon" />
-            </Link>
+            </AnchorLink>
           </Wrapper>
-          <Link href="#">
+          <Link to="/login">
             <Button
               className={`btn-light ${isLoggedIn ? 'hidden' : ''}`}
               type="button"
@@ -42,7 +43,7 @@ export class Header extends Component<HeaderProps> {
               onClick={onLogIn}
             />
           </Link>
-          <Link href="#">
+          <Link to="/registration">
             <Button
               className={`btn-light ${isLoggedIn ? 'hidden' : ''}`}
               type="button"

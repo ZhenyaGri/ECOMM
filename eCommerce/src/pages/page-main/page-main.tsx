@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Section } from '../../components/section/section';
 import { Wrapper } from '../../components/wrapper/wrapper';
 import { Heading } from '../../components/heading/heading';
-import { Link } from '../../components/link/link';
+import { AnchorLink } from '../../components/link/link';
 import { Img } from '../../components/img/img';
 import { Text } from '../../components/text/text';
 import lampAndTable from '../../assets/img/table-and-lamp.jpg';
@@ -29,9 +29,9 @@ export class Main extends Component {
               className="heading-secondary heading-light"
               content="Pavot Collection"
             />
-            <Link href="#" className="link-hero">
+            <AnchorLink href="#" className="link-hero">
               Explore the collection
-            </Link>
+            </AnchorLink>
           </Wrapper>
         </Section>
         <Section className="section-collection">
@@ -53,9 +53,9 @@ export class Main extends Component {
                 content="Reverse Collection"
               />
               <Text className="collection-text" content={collectionText} />
-              <Link href="#" className="link-collection">
+              <AnchorLink href="#" className="link-collection">
                 Discover the Reverse Collection
-              </Link>
+              </AnchorLink>
             </Wrapper>
           </Wrapper>
         </Section>
@@ -66,7 +66,7 @@ export class Main extends Component {
             content="Shop by category"
           />
           <Wrapper className="wrapper-shop">
-            <Link className="link-shop" href="#">
+            <AnchorLink className="link-shop" href="#">
               <Wrapper className="wrapper-shop-img">
                 <Heading
                   tag="h3"
@@ -75,8 +75,8 @@ export class Main extends Component {
                 />
                 <Img className="shop-img" src={seating} alt="Chair" />
               </Wrapper>
-            </Link>
-            <Link className="link-shop" href="#">
+            </AnchorLink>
+            <AnchorLink className="link-shop" href="#">
               <Wrapper className="wrapper-shop-img">
                 <Heading
                   tag="h3"
@@ -85,8 +85,8 @@ export class Main extends Component {
                 />
                 <Img className="shop-img" src={tables} alt="Tables" />
               </Wrapper>
-            </Link>
-            <Link className="link-shop" href="#">
+            </AnchorLink>
+            <AnchorLink className="link-shop" href="#">
               <Wrapper className="wrapper-shop-img">
                 <Heading
                   tag="h3"
@@ -95,8 +95,8 @@ export class Main extends Component {
                 />
                 <Img className="shop-img" src={lighting} alt="Lighting" />
               </Wrapper>
-            </Link>
-            <Link className="link-shop" href="#">
+            </AnchorLink>
+            <AnchorLink className="link-shop" href="#">
               <Wrapper className="wrapper-shop-img">
                 <Heading
                   tag="h3"
@@ -105,14 +105,14 @@ export class Main extends Component {
                 />
                 <Img className="shop-img" src={accessories} alt="Accessories" />
               </Wrapper>
-            </Link>
+            </AnchorLink>
           </Wrapper>
         </Section>
         <Section className="section-banner">
           <Wrapper className="wrapper-banner">
-            <Link href="#" className="link-hero">
+            <AnchorLink href="#" className="link-hero">
               Tap to unfold
-            </Link>
+            </AnchorLink>
           </Wrapper>
         </Section>
         <Section className="section-new-items">
@@ -127,9 +127,9 @@ export class Main extends Component {
                 content="Introducing Red Travertine"
               />
               <Text className="collection-text" content={newItemsText} />
-              <Link href="#" className="link-collection">
+              <AnchorLink href="#" className="link-collection">
                 Discover the JWDA collection
-              </Link>
+              </AnchorLink>
             </Wrapper>
           </Wrapper>
         </Section>
@@ -142,9 +142,9 @@ export class Main extends Component {
                 content="Audo House"
               />
               <Text className="collection-text" content={audoHouseText} />
-              <Link href="#" className="link-collection">
+              <AnchorLink href="#" className="link-collection">
                 Explore upcoming events
-              </Link>
+              </AnchorLink>
             </Wrapper>
             <Wrapper className="wrapper-house-img">
               <Img className="house-img" src={house} alt="Interior" />

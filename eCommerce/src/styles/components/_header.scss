@@ -16,19 +16,6 @@
 
 .header-logo {
   width: 8rem;
-  margin-right: 25rem;
-
-  @media screen and (max-width: 1330px) {
-    margin-right: 0;
-  }
-
-  @media screen and (max-width: 1100px) {
-    margin-right: 10rem;
-  }
-
-  @media screen and (max-width: 930px) {
-    margin-right: 0;
-  }
 }
 
 .header-icon {

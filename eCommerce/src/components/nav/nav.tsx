@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { List } from '../list/list';
 import { ListItem } from '../list/list-item';
-import { Link } from '../link/link';
+import { AnchorLink } from '../link/link';
 import { Burger } from './burger';
 import { INavState } from '../../types/interfaces';
 
@@ -22,19 +22,19 @@ export class Nav extends Component<{ state?: boolean }, INavState> {
         <nav className={`nav${isOpen ? ' open' : ''}`}>
           <List>
             <ListItem>
-              <Link children="Shop" href="#" />
+              <AnchorLink children="Shop" href="#" />
             </ListItem>
             <ListItem>
-              <Link children="Inspiration" href="#" />
+              <AnchorLink children="Inspiration" href="#" />
             </ListItem>
             <ListItem>
-              <Link children="Audo House" href="#" />
+              <AnchorLink children="Audo House" href="#" />
             </ListItem>
             <ListItem>
-              <Link children="Samples" href="#" />
+              <AnchorLink children="Samples" href="#" />
             </ListItem>
             <ListItem>
-              <Link children="Professionals" href="#" />
+              <AnchorLink children="Professionals" href="#" />
             </ListItem>
           </List>
         </nav>

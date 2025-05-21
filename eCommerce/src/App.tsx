@@ -1,20 +1,21 @@
 import './index.scss';
 import { useEffect, useState } from 'react';
+import { Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Wrapper } from './components/wrapper/wrapper';
 import { Header } from './components/header/header';
 import { Text } from './components/text/text';
 import { Footer } from './components/footer/footer';
-import { mainStateRender } from './components/auth/auth-toggler';
+import { Main } from './pages/page-main/page-main';
+import LogInComponent from './components/auth/auth-log-in';
+import CreateUserComponent from './components/auth/auth-reg';
+import PassRecoveryComponent from './components/auth/auth-reset-pass';
+import { Page404 } from './pages/page-404/page-404';
 
 function App(): React.ReactNode {
-  const [mainState, setMainState] = useState<
-    'main' | 'login' | 'signUp' | 'recovery'
-  >('main');
+  const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
-
-  const toggleView = (view: 'main' | 'login' | 'signUp' | 'recovery'): void =>
-    setMainState(view);
 
   useEffect((): (() => void) | void => {
     if (!successMessage) return;
@@ -31,23 +32,54 @@ function App(): React.ReactNode {
       <Wrapper className="wrapper-shipping">
         <Text content="Free shipping above €150" />
       </Wrapper>
-
       <Header
         isLoggedIn={isLoggedIn}
-        onLogIn={() => toggleView('login')}
-        onSignUp={() => toggleView('signUp')}
+        onLogIn={() => navigate('/login')}
+        onSignUp={() => navigate('/registration')}
         onLogOut={() => {
           setIsLoggedIn(false);
-          toggleView('main');
+          navigate('/');
         }}
       />
-
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route
+          path="/login"
+          element={
+            <LogInComponent
+              onSignUp={() => navigate('/registration')}
+              onRecovery={() => navigate('/recovery')}
+              onSuccessLogin={() => {
+                setIsLoggedIn(true);
+                navigate('/');
+                setSuccessMessage('Logged in successfully!');
+              }}
+            />
+          }
+        />
+        <Route
+          path="/registration"
+          element={
+            <CreateUserComponent
+              onCreateAccount={() => navigate('/')}
+              onSuccessSignUp={() => {
+                setIsLoggedIn(true);
+                navigate('/');
+                setSuccessMessage('Account created successfully!');
+              }}
+            />
+          }
+        />
+        <Route
+          path="/recovery"
+          element={<PassRecoveryComponent onCancel={() => navigate('/')} />}
+        />
+        <Route path="*" element={<Page404 />} />
+      </Routes>
+      <Footer />
       {successMessage && (
         <div className="success-message">{successMessage}</div>
       )}
-
-      {mainStateRender(mainState, toggleView, setIsLoggedIn, setSuccessMessage)}
-      <Footer />
     </>
   );
 }
