@@ -1,38 +1,28 @@
 import { errorFields, validationData } from './data-list';
-import {
-  ICreateAccount,
-  ILogIn,
-  IRemaindPass,
-  IWarnRefObj,
-} from './type/auth-types';
+import { IUserData, IWarnRefObj } from './type/auth-types';
 
-let userDataObj: ICreateAccount | ILogIn | IRemaindPass | undefined = undefined;
+let validformDataObj: IUserData | undefined = undefined;
 
 //function to get object with data after validation
-export const getUserDataObj = ():
-  | ICreateAccount
-  | ILogIn
-  | IRemaindPass
-  | undefined => {
-  if (userDataObj) {
-    const objValues = Object.values(userDataObj);
+export const getUserDataObj = (): IUserData | undefined => {
+  if (validformDataObj) {
+    const objValues = Object.values(validformDataObj);
     const isObjValues = objValues.every((val) => val !== undefined);
     if (isObjValues) {
-      console.log(userDataObj);
-      return userDataObj;
+      console.log(validformDataObj);
+      return validformDataObj;
     } else {
       console.error('obj is undefined or somting went wrong');
       return undefined;
     }
   }
 };
+
 // input handler cllaer
 export const inputHandler = (
   e: React.FormEvent<HTMLInputElement | HTMLSelectElement>,
-  type: string,
-  setState: React.Dispatch<
-    React.SetStateAction<ICreateAccount | ILogIn | IRemaindPass>
-  >,
+  inputType: keyof IUserData,
+  userDataObj: IUserData | undefined,
   ref: HTMLHeadingElement | null
 ): void => {
   const element = e.target;
@@ -41,28 +31,28 @@ export const inputHandler = (
     element instanceof HTMLSelectElement
   ) {
     const value = element.value;
-    updateFormState(value, type, setState, ref);
+    updateFormState(value, inputType, userDataObj, ref);
   }
 };
 
 //formHandler main func to get whole data obj
 const updateFormState = (
   value: string,
-  inputType: string,
-  setState: React.Dispatch<
-    React.SetStateAction<ICreateAccount | ILogIn | IRemaindPass>
-  >,
+  inputType: keyof IUserData,
+  userDataObj: IUserData | undefined,
   ref: HTMLHeadingElement | null
 ): void => {
   const inputVal = getValidInputValue(value, inputType, ref);
-  setState((prev) => {
-    const stateObj = { ...prev, [inputType]: inputVal };
-    userDataObj = { ...stateObj };
-    //console.log(userDataObj);
-    return stateObj;
-  });
+  if (userDataObj) {
+    if (inputType in userDataObj) {
+      userDataObj[inputType] = inputVal;
+      validformDataObj = userDataObj;
+      console.log(userDataObj);
+    }
+  }
 };
 
+// validation engine
 const getValidInputValue = (
   value: string,
   inputType: string,
@@ -72,18 +62,14 @@ const getValidInputValue = (
     console.error('value is undefined or ref is null');
     return undefined;
   }
-
   const validationRule = validationData.find(
     (dataObj) => dataObj.type === inputType
   );
-
   if (!validationRule) {
     console.error(`No validation rule found for type ${inputType}`);
     return undefined;
   }
-
   const isValid = validationRule.isValid(value);
-
   if (isValid) {
     ref.textContent = '';
     return value;
@@ -99,24 +85,47 @@ export const showErrorMessages = (warnRefObj: IWarnRefObj): void => {
   const keys = Object.keys(warnRefObj);
   const values = Object.values(warnRefObj);
   const filteredErrFields = errorFields.filter((f) => keys.includes(f.key));
-  const userDataObjValues:
-    | ICreateAccount[]
-    | ILogIn[]
-    | IRemaindPass[]
-    | undefined = userDataObj ? Object.values(userDataObj) : undefined;
+  const userDataObjValues: string[] | undefined = validformDataObj
+    ? Object.values(validformDataObj)
+    : undefined;
   values.forEach((val, i) => {
-    if (!userDataObj) {
+    if (!validformDataObj) {
       if (val && val.current) {
         val.current.textContent = filteredErrFields[i].message;
       }
     } else {
       if (userDataObjValues) {
         if (!userDataObjValues[i]) {
-          val.current.textContent = filteredErrFields[i].message;
+          if (val && val.current) {
+            val.current.textContent = filteredErrFields[i].message;
+          }
         } else {
-          val.current.textContent = '';
+          if (val && val.current) {
+            val.current.textContent = '';
+          }
         }
       }
     }
   });
+};
+
+export const setShippingAddress = (
+  userDataObj: IUserData | undefined,
+  isShippingAddressVisible: boolean
+) => {
+  if (isShippingAddressVisible) {
+    return;
+  } else {
+    if (userDataObj) {
+      const street = userDataObj.street;
+      const city = userDataObj.city;
+      const postalAddress = userDataObj.postCode;
+      const country = userDataObj.country;
+
+      userDataObj.shippingStreet = street;
+      userDataObj.shippingCity = city;
+      userDataObj.shippingPostCode = postalAddress;
+      userDataObj.shippingCountry = country;
+    }
+  }
 };

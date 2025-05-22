@@ -1,4 +1,4 @@
-import { IErrorField, IFieldObj } from './type/auth-types';
+import { IAuthUserData, IErrorField, IFieldObj } from './type/auth-types';
 export const countries = [
   { name: 'Afghanistan', code: 'AF' },
   { name: 'Albania', code: 'AL' },
@@ -196,8 +196,7 @@ export const countries = [
   { name: 'Zimbabwe', code: 'ZW' },
 ];
 
-
-export const accountFields: IFieldObj [] = [
+export const accountFields: IFieldObj[] = [
   {
     type: 'firstName',
     inputId: 'first-name',
@@ -205,7 +204,7 @@ export const accountFields: IFieldObj [] = [
     placeholder: 'Enter first name',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
   {
     type: 'lastName',
@@ -214,7 +213,7 @@ export const accountFields: IFieldObj [] = [
     placeholder: 'Enter last name',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
   {
     type: 'birthDate',
@@ -223,7 +222,7 @@ export const accountFields: IFieldObj [] = [
     placeholder: 'Select birth date',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
   {
     type: 'email',
@@ -232,7 +231,7 @@ export const accountFields: IFieldObj [] = [
     placeholder: 'Enter email',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
   {
     type: 'password',
@@ -241,11 +240,11 @@ export const accountFields: IFieldObj [] = [
     placeholder: 'Enter password',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
 ];
 
-export const addressFields: IFieldObj [] = [
+export const addressFields: IFieldObj[] = [
   {
     type: 'street',
     inputId: 'street',
@@ -253,7 +252,7 @@ export const addressFields: IFieldObj [] = [
     placeholder: 'Enter street',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
   {
     type: 'city',
@@ -262,7 +261,7 @@ export const addressFields: IFieldObj [] = [
     placeholder: 'Enter city',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
   {
     type: 'postCode',
@@ -271,7 +270,7 @@ export const addressFields: IFieldObj [] = [
     placeholder: 'Enter postal code',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
   {
     type: 'country',
@@ -280,10 +279,9 @@ export const addressFields: IFieldObj [] = [
     placeholder: 'Select country',
     classNameInput: 'create-account__input',
     classNameItem: 'create-account__input-item',
-    classNameWarning: 'input-item-warning'
+    classNameWarning: 'input-item-warning',
   },
 ];
-
 
 export const shippingFields: IFieldObj[] = [
   {
@@ -324,73 +322,137 @@ export const shippingFields: IFieldObj[] = [
   },
 ];
 
-
 export const errorFields: IErrorField[] = [
   { key: 'firstName', message: 'Please enter your first name' },
   { key: 'lastName', message: 'Please enter your last name' },
   { key: 'birthDate', message: 'please chose your date birth' },
   { key: 'email', message: 'Please enter your email' },
   { key: 'password', message: 'Please enter your password' },
-  
+
   { key: 'street', message: 'Please enter your street' },
   { key: 'city', message: 'Please enter your city' },
   { key: 'postCode', message: 'Please enter your postal code' },
   { key: 'country', message: 'Please chose your country' },
-  
+
   { key: 'shippingStreet', message: 'Please enter your shipping street' },
   { key: 'shippingCity', message: 'Please enter your shipping city' },
-  { key: 'shippingPostCode', message: 'Please enter your shipping postal code' },
-  { key: 'shippingCountry', message: 'Please choose your shipping country' }
-
+  {
+    key: 'shippingPostCode',
+    message: 'Please enter your shipping postal code',
+  },
+  { key: 'shippingCountry', message: 'Please choose your shipping country' },
 ];
 
-
-
 export const validationData = [
-  {type:'firstName',
-   err:'First name: Must contain at least one character and no special characters or numbers',
-   isValid:(value:string):boolean => value.length > 0 
+  {
+    type: 'firstName',
+    err: 'First name: Must contain at least one character and no special characters or numbers',
+    isValid: (value: string): boolean => value.length > 0,
   },
 
-  {type:'lastName',
-   err:'Last name: Must contain at least one character and no special characters or numbers', 
-   isValid:(value:string):boolean => value.length > 0 
+  {
+    type: 'lastName',
+    err: 'Last name: Must contain at least one character and no special characters or numbers',
+    isValid: (value: string): boolean => value.length > 0,
   },
 
-  {type:'birthDate',
-   err: 'Date of birth: A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)',
-   isValid:(value:string):boolean =>   /^(19\d{2}|200\d|201[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(value)
+  {
+    type: 'birthDate',
+    err: 'Date of birth: A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)',
+    isValid: (value: string): boolean =>
+      /^(19\d{2}|200\d|201[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(
+        value
+      ),
   },
 
-  {type:'email',
-   err:'Email: A properly formatted email address (e.g., example@email.com)',
-   isValid:(value:string):boolean => /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(value)
-  },
-  
-  {type:'password',
-   err:'Password: Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
-   isValid:(value:string):boolean =>/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(value)
+  {
+    type: 'email',
+    err: 'Email: A properly formatted email address (e.g., example@email.com)',
+    isValid: (value: string): boolean =>
+      /^[^\s@]+@[^\s@]+\.[a-zA-Z]{2,}$/.test(value),
   },
 
-  {type:'street',
-   err:'Street: Must contain at least one character',
-   isValid:(value:string):boolean => value.length > 0 
+  {
+    type: 'password',
+    err: 'Password: Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
+    isValid: (value: string): boolean =>
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(value),
   },
 
-  {type:'city',
-   err:'City: Must contain at least one character and no special characters or numbers',
-   isValid:(value:string):boolean => value.length > 0 
+  {
+    type: 'street',
+    err: 'Street: Must contain at least one character',
+    isValid: (value: string): boolean => value.length > 0,
   },
 
-  {type:'postCode',
-   err:'Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)',
-   isValid:(value:string):boolean => /^[A-Za-z0-9\s-]{3,10}$/.test(value)
+  {
+    type: 'city',
+    err: 'City: Must contain at least one character and no special characters or numbers',
+    isValid: (value: string): boolean => value.length > 0,
   },
 
-  {type:'country',
-   err:'There isn`t such country',
-   isValid:(value:string):boolean => value.length > 0 
+  {
+    type: 'postCode',
+    err: 'Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)',
+    isValid: (value: string): boolean => /^[A-Za-z0-9\s-]{3,10}$/.test(value),
   },
 
+  {
+    type: 'country',
+    err: 'There isn`t such country',
+    isValid: (value: string): boolean => value.length > 0,
+  },
 
-]
+  {
+    type: 'shippingStreet',
+    err: 'Street: Must contain at least one character',
+    isValid: (value: string): boolean => value.length > 0,
+  },
+
+  {
+    type: 'shippingCity',
+    err: 'City: Must contain at least one character and no special characters or numbers',
+    isValid: (value: string): boolean => value.length > 0,
+  },
+
+  {
+    type: 'shippingPostCode',
+    err: 'Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)',
+    isValid: (value: string): boolean => /^[A-Za-z0-9\s-]{3,10}$/.test(value),
+  },
+
+  {
+    type: 'shippingCountry',
+    err: 'There isn`t such country',
+    isValid: (value: string): boolean => value.length > 0,
+  },
+];
+
+export const authUserData: IAuthUserData = {
+  newUser: {
+    firstName: undefined,
+    lastName: undefined,
+    birthDate: undefined,
+    email: undefined,
+    password: undefined,
+
+    street: undefined,
+    city: undefined,
+    postCode: undefined,
+    country: undefined,
+
+    shippingStreet: undefined,
+    shippingCity: undefined,
+    shippingPostCode: undefined,
+    shippingCountry: undefined,
+  },
+
+  logIn: {
+    email: undefined,
+    password: undefined,
+  },
+
+  restorUser: {
+    email: undefined,
+  },
+};

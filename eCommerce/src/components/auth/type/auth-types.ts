@@ -1,29 +1,34 @@
+export interface INewUser {
+  firstName: string | undefined;
+  lastName: string | undefined;
+  birthDate: string | undefined;
+  email: string | undefined;
+  password: string | undefined;
+
+  street: string | undefined;
+  city: string | undefined;
+  postCode: string | undefined;
+  country: string | undefined;
+
+  shippingStreet: string | undefined;
+  shippingCity: string | undefined;
+  shippingPostCode: string | undefined;
+  shippingCountry: string | undefined;
+}
 export interface ILogIn {
   email: string | undefined;
   password: string | undefined;
 }
-
-export interface ICreateAccount {
-  firstName?: string | undefined;
-  lastName?: string | undefined;
-  birthDate?: string | undefined;
-  email?: string | undefined;
-  password?: string | undefined;
-
-  street?: string | undefined;
-  city?: string | undefined;
-  postCode?: string | undefined;
-  country?: string | undefined;
-
-  shippingStreet?: string | undefined;
-  shippingCity?: string | undefined;
-  shippingPostCode?: string | undefined;
-  shippingCountry?: string | undefined;
-}
-
-export interface IRemaindPass {
+export interface IRestoreUser {
   email: string | undefined;
 }
+export interface IAuthUserData {
+  newUser: INewUser | undefined;
+  logIn: ILogIn | undefined;
+  restorUser: IRestoreUser | undefined;
+}
+
+export type IUserData = Partial<INewUser & ILogIn & IRestoreUser>;
 
 export interface IWarnRefObj {
   firstName?: React.RefObject<HTMLHeadingElement | null>;
@@ -54,7 +59,7 @@ export interface IValidationData {
   isValid: boolean;
 }
 
-type AccountFieldKey =
+export type AccountFieldKey =
   | 'firstName'
   | 'lastName'
   | 'birthDate'
