@@ -24,6 +24,12 @@
   .address-title {
     @include fontStyle(28px, 400, 1px, var(--font-color));
   }
+
+  li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+ }
 }
 
 .input-item-warning {
@@ -31,3 +37,14 @@
   padding: 0 15px;
   @include fontStyle(12px, 600, 1px, rgb(212, 0, 0));
 }
+
+.auth-log-in__error-message,
+.create-account__error-message {
+  @include fontStyle(20px, 600, 1px, rgb(212, 0, 0));
+}
+
+.create-account__error-message {
+  margin-bottom: 40px;
+}
+
+

@@ -1,6 +1,6 @@
 import './style/auth.scss';
 import { ReactElement, useRef, useState } from 'react';
-import { countries } from './data-list';
+import { accountFields, addressFields, countries } from './data-list';
 
 import type {
   ILogIn,
@@ -13,253 +13,219 @@ import {
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
+import { handleSignup, mapToCustomerDraft } from '../../api/authHandlers';
+import { parseError } from '../../api/errorHandler';
+import ShippingAddressComponent from './auth-reg-shipping-addres';
+import defaultNewUserObj from './get-defoult-new-uuser-obj';
 
 type CreateAccountProps = {
   onCreateAccount: () => void;
+  onSuccessSignUp: () => void;
 };
 
 const CreateUserComponent = ({
   onCreateAccount,
+  onSuccessSignUp,
 }: CreateAccountProps): ReactElement => {
-  const [, setNewAccount] = useState<ILogIn | ICreateAccount | IRemaindPass>({
-    firstName: undefined,
-    lastName: undefined,
-    birthDate: undefined,
-    email: undefined,
-    password: undefined,
-    street: undefined,
-    city: undefined,
-    postCode: undefined,
-    country: undefined,
-  });
+  const [isShippingAddressVisible, setIsShippingAddressVisible] =
+    useState(true);
+  const creacteAccountDataObj: ICreateAccount = defaultNewUserObj(
+    isShippingAddressVisible
+  );
+  const [, setNewAccount] = useState<ILogIn | ICreateAccount | IRemaindPass>(
+    creacteAccountDataObj
+  );
 
-  const warnRef: IWarnRefObj = {
+  const [signupError, setSignupError] = useState('');
+
+  const onSigInClick = async (): Promise<void> => {
+    const formData = getUserDataObj();
+    showErrorMessages({
+      ...warnRefAccount,
+      ...warnRefAddress,
+      ...warnRefShiping,
+    });
+    console.log(creacteAccountDataObj);
+    try {
+      const customerDraft = mapToCustomerDraft(formData);
+      await handleSignup(customerDraft);
+      onSuccessSignUp();
+      setSignupError('');
+    } catch (error) {
+      const errorMsg = parseError(error);
+      setSignupError(errorMsg);
+    }
+  };
+
+  const warnRefAccount: IWarnRefObj = {
     firstName: useRef(null),
     lastName: useRef(null),
     birthDate: useRef(null),
     email: useRef(null),
     password: useRef(null),
+  };
+
+  const warnRefAddress: IWarnRefObj = {
     street: useRef(null),
     city: useRef(null),
     postCode: useRef(null),
     country: useRef(null),
   };
 
+  const warnRefShiping: IWarnRefObj = {
+    shippingStreet: useRef(null),
+    shippingCity: useRef(null),
+    shippingPostCode: useRef(null),
+    shippingCountry: useRef(null),
+  };
+
   return (
     <>
       <div className="create-account">
         <h2 className="create-account__title">Create account</h2>
+        {/*person details input list*/}
         <ul className="create-account__input-list">
-          <li className="create-account__input-item">
-            <input
-              className="create-account__input"
-              id="first-name"
-              type="text"
-              placeholder="First name"
-              onInput={(e) => {
-                if (warnRef.firstName) {
-                  inputHandler(
-                    e,
-                    'firstName',
-                    setNewAccount,
-                    warnRef.firstName.current
-                  );
-                }
-              }}
-            />
-            <h2
-              ref={warnRef.firstName}
-              id="first-name"
-              className="input-item-warning"
-            ></h2>
-          </li>
+          {accountFields.map((fieldObj) => (
+            <li className={fieldObj.classNameItem}>
+              {fieldObj.inputType === 'date' ? (
+                <input
+                  className={fieldObj.classNameInput}
+                  id={fieldObj.inputId}
+                  type={fieldObj.inputType}
+                  defaultValue="2000-01-01"
+                  placeholder={fieldObj.placeholder}
+                  onInput={(e) => {
+                    const ref = warnRefAccount[fieldObj.type];
+                    if (ref) {
+                      inputHandler(
+                        e,
+                        fieldObj.type,
+                        setNewAccount,
+                        ref.current
+                      );
+                    }
+                  }}
+                />
+              ) : (
+                <input
+                  className={fieldObj.classNameInput}
+                  id={fieldObj.inputId}
+                  type={fieldObj.inputType}
+                  placeholder={fieldObj.placeholder}
+                  onInput={(e) => {
+                    const ref = warnRefAccount[fieldObj.type];
+                    if (ref) {
+                      inputHandler(
+                        e,
+                        fieldObj.type,
+                        setNewAccount,
+                        ref.current
+                      );
+                    }
+                  }}
+                />
+              )}
 
-          <li className="create-account__input-item">
-            <input
-              className="create-account__input"
-              id="last-name"
-              type="text"
-              placeholder="Last name"
-              onInput={(e) => {
-                if (warnRef.lastName) {
-                  inputHandler(
-                    e,
-                    'lastName',
-                    setNewAccount,
-                    warnRef.lastName.current
-                  );
-                }
-              }}
-            />
-            <h2 ref={warnRef.lastName} className="input-item-warning"></h2>
-          </li>
+              <h2
+                className={fieldObj.classNameWarning}
+                ref={warnRefAccount[fieldObj.type]}
+              ></h2>
+            </li>
+          ))}
+        </ul>
 
-          <li className="create-account__input-item">
-            <input
-              className="create-account__input"
-              id="birthDate"
-              type="text"
-              placeholder="Select your date birth"
-              onFocus={(e) => {
-                e.target.type = 'date';
-                e.target.value = '';
-              }}
-              onBlur={(e) => {
-                if (!e.target.value) e.target.type = 'text';
-              }}
-              onInput={(e) => {
-                if (warnRef.birthDate) {
-                  inputHandler(
-                    e,
-                    'birthDate',
-                    setNewAccount,
-                    warnRef.birthDate.current
-                  );
-                }
-              }}
-            />
-            <h2 ref={warnRef.birthDate} className="input-item-warning"></h2>
-          </li>
+        <h2 className="create-account__title address-title">Billing Address</h2>
 
-          <li className="create-account__input-item">
-            <input
-              className="create-account__input"
-              id="email"
-              type="email"
-              placeholder="Email"
-              onInput={(e) => {
-                if (warnRef.email) {
-                  inputHandler(
-                    e,
-                    'email',
-                    setNewAccount,
-                    warnRef.email.current
-                  );
-                }
-              }}
-            />
-            <h2 ref={warnRef.email} className="input-item-warning"></h2>
-          </li>
+        {/*address details input list*/}
+        <ul className="create-account__input-list">
+          {addressFields.map((fieldObj) => (
+            <li className={fieldObj.classNameItem} key={fieldObj.inputId}>
+              {fieldObj.inputType === 'select' ? (
+                <>
+                  <select
+                    className={fieldObj.classNameInput}
+                    id={fieldObj.inputId}
+                    name={fieldObj.type}
+                    onChange={(e) => {
+                      const ref = warnRefAddress[fieldObj.type];
+                      if (ref) {
+                        inputHandler(
+                          e,
+                          fieldObj.type,
+                          setNewAccount,
+                          ref.current
+                        );
+                      }
+                    }}
+                  >
+                    <option className="create-account-option-title" value="">
+                      Choose your country
+                    </option>
+                    {countries.map((country) => (
+                      <option
+                        className="create-account-option"
+                        key={country.code}
+                        value={country.code}
+                      >
+                        {country.name}
+                      </option>
+                    ))}
+                  </select>
+                </>
+              ) : (
+                <>
+                  <input
+                    className={fieldObj.classNameInput}
+                    id={fieldObj.inputId}
+                    type={fieldObj.inputType}
+                    placeholder={fieldObj.placeholder}
+                    onInput={(e) => {
+                      const ref = warnRefAddress[fieldObj.type];
+                      if (ref) {
+                        inputHandler(
+                          e,
+                          fieldObj.type,
+                          setNewAccount,
+                          ref.current
+                        );
+                      }
+                    }}
+                  />
+                </>
+              )}
 
-          <li className="create-account__input-item">
+              <h2
+                className={fieldObj.classNameWarning}
+                ref={warnRefAddress[fieldObj.type]}
+              ></h2>
+            </li>
+          ))}
+
+          <li className="create-account__input-item-checkbox">
             <input
-              className="create-account__input"
-              id="password"
-              type="password"
-              placeholder="Password"
-              minLength={8}
-              onInput={(e) => {
-                if (warnRef.password) {
-                  inputHandler(
-                    e,
-                    'password',
-                    setNewAccount,
-                    warnRef.password.current
-                  );
-                }
-              }}
+              className="checkbox"
+              id="checkbox"
+              type="checkbox"
+              checked={!isShippingAddressVisible}
+              onChange={(e) => setIsShippingAddressVisible(!e.target.checked)}
             />
-            <h2 ref={warnRef.password} className="input-item-warning"></h2>
+
+            <span className="checkmark"></span>
+            <label htmlFor="checkbox-label">
+              Set billing addres as defoult value
+            </label>
           </li>
         </ul>
 
-        <h2 className="create-account__title address-title">Address</h2>
-
-        <ul className="create-account__input-list">
-          <li className="create-account__input-item">
-            <input
-              className="create-account__input"
-              id="street"
-              type="Text"
-              placeholder="Street"
-              onInput={(e) => {
-                if (warnRef.street) {
-                  inputHandler(
-                    e,
-                    'street',
-                    setNewAccount,
-                    warnRef.street.current
-                  );
-                }
-              }}
-            />
-            <h2 ref={warnRef.street} className="input-item-warning"></h2>
-          </li>
-
-          <li className="create-account__input-item">
-            <input
-              className="create-account__input"
-              id="city"
-              type="text"
-              placeholder="City"
-              onInput={(e) => {
-                if (warnRef.city) {
-                  inputHandler(e, 'city', setNewAccount, warnRef.city.current);
-                }
-              }}
-            />
-            <h2 ref={warnRef.city} className="input-item-warning"></h2>
-          </li>
-          <li className="create-account__input-item">
-            <input
-              className="create-account__input"
-              id="postcode"
-              type="text"
-              placeholder="Postal code"
-              onInput={(e) => {
-                if (warnRef.postCode) {
-                  inputHandler(
-                    e,
-                    'postCode',
-                    setNewAccount,
-                    warnRef.postCode.current
-                  );
-                }
-              }}
-            />
-            <h2 ref={warnRef.postCode} className="input-item-warning"></h2>
-          </li>
-
-          <li className="create-account__input-item">
-            <select
-              className="create-account__input"
-              name="country"
-              onChange={(e) => {
-                if (warnRef.country) {
-                  inputHandler(
-                    e,
-                    'country',
-                    setNewAccount,
-                    warnRef.country.current
-                  );
-                }
-              }}
-            >
-              <option className="create-account-option-title" value="">
-                Chose your country
-              </option>
-              {countries.map((country) => (
-                <option
-                  className="create-account-option"
-                  key={country}
-                  value={country}
-                >
-                  {country}
-                </option>
-              ))}
-            </select>
-            <h2 ref={warnRef.country} className="input-item-warning"></h2>
-          </li>
-        </ul>
+        {isShippingAddressVisible && (
+          <ShippingAddressComponent
+            setNewAccount={setNewAccount}
+            warnRefShiping={warnRefShiping}
+          />
+        )}
 
         <div className="create-account__btn-wrapper">
-          <div
-            className="create-account__btn"
-            onClick={() => {
-              getUserDataObj();
-              showErrorMessages(warnRef);
-            }}
-          >
+          <div className="create-account__btn" onClick={onSigInClick}>
             <h2 className="create-account__btn-title">Create</h2>
           </div>
 
@@ -267,6 +233,10 @@ const CreateUserComponent = ({
             Cancel
           </h2>
         </div>
+
+        {signupError && (
+          <h3 className="create-account__error-message">{signupError}</h3>
+        )}
       </div>
     </>
   );

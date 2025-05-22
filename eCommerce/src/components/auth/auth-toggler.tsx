@@ -4,8 +4,10 @@ import CreateUserComponent from './auth-reg';
 import PassRecoveryComponent from './auth-reset-pass';
 export const mainStateRender = (
   mainState: 'main' | 'login' | 'signUp' | 'recovery',
-  toggleView: (view: 'main' | 'login' | 'signUp' | 'recovery') => void
-):React.ReactNode => {
+  toggleView: (view: 'main' | 'login' | 'signUp' | 'recovery') => void,
+  setIsLoggedIn: (status: boolean) => void,
+  setSuccessMessage: (msg: string) => void
+): React.ReactNode => {
   if (mainState === 'main') {
     return <Main />;
   } else if (mainState === 'login') {
@@ -13,10 +15,24 @@ export const mainStateRender = (
       <LogInComponent
         onSignUp={() => toggleView('signUp')}
         onRecovery={() => toggleView('recovery')}
+        onSuccessLogin={() => {
+          setIsLoggedIn(true);
+          toggleView('main');
+          setSuccessMessage('Logged in successfully!');
+        }}
       />
     );
   } else if (mainState === 'signUp') {
-    return <CreateUserComponent onCreateAccount={() => toggleView('main')} />;
+    return (
+      <CreateUserComponent
+        onCreateAccount={() => toggleView('main')}
+        onSuccessSignUp={() => {
+          setIsLoggedIn(true);
+          toggleView('main');
+          setSuccessMessage('Account created successfully!');
+        }}
+      />
+    );
   } else if (mainState === 'recovery') {
     return <PassRecoveryComponent onCancel={() => toggleView('main')} />;
   }
