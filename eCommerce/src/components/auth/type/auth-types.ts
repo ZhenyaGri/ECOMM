@@ -58,7 +58,7 @@ export interface IValidationData {
   err: string;
   isValid: boolean;
 }
-type AccountFieldKey =
+export type AccountFieldKeys =
   | 'firstName'
   | 'lastName'
   | 'birthDate'
@@ -74,7 +74,7 @@ type AccountFieldKey =
   | 'shippingCountry';
 
 export interface IFieldObj {
-  type: AccountFieldKey;
+  type: AccountFieldKeys;
   inputId: string;
   inputType: string;
   placeholder?: string;

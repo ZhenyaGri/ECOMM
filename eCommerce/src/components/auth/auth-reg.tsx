@@ -59,7 +59,6 @@ const CreateUserComponent = ({
       ...warnRefAddress,
       ...warnRefShiping,
     });
-
     try {
       const customerDraft = mapToCustomerDraft(formData);
       await handleSignup(customerDraft);
@@ -84,7 +83,7 @@ const CreateUserComponent = ({
                 className={fieldObj.classNameInput}
                 id={fieldObj.inputId}
                 type={fieldObj.inputType}
-                defaultValue="2000-01-01"
+                defaultValue={authUserData.newUser?.birthDate}
                 placeholder={fieldObj.placeholder}
                 onInput={(e) => {
                   const ref = warnRefAccount[fieldObj.type];
@@ -207,6 +206,7 @@ const CreateUserComponent = ({
         </li>
       </ul>
 
+      {/* shipping details */}
       {isShippingAddressVisible ? (
         <ShippingAddressComponent warnRefShiping={warnRefShiping} />
       ) : null}

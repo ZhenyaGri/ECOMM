@@ -432,7 +432,7 @@ export const authUserData: IAuthUserData = {
   newUser: {
     firstName: undefined,
     lastName: undefined,
-    birthDate: undefined,
+    birthDate: '2000-01-01',
     email: undefined,
     password: undefined,
 
@@ -456,3 +456,6 @@ export const authUserData: IAuthUserData = {
     email: undefined,
   },
 };
+
+export const defaultCopyAuthUserData: IAuthUserData =
+  structuredClone(authUserData);
