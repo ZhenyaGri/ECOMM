@@ -1,0 +1,94 @@
+.link:link,
+.link:visited {
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: all 0.2s ease-in;
+  color: var(--color-black);
+}
+
+.link:hover,
+.link:active {
+  cursor: pointer;
+  font-style: italic;
+}
+
+.link-logo {
+  padding: 0 0.75rem;
+  margin-right: 25rem;
+
+  @media screen and (max-width: 1330px) {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 1100px) {
+    margin-right: 10rem;
+  }
+
+  @media screen and (max-width: 930px) {
+    margin-right: 0;
+  }
+
+  @media screen and (max-width: 530px) {
+    margin: 0 auto;
+  }
+}
+
+.link-icon {
+  display: block;
+  height: 2.4rem;
+  width: 2.4rem;
+  margin: 0.75rem;
+}
+
+.link-hero:link,
+.link-hero:visited,
+.link-collection:link,
+.link-collection:visited {
+  font-size: 1.6rem;
+  font-style: italic;
+  margin: 0.96rem;
+
+  @media screen and (max-width: 650px) {
+    font-size: 1.4rem;
+  }
+}
+
+.link-hero,
+.link-collection {
+  position: relative;
+}
+
+.link-hero:link,
+.link-hero:visited {
+  color: var(--color-background);
+}
+
+.link-hero:after,
+.link-collection:after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0%;
+  border-bottom: 1.5px solid var(--color-black);
+  transition: 0.3s;
+}
+
+.link-hero:after {
+  border-bottom: 1.5px solid var(--color-white);
+}
+
+.link-hero:hover:after,
+.link-collection:hover:after {
+  width: 100%;
+}
+
+.link-shop {
+  display: flex;
+  max-width: 33rem;
+
+  &:hover,
+  &:active {
+    font-style: normal;
+  }
+}

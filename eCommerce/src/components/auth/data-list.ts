@@ -376,7 +376,7 @@ export const validationData = [
     type: 'password',
     err: 'Password: Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
     isValid: (value: string): boolean =>
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(value),
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(value),
   },
 
   {

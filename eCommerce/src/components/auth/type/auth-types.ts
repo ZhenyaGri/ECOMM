@@ -58,8 +58,7 @@ export interface IValidationData {
   err: string;
   isValid: boolean;
 }
-
-export type AccountFieldKey =
+type AccountFieldKey =
   | 'firstName'
   | 'lastName'
   | 'birthDate'

@@ -1,0 +1,165 @@
+.wrapper {
+  display: flex;
+}
+
+.wrapper-header,
+.wrapper-icons,
+.wrapper-collection {
+  align-items: center;
+  gap: 2rem;
+}
+
+.wrapper-icons {
+  margin-right: 1rem;
+}
+
+.wrapper-shipping {
+  height: 4rem;
+  justify-content: center;
+  align-items: center;
+  padding: 0.5rem 5rem;
+}
+
+.wrapper-hero,
+.wrapper-banner {
+  background: url('./assets/img/main-hero.jpg') no-repeat;
+  background-position: center;
+  background-size: cover;
+  max-width: 152rem;
+  height: 85.5rem;
+  padding: 4rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.wrapper-collection {
+  @media screen and (max-width: 1100px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.wrapper-img {
+  width: 44rem;
+
+  @media screen and (max-width: 1100px) {
+    width: 50rem;
+  }
+}
+
+.wrapper-collection-text,
+.wrapper-new-items-text,
+.wrapper-house-text,
+.wrapper-404 {
+  flex-direction: column;
+  align-items: center;
+}
+
+.wrapper-collection-text {
+  width: 36rem;
+  margin: 4rem;
+
+  @media screen and (max-width: 1100px) {
+    width: 50rem;
+  }
+
+  @media screen and (max-width: 460px) {
+    margin: 4rem 0;
+  }
+}
+
+.wrapper-shop {
+  gap: 1rem;
+  margin-top: 2rem;
+
+  @media screen and (max-width: 1490px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.wrapper-shop-img {
+  max-width: 33rem;
+  position: relative;
+}
+
+.wrapper-banner {
+  background: url('./assets/img/main-banner.jpg') no-repeat;
+  background-size: cover;
+}
+
+.wrapper-new-items {
+  align-items: center;
+  justify-content: space-between;
+
+  @media screen and (max-width: 855px) {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
+.wrapper-new-items-img {
+  width: 63.5rem;
+}
+
+.wrapper-new-items-text {
+  width: 55.5rem;
+  text-align: center;
+  padding: 4rem;
+
+  @media screen and (max-width: 1330px) {
+    padding-left: 8rem;
+  }
+
+  @media screen and (max-width: 855px) {
+    width: 45.5rem;
+    padding: 4rem 0;
+  }
+}
+
+.wrapper-house {
+  align-items: center;
+  gap: 1rem;
+
+  @media screen and (max-width: 855px) {
+    flex-direction: column-reverse;
+  }
+}
+
+.wrapper-house-text {
+  width: 36.5rem;
+  padding: 4rem;
+  text-align: center;
+}
+
+.wrapper-house-img {
+  width: 44.5rem;
+  height: 55.8rem;
+
+  & .house-img {
+    object-fit: cover;
+  }
+
+  @media screen and (max-width: 460px) {
+    width: 35rem;
+  }
+
+  @media screen and (max-width: 360px) {
+    width: 30rem;
+  }
+}
+
+.wrapper-footer-item {
+  flex-direction: column;
+  align-items: flex-start;
+  width: 32.5rem;
+
+  @media screen and (max-width: 650px) {
+    max-width: 25rem;
+  }
+}
+
+.wrapper-404 {
+  gap: 2rem;
+}

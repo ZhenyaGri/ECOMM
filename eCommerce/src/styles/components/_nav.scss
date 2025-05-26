@@ -1,0 +1,32 @@
+.nav {
+  @media screen and (max-width: 855px) {
+    left: -85.5rem;
+    transition: all 0.3s ease-in-out;
+
+    & .list {
+      display: none;
+    }
+
+    &.open {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 10;
+      background-color: var(--color-background);
+    }
+
+    &.open .list {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+    }
+  }
+}

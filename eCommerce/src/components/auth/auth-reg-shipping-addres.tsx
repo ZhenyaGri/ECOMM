@@ -1,4 +1,4 @@
-import React, { ReactElement } from 'react';
+import { ReactElement } from 'react';
 import { countries, shippingFields, authUserData } from './data-list';
 import { IWarnRefObj } from './type/auth-types';
 import { inputHandler } from './form-handler';
@@ -10,7 +10,6 @@ interface ShippingAddressComponentProps {
 const ShippingAddressComponent = ({
   warnRefShiping,
 }: ShippingAddressComponentProps): ReactElement => {
-  console.log(warnRefShiping);
   return (
     <>
       <h2 className="create-account__title address-title">Shipping Address</h2>

@@ -1,0 +1,57 @@
+.footer {
+  background-color: var(--color-footer-background);
+  padding: 7.6rem 5rem 4.8rem 5rem;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.6rem;
+  margin-bottom: 5rem;
+
+  @media screen and (max-width: 650px) {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 2.4rem;
+  }
+}
+
+.footer-list {
+  text-transform: none;
+  display: flex;
+  flex-direction: column;
+
+  & .list-item {
+    margin-bottom: 0;
+  }
+}
+
+.footer-text {
+  text-align: start;
+  margin-bottom: 1.5rem;
+}
+
+.footer-contacts {
+  margin-top: 3rem;
+  text-align: center;
+  display: block;
+}
+
+.footer-logo {
+  width: 8rem;
+  margin-bottom: 3rem;
+}
+
+.footer-address {
+  font-size: 1.2rem;
+}
+
+.footer-icons {
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.footer-icon {
+  width: 2rem;
+  height: 2rem;
+}

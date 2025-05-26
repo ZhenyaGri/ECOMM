@@ -9,10 +9,8 @@ export const getUserDataObj = (): IUserData | undefined => {
     const objValues = Object.values(validformDataObj);
     const isObjValues = objValues.every((val) => val !== undefined);
     if (isObjValues) {
-      console.log(validformDataObj);
       return validformDataObj;
     } else {
-      console.error('obj is undefined or somting went wrong');
       return undefined;
     }
   }
@@ -47,7 +45,6 @@ const updateFormState = (
     if (inputType in userDataObj) {
       userDataObj[inputType] = inputVal;
       validformDataObj = userDataObj;
-      console.log(userDataObj);
     }
   }
 };
@@ -59,14 +56,12 @@ const getValidInputValue = (
   ref: HTMLHeadingElement | null
 ): string | undefined => {
   if (!value || !ref || value.length === 0) {
-    console.error('value is undefined or ref is null');
     return undefined;
   }
   const validationRule = validationData.find(
     (dataObj) => dataObj.type === inputType
   );
   if (!validationRule) {
-    console.error(`No validation rule found for type ${inputType}`);
     return undefined;
   }
   const isValid = validationRule.isValid(value);
@@ -81,7 +76,6 @@ const getValidInputValue = (
 
 // error message render
 export const showErrorMessages = (warnRefObj: IWarnRefObj): void => {
-  console.log(warnRefObj);
   const keys = Object.keys(warnRefObj);
   const values = Object.values(warnRefObj);
   const filteredErrFields = errorFields.filter((f) => keys.includes(f.key));
@@ -112,7 +106,7 @@ export const showErrorMessages = (warnRefObj: IWarnRefObj): void => {
 export const setShippingAddress = (
   userDataObj: IUserData | undefined,
   isShippingAddressVisible: boolean
-) => {
+):void => {
   if (isShippingAddressVisible) {
     return;
   } else {
