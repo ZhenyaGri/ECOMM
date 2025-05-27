@@ -11,11 +11,21 @@ import LogInComponent from './components/auth/auth-log-in';
 import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
+import { getToken, removeToken } from './api/authHandlers';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('authToken');
+    if (authToken) {
+      setIsLoggedIn(true);
+      return;
+    }
+    getToken('authToken');
+  }, []);
 
   useEffect((): (() => void) | void => {
     if (!successMessage) return;
@@ -38,6 +48,7 @@ function App(): React.ReactNode {
         onSignUp={() => navigate('/registration')}
         onLogOut={() => {
           setIsLoggedIn(false);
+          removeToken();
           navigate('/');
         }}
       />
