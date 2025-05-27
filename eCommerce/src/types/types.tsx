@@ -11,7 +11,7 @@ export type ButtonProps = {
 };
 
 export type headingProps = {
-  tag: 'h2' | 'h3' | 'h4';
+  tag: 'h1' | 'h2' | 'h3' | 'h4';
   className?: string;
   content: string;
 };

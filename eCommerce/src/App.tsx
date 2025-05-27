@@ -6,12 +6,13 @@ import { Wrapper } from './components/wrapper/wrapper';
 import { Header } from './components/header/header';
 import { Text } from './components/text/text';
 import { Footer } from './components/footer/footer';
-import { Main } from './pages/page-main/page-main';
+//import { Main } from './pages/page-main/page-main';
 import LogInComponent from './components/auth/auth-log-in';
 import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
 import { getToken, removeToken } from './api/authHandlers';
+import { Catalog } from './pages/catalog/catalog';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -53,7 +54,7 @@ function App(): React.ReactNode {
         }}
       />
       <Routes>
-        <Route path="/" element={<Main />} />
+        <Route path="/" element={<Catalog />} />
         <Route
           path="/login"
           element={
