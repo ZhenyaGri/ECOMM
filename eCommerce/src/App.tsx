@@ -11,6 +11,7 @@ import LogInComponent from './components/auth/auth-log-in';
 import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
+import { dataReset } from './components/auth/form-handler';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -39,6 +40,7 @@ function App(): React.ReactNode {
         onLogOut={() => {
           setIsLoggedIn(false);
           navigate('/');
+          dataReset();
         }}
       />
       <Routes>

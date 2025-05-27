@@ -5,10 +5,10 @@ import {
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
-import type { ILogIn, IRemaindPass, IWarnRefObj } from './type/auth-types';
+import type { IWarnRefObj } from './type/auth-types';
 import { handleLogin } from '../../api/authHandlers';
 import { parseError } from '../../api/errorHandler';
-
+import { authUserData } from './data-list';
 type logInProps = {
   onSignUp: () => void;
   onRecovery: () => void;
@@ -20,17 +20,12 @@ const LogInComponent = ({
   onRecovery,
   onSuccessLogin,
 }: logInProps): ReactElement => {
-  const [, setLogInData] = useState<ILogIn | IRemaindPass>({
-    email: undefined,
-    password: undefined,
-  });
+  const [loginError, setLoginError] = useState('');
 
   const warnRef: IWarnRefObj = {
     email: useRef(null),
     password: useRef(null),
   };
-
-  const [loginError, setLoginError] = useState('');
 
   const onLoginClick = async (): Promise<void> => {
     const userData = getUserDataObj();
@@ -65,7 +60,7 @@ const LogInComponent = ({
                     inputHandler(
                       e,
                       'email',
-                      setLogInData,
+                      authUserData.logIn,
                       warnRef.email.current
                     );
                   }
@@ -85,7 +80,7 @@ const LogInComponent = ({
                     inputHandler(
                       e,
                       'password',
-                      setLogInData,
+                      authUserData.logIn,
                       warnRef.password.current
                     );
                   }
@@ -126,3 +121,4 @@ const LogInComponent = ({
 };
 
 export default LogInComponent;
+

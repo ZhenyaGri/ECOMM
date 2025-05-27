@@ -20,6 +20,15 @@
   .create-account-option-title {
     @include fontStyle(14px, 600, 1px, var(--font-color));
   }
+
+  .create-account__input-item-checkbox {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    padding: 0 15px;
+  }
 }
 .create-account__btn-wrapper {
   display: flex;

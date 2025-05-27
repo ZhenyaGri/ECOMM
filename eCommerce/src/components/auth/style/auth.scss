@@ -24,6 +24,12 @@
   .address-title {
     @include fontStyle(28px, 400, 1px, var(--font-color));
   }
+
+  li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
 }
 
 .input-item-warning {

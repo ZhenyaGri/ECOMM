@@ -66,6 +66,8 @@ export async function createAnonymousToken(): Promise<TokenResponse | null> {
   const projectKey = EnvParams.VITE_CTP_PROJECT_KEY;
   const scope = EnvParams.VITE_CTP_SCOPES;
 
+  console.log(authHost, projectKey, scope);
+
   const url = `${authHost}/oauth/${projectKey}/anonymous/token`;
 
   const body = new URLSearchParams({

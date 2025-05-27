@@ -1,8 +1,4 @@
-import {
-  ICreateAccount,
-  ILogIn,
-  IRemaindPass,
-} from '../components/auth/type/auth-types';
+import { IUserData, INewUser } from '../components/auth/type/auth-types';
 import {
   createAnonymousToken,
   createAuthCustomer,
@@ -50,9 +46,7 @@ export const handleSignup = async (
   }
 };
 
-export function mapToCustomerDraft(
-  data: ICreateAccount | ILogIn | IRemaindPass | undefined
-): CustomerDraft {
+export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
   if (!isCreateAccount(data)) {
     throw new Error('Invalid data: expected ICreateAccount');
   }
@@ -75,9 +69,7 @@ export function mapToCustomerDraft(
   return CustomerDraft;
 }
 
-function isCreateAccount(
-  data: ICreateAccount | ILogIn | IRemaindPass | undefined
-): data is ICreateAccount {
+function isCreateAccount(data: IUserData | undefined): data is INewUser {
   return (
     !!data &&
     'firstName' in data &&
