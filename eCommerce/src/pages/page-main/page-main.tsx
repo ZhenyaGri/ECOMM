@@ -7,7 +7,7 @@ import { Img } from '../../components/img/img';
 import { Text } from '../../components/text/text';
 import lampAndTable from '../../assets/img/table-and-lamp.jpg';
 import lampOnWall from '../../assets/img/wall-lamp.jpg';
-import furniture from '../../assets/img/main-tables.jpg';
+import furniture from '../../assets/img/main-furniture.jpg';
 import lighting from '../../assets/img/main-lighting.jpg';
 import accessories from '../../assets/img/main-accessories.jpg';
 import floorLamp from '../../assets/img/new-items.jpg';
