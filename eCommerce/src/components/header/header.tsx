@@ -42,17 +42,17 @@ export class Header extends Component<HeaderProps> {
               <Img className="header-icon" src={iconProfile} alt="Bag Icon" />
             </AnchorLink>
           </Wrapper>
-          <Link to="/login">
+          <Link to="/login" className={`${isLoggedIn ? 'hidden' : ''}`}>
             <Button
-              className={`btn-light ${isLoggedIn ? 'hidden' : ''}`}
+              className="btn-light"
               type="button"
               children="Log In"
               onClick={onLogIn}
             />
           </Link>
-          <Link to="/registration">
+          <Link to="/registration" className={`${isLoggedIn ? 'hidden' : ''}`}>
             <Button
-              className={`btn-light ${isLoggedIn ? 'hidden' : ''}`}
+              className="btn-light"
               type="button"
               children="Sign Up"
               onClick={onSignUp}
