@@ -73,6 +73,7 @@ function App(): React.ReactNode {
               element={
                 <CreateUserComponent
                   onCreateAccount={() => navigate('/')}
+                  onLogIn={() => navigate('/login')}
                   onSuccessSignUp={() => {
                     setIsLoggedIn(true);
                     sessionStorage.setItem('loggedIn', 'true');
