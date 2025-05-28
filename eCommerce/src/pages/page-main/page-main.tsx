@@ -7,8 +7,7 @@ import { Img } from '../../components/img/img';
 import { Text } from '../../components/text/text';
 import lampAndTable from '../../assets/img/table-and-lamp.jpg';
 import lampOnWall from '../../assets/img/wall-lamp.jpg';
-import seating from '../../assets/img/main-seating.jpg';
-import tables from '../../assets/img/main-tables.jpg';
+import furniture from '../../assets/img/main-tables.jpg';
 import lighting from '../../assets/img/main-lighting.jpg';
 import accessories from '../../assets/img/main-accessories.jpg';
 import floorLamp from '../../assets/img/new-items.jpg';
@@ -71,19 +70,9 @@ export class Main extends Component {
                 <Heading
                   tag="h3"
                   className="heading-tertiary heading-shop"
-                  content="Seating"
+                  content="Furniture"
                 />
-                <Img className="shop-img" src={seating} alt="Chair" />
-              </Wrapper>
-            </AnchorLink>
-            <AnchorLink className="link-shop" href="#">
-              <Wrapper className="wrapper-shop-img">
-                <Heading
-                  tag="h3"
-                  className="heading-tertiary heading-shop"
-                  content="Tables"
-                />
-                <Img className="shop-img" src={tables} alt="Tables" />
+                <Img className="shop-img" src={furniture} alt="Furniture" />
               </Wrapper>
             </AnchorLink>
             <AnchorLink className="link-shop" href="#">

@@ -70,12 +70,16 @@
 }
 
 .wrapper-shop {
-  gap: 1rem;
+  gap: 4.5rem;
   margin-top: 2rem;
+  justify-content: center;
 
   @media screen and (max-width: 1490px) {
     flex-wrap: wrap;
-    justify-content: center;
+  }
+
+  @media screen and (max-width: 855px) {
+    column-gap: 2rem;
   }
 }
 
