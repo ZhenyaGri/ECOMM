@@ -12,6 +12,7 @@ import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
 import { ProtectedRoute } from './utils/protected-route';
 import { TestPage } from './pages/test-page';
+import { dataReset } from './components/auth/form-handler';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -45,6 +46,7 @@ function App(): React.ReactNode {
           sessionStorage.setItem('loggedIn', 'false');
           sessionStorage.clear();
           navigate('/');
+          dataReset();
         }}
       />
       <Routes>

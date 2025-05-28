@@ -1,12 +1,12 @@
 import './style/auth.scss';
-import { ReactElement, useRef, useState } from 'react';
-import { IRemaindPass, IWarnRefObj } from './type/auth-types';
+import { ReactElement, useRef } from 'react';
+import { IWarnRefObj } from './type/auth-types';
 import {
   inputHandler,
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
-
+import { authUserData } from './data-list';
 type RecoveryPassProps = {
   onCancel: () => void;
 };
@@ -14,10 +14,6 @@ type RecoveryPassProps = {
 const PassRecoveryComponent = ({
   onCancel,
 }: RecoveryPassProps): ReactElement => {
-  const [, setEmail] = useState<IRemaindPass>({
-    email: undefined,
-  });
-
   const warnRef: IWarnRefObj = {
     email: useRef(null),
   };
@@ -42,7 +38,12 @@ const PassRecoveryComponent = ({
               placeholder="Email"
               onInput={(e) => {
                 if (warnRef.email) {
-                  inputHandler(e, 'email', setEmail, warnRef.email.current);
+                  inputHandler(
+                    e,
+                    'email',
+                    authUserData.restorUser,
+                    warnRef.email.current
+                  );
                 }
               }}
             />
