@@ -8,6 +8,7 @@ import { Button } from '../button/button';
 import logoAudo from '../../assets/icons/audo-logo.svg';
 import iconSearch from '../../assets/icons/icon-search.svg';
 import iconBag from '../../assets/icons/icon-bag.svg';
+import iconProfile from '../../assets/icons/icon-profile.svg';
 
 type HeaderProps = {
   isLoggedIn: boolean;
@@ -33,6 +34,12 @@ export class Header extends Component<HeaderProps> {
             </AnchorLink>
             <AnchorLink href="#" className="link-icon">
               <Img className="header-icon" src={iconBag} alt="Bag Icon" />
+            </AnchorLink>
+            <AnchorLink
+              href="#"
+              className={`link-icon ${isLoggedIn ? '' : 'link-hidden'}`}
+            >
+              <Img className="header-icon" src={iconProfile} alt="Bag Icon" />
             </AnchorLink>
           </Wrapper>
           <Link to="/login">
