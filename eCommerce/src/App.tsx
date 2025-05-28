@@ -1,7 +1,6 @@
 import './index.scss';
 import { useEffect, useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
+import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { Wrapper } from './components/wrapper/wrapper';
 import { Header } from './components/header/header';
 import { Text } from './components/text/text';
@@ -11,11 +10,16 @@ import LogInComponent from './components/auth/auth-log-in';
 import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
+import { ProtectedRoute } from './utils/protected-route';
+import { TestPage } from './pages/test-page';
 import { dataReset } from './components/auth/form-handler';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
-  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
+    return sessionStorage.getItem('loggedIn') === 'true';
+  });
+
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect((): (() => void) | void => {
@@ -39,39 +43,58 @@ function App(): React.ReactNode {
         onSignUp={() => navigate('/registration')}
         onLogOut={() => {
           setIsLoggedIn(false);
+          sessionStorage.setItem('loggedIn', 'false');
+          sessionStorage.clear();
           navigate('/');
           dataReset();
         }}
       />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route
-          path="/login"
-          element={
-            <LogInComponent
-              onSignUp={() => navigate('/registration')}
-              onRecovery={() => navigate('/recovery')}
-              onSuccessLogin={() => {
-                setIsLoggedIn(true);
-                navigate('/');
-                setSuccessMessage('Logged in successfully!');
-              }}
+        {!isLoggedIn ? (
+          <>
+            <Route
+              path="/login"
+              element={
+                <LogInComponent
+                  onSignUp={() => navigate('/registration')}
+                  onRecovery={() => navigate('/recovery')}
+                  onSuccessLogin={() => {
+                    setIsLoggedIn(true);
+                    sessionStorage.setItem('loggedIn', 'true');
+                    navigate('/');
+                    setSuccessMessage('Logged in successfully!');
+                  }}
+                />
+              }
             />
-          }
-        />
-        <Route
-          path="/registration"
-          element={
-            <CreateUserComponent
-              onCreateAccount={() => navigate('/')}
-              onSuccessSignUp={() => {
-                setIsLoggedIn(true);
-                navigate('/');
-                setSuccessMessage('Account created successfully!');
-              }}
+            <Route
+              path="/registration"
+              element={
+                <CreateUserComponent
+                  onCreateAccount={() => navigate('/')}
+                  onSuccessSignUp={() => {
+                    setIsLoggedIn(true);
+                    sessionStorage.setItem('loggedIn', 'true');
+                    navigate('/');
+                    setSuccessMessage('Account created successfully!');
+                  }}
+                />
+              }
             />
-          }
-        />
+          </>
+        ) : (
+          <>
+            <Route element={<ProtectedRoute />}>
+              <Route path="/login" element={<Navigate to="/" replace />} />
+              <Route
+                path="/registration"
+                element={<Navigate to="/" replace />}
+              />
+              <Route path="/test" element={<TestPage />} />
+            </Route>
+          </>
+        )}
         <Route
           path="/recovery"
           element={<PassRecoveryComponent onCancel={() => navigate('/')} />}
