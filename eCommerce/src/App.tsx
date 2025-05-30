@@ -79,6 +79,7 @@ function App(): React.ReactNode {
                     navigate('/');
                     setSuccessMessage('Account created successfully!');
                   }}
+                  onLogIn={() => navigate('/login')}
                 />
               }
             />
