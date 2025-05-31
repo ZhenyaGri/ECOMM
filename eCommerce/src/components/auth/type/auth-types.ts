@@ -15,15 +15,23 @@ export interface INewUser {
   shippingPostCode: string | undefined;
   shippingCountry: string | undefined;
 }
+export interface IAddressDefoult {
+  isBillingAddressDef: boolean;
+  isShippingAddress: boolean;
+}
+
 export interface ILogIn {
   email: string | undefined;
   password: string | undefined;
 }
+
 export interface IRestoreUser {
   email: string | undefined;
 }
+
 export interface IAuthUserData {
   newUser: INewUser | undefined;
+  addressDefaults: IAddressDefoult;
   logIn: ILogIn | undefined;
   restorUser: IRestoreUser | undefined;
 }
@@ -46,6 +54,14 @@ export interface IWarnRefObj {
   shippingCity?: React.RefObject<HTMLHeadingElement | null>;
   shippingPostCode?: React.RefObject<HTMLHeadingElement | null>;
   shippingCountry?: React.RefObject<HTMLHeadingElement | null>;
+}
+
+export interface IRefs {
+  warnRefAccount: IWarnRefObj;
+  warnRefAddress: IWarnRefObj;
+  warnRefShiping: IWarnRefObj;
+  warnRefLogIn: IWarnRefObj;
+  warnRefRestoreUser: IWarnRefObj;
 }
 
 export interface IErrorField {

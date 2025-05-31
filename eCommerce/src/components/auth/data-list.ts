@@ -447,6 +447,11 @@ export const authUserData: IAuthUserData = {
     shippingCountry: undefined,
   },
 
+  addressDefaults: {
+    isBillingAddressDef: false,
+    isShippingAddress: false,
+  },
+
   logIn: {
     email: undefined,
     password: undefined,
