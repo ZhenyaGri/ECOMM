@@ -195,7 +195,9 @@ const CreateUserComponent = ({
               console.log(isBillgAddreasDef);
             }}
           />
-          <label htmlFor="default-address">Set this address as default</label>
+          <label htmlFor="default-address">
+            Set billing address as default
+          </label>
         </li>
       </ul>
 
