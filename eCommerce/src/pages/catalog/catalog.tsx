@@ -28,9 +28,12 @@ export const Catalog = (): React.ReactNode => {
       try {
         setLoading(true);
         const response: ProductProjectionPagedQueryResponse =
-          await getPublishedProducts({
-            limit: 18,
-          });
+          await getPublishedProducts(
+            {
+              limit: 30,
+            },
+            false
+          );
 
         console.log(response);
 

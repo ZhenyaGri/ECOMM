@@ -16,13 +16,14 @@ const EnvParams: ImportMetaEnv = {
 };
 
 export async function fetchProducts(
-  params: FetchProductsParams = {}
+  params: FetchProductsParams = {},
+  PathURL: string
 ): Promise<ProductProjectionPagedQueryResponse> {
   const token =
     (await getToken('authToken'))?.access_token ||
     (await getToken('anonymousToken'))?.access_token;
   const url = new URL(
-    `${EnvParams.VITE_CTP_API_URL}/${EnvParams.VITE_CTP_PROJECT_KEY}/product-projections`
+    `${EnvParams.VITE_CTP_API_URL}/${EnvParams.VITE_CTP_PROJECT_KEY}/product-projections${PathURL}`
   );
 
   Object.entries(params).forEach(([key, value]) => {
@@ -54,7 +55,8 @@ export async function fetchProducts(
 }
 
 export async function getPublishedProducts(
-  params: PublishedProductsParams = {}
+  params: PublishedProductsParams = {},
+  sortByPrice: boolean
 ): Promise<ProductProjectionPagedQueryResponse> {
   const defaultParams = {
     limit: 20,
@@ -62,5 +64,5 @@ export async function getPublishedProducts(
   };
   const queryParams = params ? { ...params } : { ...defaultParams };
 
-  return fetchProducts(queryParams);
+  return fetchProducts(queryParams, sortByPrice ? '/search' : '');
 }
