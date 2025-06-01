@@ -19,11 +19,13 @@ import { parseError } from '../../api/errorHandler';
 type CreateAccountProps = {
   onCreateAccount: () => void;
   onSuccessSignUp: () => void;
+  onLogIn: () => void;
 };
 
 const CreateUserComponent = ({
   onCreateAccount,
   onSuccessSignUp,
+  onLogIn,
 }: CreateAccountProps): ReactElement => {
   const [isShippingAddressVisible, setIsShippingAddressVisible] =
     useState(true);
@@ -216,7 +218,9 @@ const CreateUserComponent = ({
           <h2 className="create-account__btn-title">Create</h2>
         </div>
 
-        <h2 className="create-account__cancel-text">logIn</h2>
+        <h2 className="create-account__cancel-text" onClick={onLogIn}>
+          LogIn
+        </h2>
 
         <h2 className="create-account__cancel-text" onClick={onCreateAccount}>
           Cancel

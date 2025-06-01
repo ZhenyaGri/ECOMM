@@ -31,6 +31,7 @@ export const mainStateRender = (
           toggleView('main');
           setSuccessMessage('Account created successfully!');
         }}
+        onLogIn={() => toggleView('login')}
       />
     );
   } else if (mainState === 'recovery') {

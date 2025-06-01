@@ -121,4 +121,3 @@ const LogInComponent = ({
 };
 
 export default LogInComponent;
-
