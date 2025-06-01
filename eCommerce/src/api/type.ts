@@ -122,3 +122,13 @@ export type CustomerSignInResult = {
   customer: Customer;
   cart?: Cart;
 };
+
+export type FetchProductsParams = {
+  limit?: number;
+  offset?: number;
+  priceCurrency?: string;
+  priceCountry?: string;
+  where?: string[];
+  sort?: string[];
+  expand?: string[];
+};

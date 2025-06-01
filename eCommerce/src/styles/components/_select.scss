@@ -1,0 +1,25 @@
+.facet-sorting {
+    padding: 1rem;
+
+    select {
+        text-align: end;
+        font-family: 'CenturyOld';
+        font-weight: normal;
+        font-size: 1.5rem;
+        
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        padding: 0.6rem 2rem;
+        background-color: rgba(0,0,0,0);
+        border-radius: 0;
+        border: none;
+        option {
+            line-height: 2;
+            background-color: var(--color-background);
+        }
+    }
+    select:hover {
+        border-color: var(--color-footer-background);
+    }
+
+}

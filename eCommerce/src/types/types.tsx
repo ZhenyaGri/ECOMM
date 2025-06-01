@@ -32,3 +32,10 @@ export type textProps = {
   className?: string;
   content: string;
 };
+
+export type Product = {
+  name: string;
+  price: number;
+  imageUrl: string;
+  discount?: number;
+};
