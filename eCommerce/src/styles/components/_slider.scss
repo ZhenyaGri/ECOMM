@@ -1,12 +1,27 @@
+:root {
+  --swiper-navigation-size: 3rem;
+}
+
 .wrapper-slider {
   position: relative;
   max-width: 71rem;
   position: relative;
-}
 
-.mySwiper {
-  width: 71rem;
-  height: 95rem;
+  @media screen and (max-width: 1330px) {
+    max-width: 59rem;
+  }
+
+  @media screen and (max-width: 1100px) {
+    max-width: 45rem;
+  }
+
+  @media screen and (max-width: 530px) {
+    max-width: 45rem;
+  }
+
+  @media screen and (max-width: 460px) {
+    max-width: 30rem;
+  }
 }
 
 .product-img {
@@ -14,6 +29,12 @@
   height: 100%;
   object-fit: cover;
   user-select: none;
+}
+
+.swiper-wrapper {
+  @media screen and (max-width: 650px) {
+    
+  }
 }
 
 .swiper-button-prev,

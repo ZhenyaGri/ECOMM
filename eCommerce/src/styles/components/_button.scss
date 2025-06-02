@@ -82,6 +82,14 @@
   width: 45rem;
   height: 5rem;
   margin: 1rem 0;
+
+  @media screen and (max-width: 1330px) {
+    max-width: 35rem;
+  }
+
+  @media screen and (max-width: 460px) {
+    max-width: 30rem;
+  }
 }
 
 .btn-arrow-left,
