@@ -1,4 +1,4 @@
-import { IUserData } from '../components/auth/type/auth-types';
+import { IUserData, INewUser } from '../components/auth/type/auth-types';
 import {
   createAnonymousToken,
   createAuthCustomer,
@@ -72,7 +72,7 @@ export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
   return CustomerDraft;
 }
 
-function isCreateAccount(data: IUserData | undefined): data is IUserData {
+function isCreateAccount(data: IUserData | undefined): data is INewUser {
   return (
     !!data &&
     'firstName' in data &&

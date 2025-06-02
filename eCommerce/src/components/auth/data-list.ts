@@ -376,7 +376,7 @@ export const validationData = [
     type: 'password',
     err: 'Password: Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, and 1 number',
     isValid: (value: string): boolean =>
-      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])/.test(value),
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(value),
   },
 
   {
@@ -432,7 +432,7 @@ export const authUserData: IAuthUserData = {
   newUser: {
     firstName: undefined,
     lastName: undefined,
-    birthDate: undefined,
+    birthDate: '2000-01-01',
     email: undefined,
     password: undefined,
 
@@ -456,3 +456,6 @@ export const authUserData: IAuthUserData = {
     email: undefined,
   },
 };
+
+export const defaultCopyAuthUserData: IAuthUserData =
+  structuredClone(authUserData);

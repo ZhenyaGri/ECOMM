@@ -23,11 +23,13 @@ import { parseError } from '../../api/errorHandler';
 type CreateAccountProps = {
   onCreateAccount: () => void;
   onSuccessSignUp: () => void;
+  onLogIn: () => void;
 };
 
 const CreateUserComponent = ({
   onCreateAccount,
   onSuccessSignUp,
+  onLogIn,
 }: CreateAccountProps): ReactElement => {
   const [isShippingAddressVisible, setIsShippingAddressVisible] =
     useState(true);
@@ -63,7 +65,6 @@ const CreateUserComponent = ({
       ...warnRefAddress,
       ...warnRefShiping,
     });
-
     try {
       const customerDraft = mapToCustomerDraft(formData);
       const authToken = await handleSignup(customerDraft);
@@ -91,7 +92,8 @@ const CreateUserComponent = ({
                 className={fieldObj.classNameInput}
                 id={fieldObj.inputId}
                 type={fieldObj.inputType}
-                defaultValue="2000-01-01"
+                defaultValue={authUserData.newUser?.birthDate}
+
                 placeholder={fieldObj.placeholder}
                 onInput={(e) => {
                   const ref = warnRefAccount[fieldObj.type];
@@ -214,6 +216,8 @@ const CreateUserComponent = ({
         </li>
       </ul>
 
+      {/* shipping details */}
+
       {isShippingAddressVisible ? (
         <ShippingAddressComponent warnRefShiping={warnRefShiping} />
       ) : null}
@@ -223,7 +227,9 @@ const CreateUserComponent = ({
           <h2 className="create-account__btn-title">Create</h2>
         </div>
 
-        <h2 className="create-account__cancel-text">logIn</h2>
+        <h2 className="create-account__cancel-text" onClick={onLogIn}>
+          LogIn
+        </h2>
 
         <h2 className="create-account__cancel-text" onClick={onCreateAccount}>
           Cancel

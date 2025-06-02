@@ -8,6 +8,7 @@ export interface INewUser {
   city: string | undefined;
   postCode: string | undefined;
   country: string | undefined;
+
   shippingStreet: string | undefined;
   shippingCity: string | undefined;
   shippingPostCode: string | undefined;
@@ -73,7 +74,7 @@ export type AccountFieldKey =
   | 'shippingCountry';
 
 export interface IFieldObj {
-  type: AccountFieldKey;
+  type: AccountFieldKeys;
   inputId: string;
   inputType: string;
   placeholder?: string;
@@ -82,24 +83,3 @@ export interface IFieldObj {
   classNameWarning: string;
 }
 
-export interface ICreateAccount {
-  firstName: string | undefined;
-  lastName: string | undefined;
-  birthDate: string | undefined;
-  email: string | undefined;
-  password: string | undefined;
-
-  street: string | undefined;
-  city: string | undefined;
-  postCode: string | undefined;
-  country: string | undefined;
-
-  shippingStreet: string | undefined;
-  shippingCity: string | undefined;
-  shippingPostCode: string | undefined;
-  shippingCountry: string | undefined;
-}
-
-export interface IRemaindPass {
-  email: string | undefined;
-}

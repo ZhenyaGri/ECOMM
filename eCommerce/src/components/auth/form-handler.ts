@@ -1,4 +1,9 @@
-import { errorFields, validationData } from './data-list';
+import {
+  authUserData,
+  defaultCopyAuthUserData,
+  errorFields,
+  validationData,
+} from './data-list';
 import { IUserData, IWarnRefObj } from './type/auth-types';
 
 let validformDataObj: IUserData | undefined = undefined;
@@ -122,4 +127,9 @@ export const setShippingAddress = (
       userDataObj.shippingCountry = country;
     }
   }
+};
+
+export const dataReset = (): void => {
+  Object.assign(authUserData, defaultCopyAuthUserData);
+  console.log(authUserData);
 };
