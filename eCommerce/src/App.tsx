@@ -10,9 +10,13 @@ import LogInComponent from './components/auth/auth-log-in';
 import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
+
+import { getToken, removeToken } from './api/authHandlers';
+import { Catalog } from './pages/catalog/catalog';
 import { ProtectedRoute } from './utils/protected-route';
 import { TestPage } from './pages/test-page';
 import { dataReset } from './components/auth/form-handler';
+
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -21,6 +25,17 @@ function App(): React.ReactNode {
   });
 
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+
+  useEffect(() => {
+    const checkAuth = async (): Promise<void> => {
+      const authToken = await getToken('authToken');
+      if (authToken) {
+        setIsLoggedIn(true);
+      }
+    };
+
+    checkAuth();
+  }, []);
 
   useEffect((): (() => void) | void => {
     if (!successMessage) return;
@@ -43,6 +58,7 @@ function App(): React.ReactNode {
         onSignUp={() => navigate('/registration')}
         onLogOut={() => {
           setIsLoggedIn(false);
+          removeToken();
           sessionStorage.setItem('loggedIn', 'false');
           sessionStorage.clear();
           navigate('/');
@@ -51,6 +67,7 @@ function App(): React.ReactNode {
       />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/catalog" element={<Catalog />} />
         {!isLoggedIn ? (
           <>
             <Route

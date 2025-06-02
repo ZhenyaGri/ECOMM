@@ -5,7 +5,8 @@ import {
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
-import { handleLogin } from '../../api/authHandlers';
+import { handleLogin, setToken } from '../../api/authHandlers';
+
 import { parseError } from '../../api/errorHandler';
 import { authUserData } from './data-list';
 import { useRefs } from './refs';
@@ -29,8 +30,11 @@ const LogInComponent = ({
 
     try {
       if (userData && userData.email && 'password' in userData) {
-        await handleLogin(userData.email, userData.password);
+        const authToken = await handleLogin(userData.email, userData.password);
         onSuccessLogin();
+        if (authToken) {
+          setToken(authToken, 'authToken');
+        }
       }
       setLoginError('');
     } catch (error) {

@@ -5,6 +5,11 @@
   text-align: center;
 }
 
+h1.heading {
+  font-size: clamp(4rem, 4vw + 2rem, 5rem);
+  padding: 8rem 0;
+}
+
 .heading-secondary {
   font-size: 4rem;
   margin-bottom: 0.5rem;

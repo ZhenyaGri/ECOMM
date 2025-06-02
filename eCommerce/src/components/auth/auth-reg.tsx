@@ -12,7 +12,11 @@ import {
   showErrorMessages,
   setShippingAddress,
 } from './form-handler';
-import { handleSignup, mapToCustomerDraft } from '../../api/authHandlers';
+import {
+  handleSignup,
+  mapToCustomerDraft,
+  setToken,
+} from '../../api/authHandlers';
 import { parseError } from '../../api/errorHandler';
 import { useRefs } from './refs';
 
@@ -48,9 +52,12 @@ const CreateUserComponent = ({
 
     try {
       const customerDraft = mapToCustomerDraft(formData);
-      await handleSignup(customerDraft);
+      const authToken = await handleSignup(customerDraft);
       onSuccessSignUp();
       setSignupError('');
+      if (authToken) {
+        setToken(authToken, 'authToken');
+      }
     } catch (error) {
       const errorMsg = parseError(error);
       setSignupError(errorMsg);
@@ -70,6 +77,7 @@ const CreateUserComponent = ({
                 id={fieldObj.inputId}
                 type={fieldObj.inputType}
                 defaultValue={authUserData.newUser?.birthDate}
+
                 placeholder={fieldObj.placeholder}
                 onInput={(e) => {
                   const ref = warnRefAccount[fieldObj.type];
@@ -204,6 +212,7 @@ const CreateUserComponent = ({
       </ul>
 
       {/* shipping details */}
+
       {isShippingAddressVisible ? (
         <ShippingAddressComponent
           warnRefShiping={warnRefShiping}
