@@ -3,6 +3,7 @@ import {
   createAnonymousToken,
   createAuthCustomer,
   getCustomerInfo,
+  refreshToken,
   signUpCustomer,
 } from './authService';
 import { CustomerDraft, TokenResponse } from './type';
@@ -68,7 +69,6 @@ export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
       },
     ],
   };
-  console.log(CustomerDraft);
   return CustomerDraft;
 }
 
@@ -85,27 +85,51 @@ function isCreateAccount(data: IUserData | undefined): data is IUserData {
   );
 }
 
+function isTokenExpired(token: TokenResponse): boolean {
+  if (!token.created_at) return true;
+  const expirationTime =
+    Number(token.created_at) + Number(token.expires_in) * 1000;
+  return Date.now() > expirationTime - 60000;
+}
+
 export function setToken(token: TokenResponse, keyToken: string): void {
-  localStorage.setItem(keyToken, JSON.stringify(token));
+  const tokenWithTimestamp = {
+    ...token,
+    created_at: Date.now(),
+  };
+  localStorage.setItem(keyToken, JSON.stringify(tokenWithTimestamp));
 }
 
 export async function getToken(
   keyToken: 'anonymousToken' | 'authToken'
 ): Promise<TokenResponse | null> {
-  let result = null;
   const token = localStorage.getItem(keyToken);
   if (token) {
-    result = JSON.parse(token);
-  } else {
-    const anonymousToken = await createAnonymousToken();
-    if (keyToken === 'anonymousToken') {
-      if (anonymousToken) {
-        setToken(anonymousToken, keyToken);
-        result = anonymousToken;
+    const parsedToken = JSON.parse(token);
+
+    if (!isTokenExpired(parsedToken)) {
+      return parsedToken;
+    }
+    localStorage.removeItem(keyToken);
+
+    if (parsedToken.refresh_token) {
+      try {
+        const newToken = await refreshToken(parsedToken.refresh_token);
+        setToken(newToken, keyToken);
+        return newToken;
+      } catch (error) {
+        console.error('Refresh token failed:', error);
+        localStorage.removeItem('authToken');
       }
     }
+  } else if (keyToken === 'anonymousToken') {
+    const anonymousToken = await createAnonymousToken();
+    if (anonymousToken) {
+      setToken(anonymousToken, keyToken);
+      return anonymousToken;
+    }
   }
-  return result;
+  return null;
 }
 
 export async function removeToken(): Promise<void> {

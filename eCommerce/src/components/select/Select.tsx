@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 export type SortOption =
   | 'featured'
-  | 'alphabetical-asc'
-  | 'alphabetical-desc'
-  | 'price-asc'
-  | 'price-desc';
+  | 'name.en asc'
+  | 'name.en desc'
+  | 'price asc'
+  | 'price desc';
 
 interface SortingSelectProps {
   className?: string;
@@ -33,10 +33,10 @@ export const SortingSelect = ({
         onChange={handleChange}
       >
         <option value="featured">Featured</option>
-        <option value="alphabetical-asc">Alphabetically, A-Z</option>
-        <option value="alphabetical-desc">Alphabetically, Z-A</option>
-        <option value="price-asc">Price, low to high</option>
-        <option value="price-desc">Price, high to low</option>
+        <option value="name.en asc">Alphabetically, A-Z</option>
+        <option value="name.en desc">Alphabetically, Z-A</option>
+        <option value="price asc">Price, low to high</option>
+        <option value="price desc">Price, high to low</option>
       </select>
     </div>
   );

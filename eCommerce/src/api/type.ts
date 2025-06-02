@@ -4,6 +4,7 @@ export type TokenResponse = {
   refresh_token: string;
   token_type: string;
   scope: string;
+  created_at?: string;
 };
 
 export type AuthParams = {

@@ -6,7 +6,7 @@ import { Wrapper } from './components/wrapper/wrapper';
 import { Header } from './components/header/header';
 import { Text } from './components/text/text';
 import { Footer } from './components/footer/footer';
-//import { Main } from './pages/page-main/page-main';
+import { Main } from './pages/page-main/page-main';
 import LogInComponent from './components/auth/auth-log-in';
 import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
@@ -20,12 +20,14 @@ function App(): React.ReactNode {
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
 
   useEffect(() => {
-    const authToken = localStorage.getItem('authToken');
-    if (authToken) {
-      setIsLoggedIn(true);
-      return;
-    }
-    getToken('authToken');
+    const checkAuth = async (): Promise<void> => {
+      const authToken = await getToken('authToken');
+      if (authToken) {
+        setIsLoggedIn(true);
+      }
+    };
+
+    checkAuth();
   }, []);
 
   useEffect((): (() => void) | void => {
@@ -54,7 +56,8 @@ function App(): React.ReactNode {
         }}
       />
       <Routes>
-        <Route path="/" element={<Catalog />} />
+        <Route path="/" element={<Main />} />
+        <Route path="/catalog" element={<Catalog />} />
         <Route
           path="/login"
           element={

@@ -1,10 +1,27 @@
+import { getPublishedProducts } from '../../api/productsService';
+import { ProductProjectionPagedQueryResponse } from '../../api/productsType';
 import { Button } from '../button/button';
 import { SortingSelect, SortOption } from '../select/Select';
 import { Wrapper } from '../wrapper/wrapper';
 
-export const CatalogToolbar = (): React.ReactNode => {
-  const handleSortChange = (sortOption: SortOption): void => {
-    console.log(sortOption);
+type CatalogToolbarProps = {
+  onProductsSorted: (products: ProductProjectionPagedQueryResponse) => void;
+};
+
+export const CatalogToolbar = ({
+  onProductsSorted,
+}: CatalogToolbarProps): React.ReactNode => {
+  const handleSortChange = async (sortOption: SortOption): Promise<void> => {
+    const response: ProductProjectionPagedQueryResponse =
+      await getPublishedProducts(
+        {
+          limit: 30,
+          sort: [sortOption === 'featured' ? 'createdAt asc' : sortOption],
+        },
+        sortOption === 'price asc' || sortOption === 'price desc'
+      );
+    onProductsSorted(response);
+    console.log(response);
   };
   return (
     <Wrapper className="facets-container">

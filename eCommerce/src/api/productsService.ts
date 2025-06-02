@@ -22,6 +22,7 @@ export async function fetchProducts(
   const token =
     (await getToken('authToken'))?.access_token ||
     (await getToken('anonymousToken'))?.access_token;
+
   const url = new URL(
     `${EnvParams.VITE_CTP_API_URL}/${EnvParams.VITE_CTP_PROJECT_KEY}/product-projections${PathURL}`
   );
@@ -56,7 +57,7 @@ export async function fetchProducts(
 
 export async function getPublishedProducts(
   params: PublishedProductsParams = {},
-  sortByPrice: boolean
+  sortByPrice: boolean = false
 ): Promise<ProductProjectionPagedQueryResponse> {
   const defaultParams = {
     limit: 20,
