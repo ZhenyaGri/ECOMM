@@ -1,7 +1,7 @@
 import { CatalogToolbar } from '../../components/CatalogToolbar/CatalogToolbar';
 import { Heading } from '../../components/heading/heading';
 import { Section } from '../../components/section/section';
-import tables from '../../assets/img/main-tables.jpg';
+import house from '../../assets/img/house.jpg';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Wrapper } from '../../components/wrapper/wrapper';
 import { useEffect, useState } from 'react';
@@ -31,7 +31,7 @@ export const Catalog = (): React.ReactNode => {
       const priceValue = priceVariant?.prices?.[0]?.value;
       const price = priceValue?.centAmount ? priceValue.centAmount / 100 : 0;
       const imageVariant = product.masterVariant || product.variants?.[0];
-      const imageUrl = imageVariant?.images?.[0]?.url || tables;
+      const imageUrl = imageVariant?.images?.[0]?.url || house;
 
       return {
         id: product.id,
