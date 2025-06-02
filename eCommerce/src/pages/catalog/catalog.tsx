@@ -42,23 +42,23 @@ export const Catalog = (): React.ReactNode => {
     });
   };
 
-  const fetchProducts = async (params = { limit: 30 }): Promise<void> => {
-    try {
-      setLoading(true);
-      const response: ProductProjectionPagedQueryResponse =
-        await getPublishedProducts(params);
-      setProducts(formatProducts(response));
-    } catch (err) {
-      setError('Failed to load products. Please try again later.');
-      console.error('Error fetching products:', err);
-    } finally {
-      setLoading(false);
-    }
-  };
-
   useEffect(() => {
+    const fetchProducts = async (params = { limit: 30 }): Promise<void> => {
+      try {
+        setLoading(true);
+        const response: ProductProjectionPagedQueryResponse =
+          await getPublishedProducts(params);
+        setProducts(formatProducts(response));
+      } catch (err) {
+        setError('Failed to load products. Please try again later.');
+        console.error('Error fetching products:', err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchProducts();
-  });
+  }, []);
 
   const handleProductsSorted = (
     response: ProductProjectionPagedQueryResponse

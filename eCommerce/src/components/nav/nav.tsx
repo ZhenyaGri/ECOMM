@@ -15,6 +15,10 @@ export class Nav extends Component<{ state?: boolean }, INavState> {
     this.setState((previousState) => ({ isOpen: !previousState.isOpen }));
   };
 
+  closeNav = (): void => {
+    this.setState({ isOpen: false });
+  };
+
   render(): React.ReactNode {
     const { isOpen } = this.state;
     return (
@@ -23,7 +27,7 @@ export class Nav extends Component<{ state?: boolean }, INavState> {
         <nav className={`nav${isOpen ? ' open' : ''}`}>
           <List>
             <ListItem>
-              <Link to="/catalog" className="link">
+              <Link to="/catalog" className="link" onClick={this.closeNav}>
                 Shop
               </Link>
             </ListItem>
