@@ -167,3 +167,38 @@
 .wrapper-404 {
   gap: 2rem;
 }
+
+.wrapper-slider {
+  align-items: center;
+  position: relative;
+}
+
+.wrapper-product {
+  gap: 8rem;
+}
+
+.wrapper-product-img {
+  width: 71rem;
+  height: 95rem;
+  overflow: hidden;
+}
+
+.wrapper-product-info {
+  width: 60rem;
+  flex-direction: column;
+}
+
+.wrapper-add-button {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.wrapper-product-text {
+  flex-direction: column;
+}
+
+.wrapper-product-text::before {
+  content: "";
+  width: 100%;
+  border-bottom: solid 1px #e3e1da;
+}

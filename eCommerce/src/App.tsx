@@ -11,6 +11,7 @@ import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
 import { ProtectedRoute } from './utils/protected-route';
+import { ProductPage } from './pages/page-product/page-product';
 import { TestPage } from './pages/test-page';
 import { dataReset } from './components/auth/form-handler';
 
@@ -51,6 +52,7 @@ function App(): React.ReactNode {
       />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/product" element={<ProductPage />} />
         {!isLoggedIn ? (
           <>
             <Route
