@@ -4,6 +4,7 @@ export type TokenResponse = {
   refresh_token: string;
   token_type: string;
   scope: string;
+  created_at?: string;
 };
 
 export type AuthParams = {
@@ -121,4 +122,14 @@ export type Cart = {
 export type CustomerSignInResult = {
   customer: Customer;
   cart?: Cart;
+};
+
+export type FetchProductsParams = {
+  limit?: number;
+  offset?: number;
+  priceCurrency?: string;
+  priceCountry?: string;
+  where?: string[];
+  sort?: string[];
+  expand?: string[];
 };

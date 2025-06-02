@@ -46,6 +46,32 @@ async function authPasswordFlow(params: AuthParams): Promise<TokenResponse> {
   return await response.json();
 }
 
+export async function refreshToken(
+  refreshToken: string
+): Promise<TokenResponse> {
+  const url = `${EnvParams.VITE_CTP_AUTH_URL}/oauth/token`;
+
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      Authorization: `Basic ${credentials}`,
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    body: new URLSearchParams({
+      grant_type: 'refresh_token',
+      refresh_token: refreshToken,
+    }),
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    console.error('Error refreshing token:', errorData);
+    throw errorData;
+  }
+
+  return await response.json();
+}
+
 export async function createAuthCustomer(
   email: string,
   password: string
