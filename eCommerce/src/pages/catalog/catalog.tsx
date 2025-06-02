@@ -58,7 +58,7 @@ export const Catalog = (): React.ReactNode => {
 
   useEffect(() => {
     fetchProducts();
-  }, []);
+  });
 
   const handleProductsSorted = (
     response: ProductProjectionPagedQueryResponse
