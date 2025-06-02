@@ -8,16 +8,16 @@ import { text } from './product-text';
 import testImg from '../../assets/img/table-and-lamp.jpg';
 import testImg2 from '../../assets/img/modular-sofa.jpg';
 import testImg3 from '../../assets/img/wall-lamp.jpg';
-import { ImgSlider } from './slider';
+import { ImgSlider } from '../../components/slider/slider';
 
-const images = [testImg, testImg2, testImg3];
+const imagesArr = [testImg, testImg2, testImg3];
 
 export class ProductPage extends Component {
   render(): React.ReactNode {
     return (
       <Section className="section-product">
         <Wrapper className="wrapper-product">
-          <ImgSlider imgUrls={images} />
+          <ImgSlider imgUrls={imagesArr} />
           <Wrapper className="wrapper-product-info">
             <h1 className="heading heading-primary">Reverse Wall Lamp</h1>
             <Text className="price-text" content="€375" />

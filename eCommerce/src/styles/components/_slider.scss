@@ -1,0 +1,28 @@
+.wrapper-slider {
+  position: relative;
+  max-width: 71rem;
+  position: relative;
+}
+
+.mySwiper {
+  width: 71rem;
+  height: 95rem;
+}
+
+.product-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  user-select: none;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: var(--color-black);
+  position: absolute;
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  height: 2rem;
+}
