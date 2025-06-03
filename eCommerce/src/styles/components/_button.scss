@@ -105,3 +105,11 @@
 .btn-arrow-left {
   left: 1.5rem;
 }
+
+.btn-modal {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  z-index: 20;
+  user-select: none;
+}

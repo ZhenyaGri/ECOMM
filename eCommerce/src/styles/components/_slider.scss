@@ -4,7 +4,7 @@
 
 .wrapper-slider {
   position: relative;
-  max-width: 71rem;
+  max-width: 69rem;
   position: relative;
 
   @media screen and (max-width: 1330px) {
@@ -29,12 +29,6 @@
   height: 100%;
   object-fit: cover;
   user-select: none;
-}
-
-.swiper-wrapper {
-  @media screen and (max-width: 650px) {
-    
-  }
 }
 
 .swiper-button-prev,
