@@ -14,9 +14,8 @@ import { Page404 } from './pages/page-404/page-404';
 import { getToken, removeToken } from './api/authHandlers';
 import { Catalog } from './pages/catalog/catalog';
 import { ProtectedRoute } from './utils/protected-route';
-import { TestPage } from './pages/test-page';
 import { dataReset } from './components/auth/form-handler';
-
+import { ProfileComponent } from './components/profile/profile';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -100,6 +99,7 @@ function App(): React.ReactNode {
                 />
               }
             />
+            <Route path="/profile" element={<Navigate to="/login" replace />} />
           </>
         ) : (
           <>
@@ -109,7 +109,7 @@ function App(): React.ReactNode {
                 path="/registration"
                 element={<Navigate to="/" replace />}
               />
-              <Route path="/test" element={<TestPage />} />
+              <Route path="/profile" element={<ProfileComponent />} />
             </Route>
           </>
         )}
@@ -119,8 +119,6 @@ function App(): React.ReactNode {
         />
         <Route path="*" element={<Page404 />} />
       </Routes>
-
-
       <Footer />
       {successMessage && (
         <div className="success-message">{successMessage}</div>

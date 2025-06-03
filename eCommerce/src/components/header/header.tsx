@@ -35,12 +35,12 @@ export class Header extends Component<HeaderProps> {
             <AnchorLink href="#" className="link-icon">
               <Img className="header-icon" src={iconBag} alt="Bag Icon" />
             </AnchorLink>
-            <AnchorLink
-              href="#"
+            <Link
+              to="/profile"
               className={`link-icon ${isLoggedIn ? '' : 'link-hidden'}`}
             >
               <Img className="header-icon" src={iconProfile} alt="Bag Icon" />
-            </AnchorLink>
+            </Link>
           </Wrapper>
           <Link to="/login" className={`${isLoggedIn ? 'hidden' : ''}`}>
             <Button
