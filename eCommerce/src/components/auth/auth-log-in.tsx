@@ -35,6 +35,7 @@ const LogInComponent = ({
         if (authToken) {
           setToken(authToken, 'authToken');
         }
+        /*TEST*/
       }
       setLoginError('');
     } catch (error) {

@@ -198,6 +198,7 @@ export const countries = [
 
 export const accountFields: IFieldObj[] = [
   {
+    title: 'Update your Name',
     type: 'firstName',
     inputId: 'first-name',
     inputType: 'text',
@@ -216,6 +217,7 @@ export const accountFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Choose your date of birth',
     type: 'birthDate',
     inputId: 'birthDate',
     inputType: 'date',
@@ -225,6 +227,7 @@ export const accountFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Update your email address',
     type: 'email',
     inputId: 'email',
     inputType: 'email',
@@ -234,6 +237,7 @@ export const accountFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Set a new password',
     type: 'password',
     inputId: 'password',
     inputType: 'password',
@@ -246,6 +250,7 @@ export const accountFields: IFieldObj[] = [
 
 export const addressFields: IFieldObj[] = [
   {
+    title: 'Enter your street address',
     type: 'street',
     inputId: 'street',
     inputType: 'text',
@@ -255,6 +260,7 @@ export const addressFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Enter your city',
     type: 'city',
     inputId: 'city',
     inputType: 'text',
@@ -264,6 +270,7 @@ export const addressFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Enter your postal code',
     type: 'postCode',
     inputId: 'postcode',
     inputType: 'text',
@@ -273,6 +280,7 @@ export const addressFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Select your country',
     type: 'country',
     inputId: 'country',
     inputType: 'select',
@@ -285,6 +293,7 @@ export const addressFields: IFieldObj[] = [
 
 export const shippingFields: IFieldObj[] = [
   {
+    title: 'Enter shipping street address',
     type: 'shippingStreet',
     inputId: 'shipping-street',
     inputType: 'text',
@@ -294,6 +303,7 @@ export const shippingFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Enter shipping city',
     type: 'shippingCity',
     inputId: 'shipping-city',
     inputType: 'text',
@@ -303,6 +313,7 @@ export const shippingFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Enter shipping postal code',
     type: 'shippingPostCode',
     inputId: 'shipping-postcode',
     inputType: 'text',
@@ -312,6 +323,7 @@ export const shippingFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Select shipping country',
     type: 'shippingCountry',
     inputId: 'shipping-country',
     inputType: 'select',

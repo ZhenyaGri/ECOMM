@@ -4,6 +4,7 @@ export interface INewUser {
   birthDate: string | undefined;
   email: string | undefined;
   password: string | undefined;
+
   street: string | undefined;
   city: string | undefined;
   postCode: string | undefined;
@@ -73,7 +74,6 @@ export interface IValidationData {
   err: string;
   isValid: boolean;
 }
-
 export type AccountFieldKeys =
   | 'firstName'
   | 'lastName'
@@ -90,6 +90,7 @@ export type AccountFieldKeys =
   | 'shippingCountry';
 
 export interface IFieldObj {
+  title?: string;
   type: AccountFieldKeys;
   inputId: string;
   inputType: string;
@@ -98,4 +99,3 @@ export interface IFieldObj {
   classNameItem: string;
   classNameWarning: string;
 }
-
