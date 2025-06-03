@@ -1,12 +1,12 @@
 import './style/auth.scss';
-import { ReactElement, useRef } from 'react';
-import { IWarnRefObj } from './type/auth-types';
+import { ReactElement } from 'react';
 import {
   inputHandler,
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
 import { authUserData } from './data-list';
+import { useRefs } from './refs';
 type RecoveryPassProps = {
   onCancel: () => void;
 };
@@ -14,9 +14,8 @@ type RecoveryPassProps = {
 const PassRecoveryComponent = ({
   onCancel,
 }: RecoveryPassProps): ReactElement => {
-  const warnRef: IWarnRefObj = {
-    email: useRef(null),
-  };
+  const { warnRefRestoreUser } = useRefs();
+
   return (
     <>
       <div className="auth-reset">
@@ -37,17 +36,20 @@ const PassRecoveryComponent = ({
               type="email"
               placeholder="Email"
               onInput={(e) => {
-                if (warnRef.email) {
+                if (warnRefRestoreUser.email) {
                   inputHandler(
                     e,
                     'email',
                     authUserData.restorUser,
-                    warnRef.email.current
+                    warnRefRestoreUser.email.current
                   );
                 }
               }}
             />
-            <h2 ref={warnRef.email} className="input-item-warning"></h2>
+            <h2
+              ref={warnRefRestoreUser.email}
+              className="input-item-warning"
+            ></h2>
           </li>
         </ul>
 
@@ -56,7 +58,7 @@ const PassRecoveryComponent = ({
             className="auth-reset__btn"
             onClick={() => {
               getUserDataObj();
-              showErrorMessages(warnRef);
+              showErrorMessages(warnRefRestoreUser);
             }}
           >
             <h2 className="auth-reset__btn-title">Submit</h2>

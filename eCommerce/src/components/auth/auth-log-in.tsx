@@ -1,15 +1,16 @@
 import './style/auth.scss';
-import { ReactElement, useRef, useState } from 'react';
+import { ReactElement, useState } from 'react';
 import {
   inputHandler,
   getUserDataObj,
   showErrorMessages,
 } from './form-handler';
-import type { IWarnRefObj } from './type/auth-types';
 import { handleLogin, setToken } from '../../api/authHandlers';
 
 import { parseError } from '../../api/errorHandler';
 import { authUserData } from './data-list';
+import { useRefs } from './refs';
+
 type logInProps = {
   onSignUp: () => void;
   onRecovery: () => void;
@@ -22,15 +23,10 @@ const LogInComponent = ({
   onSuccessLogin,
 }: logInProps): ReactElement => {
   const [loginError, setLoginError] = useState('');
-
-  const warnRef: IWarnRefObj = {
-    email: useRef(null),
-    password: useRef(null),
-  };
-
+  const { warnRefLogIn } = useRefs();
   const onLoginClick = async (): Promise<void> => {
     const userData = getUserDataObj();
-    showErrorMessages(warnRef);
+    showErrorMessages(warnRefLogIn);
 
     try {
       if (userData && userData.email && 'password' in userData) {
@@ -39,6 +35,7 @@ const LogInComponent = ({
         if (authToken) {
           setToken(authToken, 'authToken');
         }
+        /*TEST*/
       }
       setLoginError('');
     } catch (error) {
@@ -46,7 +43,6 @@ const LogInComponent = ({
       setLoginError(errorMessage);
     }
   };
-
   return (
     <>
       <div className="auth-log-in">
@@ -60,17 +56,17 @@ const LogInComponent = ({
                 type="email"
                 placeholder="Email"
                 onInput={(e) => {
-                  if (warnRef.email) {
+                  if (warnRefLogIn.email) {
                     inputHandler(
                       e,
                       'email',
                       authUserData.logIn,
-                      warnRef.email.current
+                      warnRefLogIn.email.current
                     );
                   }
                 }}
               />
-              <h2 ref={warnRef.email} className="input-item-warning"></h2>
+              <h2 ref={warnRefLogIn.email} className="input-item-warning"></h2>
             </li>
 
             <li className="auth-log-in__input-item">
@@ -80,17 +76,20 @@ const LogInComponent = ({
                 placeholder="Password"
                 minLength={8}
                 onInput={(e) => {
-                  if (warnRef.password) {
+                  if (warnRefLogIn.password) {
                     inputHandler(
                       e,
                       'password',
                       authUserData.logIn,
-                      warnRef.password.current
+                      warnRefLogIn.password.current
                     );
                   }
                 }}
               />
-              <h2 ref={warnRef.password} className="input-item-warning"></h2>
+              <h2
+                ref={warnRefLogIn.password}
+                className="input-item-warning"
+              ></h2>
             </li>
           </ul>
 

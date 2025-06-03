@@ -119,6 +119,8 @@ function App(): React.ReactNode {
         />
         <Route path="*" element={<Page404 />} />
       </Routes>
+
+
       <Footer />
       {successMessage && (
         <div className="success-message">{successMessage}</div>

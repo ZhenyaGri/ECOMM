@@ -117,7 +117,7 @@ export async function createAnonymousToken(): Promise<TokenResponse | null> {
     }
     return response.json();
   } catch (error) {
-    console.error('Error getting token:', error);
+    console.error('Error getting token:', JSON.stringify(error, null, 2));
     return null;
   }
 }

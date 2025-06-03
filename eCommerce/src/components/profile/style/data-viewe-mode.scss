@@ -1,0 +1,8 @@
+@use '../../auth/style/mixins' as *;
+@use '../../auth/style/auth_mixin' as *;
+
+.data-item__view-mode {
+  .data-item__title {
+    @include fontStyle(28px, 400, 1px, var(--font-color));
+  }
+}

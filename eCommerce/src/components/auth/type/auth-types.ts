@@ -4,6 +4,7 @@ export interface INewUser {
   birthDate: string | undefined;
   email: string | undefined;
   password: string | undefined;
+
   street: string | undefined;
   city: string | undefined;
   postCode: string | undefined;
@@ -14,15 +15,23 @@ export interface INewUser {
   shippingPostCode: string | undefined;
   shippingCountry: string | undefined;
 }
+export interface IAddressDefoult {
+  isBillingAddressDef: boolean;
+  isShippingAddress: boolean;
+}
+
 export interface ILogIn {
   email: string | undefined;
   password: string | undefined;
 }
+
 export interface IRestoreUser {
   email: string | undefined;
 }
+
 export interface IAuthUserData {
   newUser: INewUser | undefined;
+  addressDefaults: IAddressDefoult;
   logIn: ILogIn | undefined;
   restorUser: IRestoreUser | undefined;
 }
@@ -47,6 +56,14 @@ export interface IWarnRefObj {
   shippingCountry?: React.RefObject<HTMLHeadingElement | null>;
 }
 
+export interface IRefs {
+  warnRefAccount: IWarnRefObj;
+  warnRefAddress: IWarnRefObj;
+  warnRefShiping: IWarnRefObj;
+  warnRefLogIn: IWarnRefObj;
+  warnRefRestoreUser: IWarnRefObj;
+}
+
 export interface IErrorField {
   key: string;
   message: string;
@@ -57,7 +74,6 @@ export interface IValidationData {
   err: string;
   isValid: boolean;
 }
-
 export type AccountFieldKeys =
   | 'firstName'
   | 'lastName'
@@ -74,6 +90,7 @@ export type AccountFieldKeys =
   | 'shippingCountry';
 
 export interface IFieldObj {
+  title?: string;
   type: AccountFieldKeys;
   inputId: string;
   inputType: string;
@@ -82,4 +99,3 @@ export interface IFieldObj {
   classNameItem: string;
   classNameWarning: string;
 }
-
