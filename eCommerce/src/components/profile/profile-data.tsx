@@ -41,7 +41,9 @@ export const DataEditMode = ({
 }: propsDataEditMode): ReactElement => {
   return (
     <div className="data-item__edit-mode">
+
       <h2 className="title">{inputAttributes.title}</h2>
+
       {inputAttributes.inputType === 'data' ? (
         <input
           className="profile-title-input"
@@ -75,10 +77,8 @@ export const DataEditMode = ({
         <div className="data-item__btn--submit">
           <h2 className="data-item__btn--submit-title">Submit</h2>
         </div>
-        <h2
-          className="data-item__btn data-item__btn--cancel"
-          onClick={switchVieweMode}
-        >
+        <h2 className="data-item__btn data-item__btn--cancel"
+            onClick={switchVieweMode}>
           Cancel
         </h2>
       </div>
