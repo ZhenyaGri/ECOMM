@@ -4,6 +4,7 @@ import { ListItem } from '../list/list-item';
 import { AnchorLink } from '../link/link';
 import { Burger } from './burger';
 import { INavState } from '../../types/interfaces';
+import { Link } from 'react-router-dom';
 
 export class Nav extends Component<{ state?: boolean }, INavState> {
   state: INavState = {
@@ -14,6 +15,10 @@ export class Nav extends Component<{ state?: boolean }, INavState> {
     this.setState((previousState) => ({ isOpen: !previousState.isOpen }));
   };
 
+  closeNav = (): void => {
+    this.setState({ isOpen: false });
+  };
+
   render(): React.ReactNode {
     const { isOpen } = this.state;
     return (
@@ -22,7 +27,9 @@ export class Nav extends Component<{ state?: boolean }, INavState> {
         <nav className={`nav${isOpen ? ' open' : ''}`}>
           <List>
             <ListItem>
-              <AnchorLink children="Shop" href="#" />
+              <Link to="/catalog" className="link" onClick={this.closeNav}>
+                Shop
+              </Link>
             </ListItem>
             <ListItem>
               <AnchorLink children="Inspiration" href="#" />

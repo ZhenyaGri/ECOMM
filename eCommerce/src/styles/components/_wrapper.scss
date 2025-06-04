@@ -231,4 +231,23 @@
   content: "";
   width: 100%;
   border-bottom: solid 1px #e3e1da;
+
+.products-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  padding: 20px 0;
+  @media screen and (max-width: 900px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.product-card {
+  width: 100%;
+}
+
+.product-card-info {
+  padding: 1.7rem 0;
+  justify-content: space-between;
+  font-family: 'Grot12';
 }

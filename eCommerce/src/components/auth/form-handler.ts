@@ -7,7 +7,6 @@ import {
 import { IUserData, IWarnRefObj } from './type/auth-types';
 
 let validformDataObj: IUserData | undefined = undefined;
-
 //function to get object with data after validation
 export const getUserDataObj = (): IUserData | undefined => {
   if (validformDataObj) {
@@ -48,7 +47,7 @@ const updateFormState = (
   const inputVal = getValidInputValue(value, inputType, ref);
   if (userDataObj) {
     if (inputType in userDataObj) {
-      userDataObj[inputType] = inputVal;
+      userDataObj[inputType] = inputVal?.trim();
       validformDataObj = userDataObj;
     }
   }

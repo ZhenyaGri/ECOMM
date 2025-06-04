@@ -5,10 +5,14 @@ import { inputHandler } from './form-handler';
 
 interface ShippingAddressComponentProps {
   warnRefShiping: IWarnRefObj;
+  isShipAddreasDef: boolean;
+  setShipAddresAsDef: (val: boolean) => void;
 }
 
 const ShippingAddressComponent = ({
   warnRefShiping,
+  isShipAddreasDef,
+  setShipAddresAsDef,
 }: ShippingAddressComponentProps): ReactElement => {
   return (
     <>
@@ -69,13 +73,28 @@ const ShippingAddressComponent = ({
                 />
               </>
             )}
-
             <h2
               className={fieldObj.classNameWarning}
               ref={warnRefShiping[fieldObj.type]}
             ></h2>
           </li>
         ))}
+
+        <li className="create-account__input-item-checkbox">
+          <input
+            className="checkbox"
+            id="checkbox-shipping"
+            type="checkbox"
+            checked={isShipAddreasDef}
+            onChange={(e) => {
+              setShipAddresAsDef(e.target.checked);
+              console.log(isShipAddreasDef);
+            }}
+          />
+          <label htmlFor="default-address">
+            Set shipping address as default
+          </label>
+        </li>
       </ul>
     </>
   );

@@ -12,7 +12,7 @@ export type ButtonProps = {
 };
 
 export type headingProps = {
-  tag: 'h2' | 'h3' | 'h4';
+  tag: 'h1' | 'h2' | 'h3' | 'h4';
   className?: string;
   content: string;
 };
@@ -33,4 +33,11 @@ export type LinkProps = {
 export type textProps = {
   className?: string;
   content: string;
+};
+
+export type Product = {
+  name: string;
+  price: number;
+  imageUrl: string;
+  discount?: number;
 };

@@ -3,17 +3,17 @@ import {
   createAnonymousToken,
   createAuthCustomer,
   getCustomerInfo,
+  refreshToken,
   signUpCustomer,
 } from './authService';
-import { CustomerDraft } from './type';
+import { CustomerDraft, TokenResponse } from './type';
 
 export const handleLogin = async (
   email: string = '1@gmail.com',
   password: string = '11111'
-): Promise<void> => {
-  const response = await createAnonymousToken();
+): Promise<TokenResponse | null> => {
+  const response = await getToken('anonymousToken');
   if (response && 'access_token' in response) {
-    console.log(response);
     const authResponse = await createAuthCustomer(email, password);
     console.log('LogIn Success:', authResponse);
 
@@ -21,13 +21,15 @@ export const handleLogin = async (
       const userInfo = await getCustomerInfo(authResponse.access_token);
       console.log('Customer Info:', userInfo);
     }
+    return authResponse;
   }
+  return null;
 };
 
 export const handleSignup = async (
   customerDraft: CustomerDraft
-): Promise<void> => {
-  const response = await createAnonymousToken();
+): Promise<TokenResponse | null> => {
+  const response = await getToken('anonymousToken');
 
   if (response && 'access_token' in response) {
     const token = response.access_token;
@@ -43,7 +45,9 @@ export const handleSignup = async (
 
     const userInfo = await getCustomerInfo(authorizedToken);
     console.log('Customer Info:', userInfo);
+    return authResponse;
   }
+  return null;
 };
 
 export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
@@ -65,7 +69,6 @@ export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
       },
     ],
   };
-  console.log(CustomerDraft);
   return CustomerDraft;
 }
 
@@ -80,4 +83,56 @@ function isCreateAccount(data: IUserData | undefined): data is INewUser {
     'postCode' in data &&
     'country' in data
   );
+}
+
+function isTokenExpired(token: TokenResponse): boolean {
+  if (!token.created_at) return true;
+  const expirationTime =
+    Number(token.created_at) + Number(token.expires_in) * 1000;
+  return Date.now() > expirationTime - 60000;
+}
+
+export function setToken(token: TokenResponse, keyToken: string): void {
+  const tokenWithTimestamp = {
+    ...token,
+    created_at: Date.now(),
+  };
+  localStorage.setItem(keyToken, JSON.stringify(tokenWithTimestamp));
+}
+
+export async function getToken(
+  keyToken: 'anonymousToken' | 'authToken'
+): Promise<TokenResponse | null> {
+  const token = localStorage.getItem(keyToken);
+  if (token) {
+    const parsedToken = JSON.parse(token);
+
+    if (!isTokenExpired(parsedToken)) {
+      return parsedToken;
+    }
+    localStorage.removeItem(keyToken);
+
+    if (parsedToken.refresh_token) {
+      try {
+        const newToken = await refreshToken(parsedToken.refresh_token);
+        setToken(newToken, keyToken);
+        return newToken;
+      } catch (error) {
+        console.error('Refresh token failed:', error);
+        localStorage.removeItem('authToken');
+      }
+    }
+  } else if (keyToken === 'anonymousToken') {
+    const anonymousToken = await createAnonymousToken();
+    if (anonymousToken) {
+      setToken(anonymousToken, keyToken);
+      return anonymousToken;
+    }
+  }
+  return null;
+}
+
+export async function removeToken(): Promise<void> {
+  localStorage.removeItem('authToken');
+  getToken('anonymousToken');
 }

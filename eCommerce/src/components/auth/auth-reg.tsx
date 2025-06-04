@@ -1,5 +1,4 @@
-import { ReactElement, useRef, useState } from 'react';
-import { IWarnRefObj } from './type/auth-types';
+import { ReactElement, useState } from 'react';
 import ShippingAddressComponent from './auth-reg-shipping-addres';
 import {
   accountFields,
@@ -13,8 +12,13 @@ import {
   showErrorMessages,
   setShippingAddress,
 } from './form-handler';
-import { handleSignup, mapToCustomerDraft } from '../../api/authHandlers';
+import {
+  handleSignup,
+  mapToCustomerDraft,
+  setToken,
+} from '../../api/authHandlers';
 import { parseError } from '../../api/errorHandler';
+import { useRefs } from './refs';
 
 type CreateAccountProps = {
   onCreateAccount: () => void;
@@ -30,28 +34,10 @@ const CreateUserComponent = ({
   const [isShippingAddressVisible, setIsShippingAddressVisible] =
     useState(true);
   const [signupError, setSignupError] = useState('');
+  const { warnRefAccount, warnRefAddress, warnRefShiping } = useRefs();
 
-  const warnRefAccount: IWarnRefObj = {
-    firstName: useRef(null),
-    lastName: useRef(null),
-    birthDate: useRef(null),
-    email: useRef(null),
-    password: useRef(null),
-  };
-
-  const warnRefAddress: IWarnRefObj = {
-    street: useRef(null),
-    city: useRef(null),
-    postCode: useRef(null),
-    country: useRef(null),
-  };
-
-  const warnRefShiping: IWarnRefObj = {
-    shippingStreet: useRef(null),
-    shippingCity: useRef(null),
-    shippingPostCode: useRef(null),
-    shippingCountry: useRef(null),
-  };
+  const [isBillgAddreasDef, setBillAddreasAsDef] = useState(false);
+  const [isShipAddreasDef, setShipAddreasAsDef] = useState(false);
 
   const onSigInClick = async (): Promise<void> => {
     setShippingAddress(authUserData.newUser, isShippingAddressVisible);
@@ -61,11 +47,17 @@ const CreateUserComponent = ({
       ...warnRefAddress,
       ...warnRefShiping,
     });
+    authUserData.addressDefaults.isBillingAddressDef = isBillgAddreasDef;
+    authUserData.addressDefaults.isBillingAddressDef = isShipAddreasDef;
+
     try {
       const customerDraft = mapToCustomerDraft(formData);
-      await handleSignup(customerDraft);
+      const authToken = await handleSignup(customerDraft);
       onSuccessSignUp();
       setSignupError('');
+      if (authToken) {
+        setToken(authToken, 'authToken');
+      }
     } catch (error) {
       const errorMsg = parseError(error);
       setSignupError(errorMsg);
@@ -75,7 +67,6 @@ const CreateUserComponent = ({
   return (
     <div className="create-account">
       <h2 className="create-account__title">Create account</h2>
-
       {/* person details */}
       <ul className="create-account__input-list">
         {accountFields.map((fieldObj) => (
@@ -203,14 +194,30 @@ const CreateUserComponent = ({
         </li>
 
         <li className="create-account__input-item-checkbox">
-          <input className="checkbox" id="checkbox" type="checkbox" />
-          <label htmlFor="default-address">Set this address as default</label>
+          <input
+            className="checkbox"
+            id="checkbox-billing"
+            type="checkbox"
+            checked={isBillgAddreasDef}
+            onChange={(e) => {
+              setBillAddreasAsDef(e.target.checked);
+              console.log(isBillgAddreasDef);
+            }}
+          />
+          <label htmlFor="default-address">
+            Set billing address as default
+          </label>
         </li>
       </ul>
 
       {/* shipping details */}
+
       {isShippingAddressVisible ? (
-        <ShippingAddressComponent warnRefShiping={warnRefShiping} />
+        <ShippingAddressComponent
+          warnRefShiping={warnRefShiping}
+          isShipAddreasDef={isShipAddreasDef}
+          setShipAddresAsDef={setShipAddreasAsDef}
+        />
       ) : null}
 
       <div className="create-account__btn-wrapper">

@@ -43,10 +43,14 @@
   padding: 8rem;
 }
 
+
 .section-product {
   padding: 4rem 5rem;
 
   @media screen and (max-width: 650px) {
     padding: 4rem 3rem;
   }
+
+.section-products {
+  padding: 0 5rem;
 }

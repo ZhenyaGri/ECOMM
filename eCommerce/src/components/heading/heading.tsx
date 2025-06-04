@@ -6,6 +6,10 @@ export class Heading extends Component<headingProps> {
     const { tag, className, content } = this.props;
     const completeClassName = className ? `heading ${className}` : 'heading';
 
+    if (tag === 'h1') {
+      return <h1 className={completeClassName}>{content}</h1>;
+    }
+
     if (tag === 'h2') {
       return <h2 className={completeClassName}>{content}</h2>;
     }
