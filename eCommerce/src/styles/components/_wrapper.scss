@@ -231,12 +231,14 @@
   content: "";
   width: 100%;
   border-bottom: solid 1px #e3e1da;
+}
 
 .products-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   padding: 20px 0;
+  
   @media screen and (max-width: 900px) {
     grid-template-columns: repeat(1, 1fr);
   }
