@@ -16,6 +16,7 @@ import { Catalog } from './pages/catalog/catalog';
 import { ProtectedRoute } from './utils/protected-route';
 import { dataReset } from './components/auth/form-handler';
 import { ProfileComponent } from './components/profile/profile';
+import { ProductPage } from './pages/page-product/page-product';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -66,6 +67,7 @@ function App(): React.ReactNode {
       />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/product" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         {!isLoggedIn ? (
           <>

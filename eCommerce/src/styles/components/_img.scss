@@ -1,10 +1,19 @@
 .collection-img,
 .shop-img,
 .new-items-img,
-.house-img {
+.house-img,
+.product-img {
   width: 100%;
 }
 
-.house-img {
+.house-img,
+.product-img {
   height: 100%;
+}
+
+.product-img {
+  object-fit: cover;
+  display: block;
+  flex-shrink: 0;
+  flex-grow: 0;
 }
