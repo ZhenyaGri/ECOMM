@@ -104,6 +104,7 @@ export const Catalog = (): React.ReactNode => {
         <Wrapper className="products-container">
           {products.map((product) => (
             <ProductCard
+              key={product.id}
               id={product.id}
               name={product.name}
               price={product.price}

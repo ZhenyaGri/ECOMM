@@ -101,7 +101,7 @@ export const ProductPage = (): React.ReactNode => {
             />
           </Wrapper>
           {variant.attributes?.slice(2).map((attr) => (
-            <Wrapper className="wrapper-product-text">
+            <Wrapper key={attr.name} className="wrapper-product-text">
               <Heading
                 tag="h2"
                 className="heading-product"
