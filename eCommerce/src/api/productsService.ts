@@ -93,3 +93,31 @@ export async function getProductById(
 
   return response.json();
 }
+
+export async function getProductBySlug(
+  slug: string,
+  locale: string = 'en'
+): Promise<ProductProjection | null> {
+  try {
+    const response = await fetchProducts(
+      {
+        where: [`slug(${locale}="${slug}")`],
+        limit: 20,
+      },
+      '/search'
+    );
+
+    if (response.results.length === 0) {
+      return null;
+    }
+
+    const product = response.results.find(
+      (p) => p.slug && p.slug[locale] === slug
+    );
+
+    return product || null;
+  } catch (error) {
+    console.error(`Error fetching product by slug '${slug}':`, error);
+    throw error;
+  }
+}

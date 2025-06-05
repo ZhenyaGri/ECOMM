@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useParams, Link } from 'react-router-dom';
 import { Section } from '../../components/section/section';
 import { Wrapper } from '../../components/wrapper/wrapper';
 import { Heading } from '../../components/heading/heading';
@@ -8,30 +8,37 @@ import { Button } from '../../components/button/button';
 import testImg from '../../assets/img/table-and-lamp.jpg';
 import testImg2 from '../../assets/img/modular-sofa.jpg';
 import { ImgSlider } from '../../components/slider/slider';
-import { getProductById } from '../../api/productsService';
+import { getProductById, getProductBySlug } from '../../api/productsService';
 import { ProductProjection, ProductVariant } from '../../api/productsType';
-import { Link } from 'react-router-dom';
 
 export const ProductPage = (): React.ReactNode => {
   const location = useLocation();
   const productFromState = location.state?.product;
+  const { slug } = useParams<{ slug: string }>();
 
   const [product, setProduct] = useState<ProductProjection | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!productFromState?.id) {
-      setError('Product ID missing');
-      setLoading(false);
-      return;
-    }
+    async function fetchProductDetails(): Promise<void> {
+      setLoading(true);
+      setError(null);
 
-    async function fetchProduct(): Promise<void> {
       try {
-        setLoading(true);
-        const fullProduct = await getProductById(productFromState.id);
-        setProduct(fullProduct);
+        let fetchedProduct: ProductProjection | null = null;
+        if (productFromState?.id) {
+          fetchedProduct = await getProductById(productFromState.id);
+          if (!fetchedProduct) {
+            setError('Product ID missing');
+          }
+        } else if (slug) {
+          fetchedProduct = await getProductBySlug(slug);
+          if (!fetchedProduct) {
+            setError('Product Slug missing');
+          }
+        }
+        setProduct(fetchedProduct);
       } catch (err) {
         setError('Failed to load product details');
         console.error(err);
@@ -40,8 +47,8 @@ export const ProductPage = (): React.ReactNode => {
       }
     }
 
-    fetchProduct();
-  }, [productFromState?.id]);
+    fetchProductDetails();
+  }, [slug, productFromState]);
 
   if (loading) {
     return <p>Loading product details...</p>;
