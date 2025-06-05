@@ -93,11 +93,11 @@ export const ProfileTitleEditMode = ({
             try {
               await updateCustomer();
               await updateData();
-              switchVieweMode(false);
             } catch (error) {
-              void error;
+              console.error(error);
+            } finally {
+              switchVieweMode(false);
             }
-            switchVieweMode(false);
           }}
         >
           <h2 className="profile-title__btn--submit-title">Submit</h2>

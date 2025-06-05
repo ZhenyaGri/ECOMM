@@ -107,8 +107,6 @@ export const createInputObj = async (
     const addressField = billingMap[billingField];
     customerData.addresses[1][addressField] = validValue;
   }
-
-
 };
 
 type CustomerAction =
@@ -167,8 +165,7 @@ function buildActionsFromCustomerData(
 
   return actions;
 }
-
-export async function updateCustomer(): Promise<Customer> {
+export async function updateCustomer(retry = true): Promise<Customer> {
   if (!customerData) {
     await initCustomerData();
   }
@@ -202,13 +199,14 @@ export async function updateCustomer(): Promise<Customer> {
 
   if (!response.ok) {
     const error = await response.json();
+    if (error.statusCode === 409 && retry) {
+      await initCustomerData();
+      return updateCustomer(false);
+    }
     throw error;
   }
 
   const updatedCustomer: Customer = await response.json();
-
   customerData = updatedCustomer;
-
-
   return customerData;
 }
