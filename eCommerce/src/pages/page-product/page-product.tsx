@@ -10,6 +10,7 @@ import testImg2 from '../../assets/img/modular-sofa.jpg';
 import { ImgSlider } from '../../components/slider/slider';
 import { getProductById } from '../../api/productsService';
 import { ProductProjection, ProductVariant } from '../../api/productsType';
+import { Link } from 'react-router-dom';
 
 export const ProductPage = (): React.ReactNode => {
   const location = useLocation();
@@ -64,6 +65,20 @@ export const ProductPage = (): React.ReactNode => {
 
   return (
     <Section className="section-product">
+      <Wrapper className="wrapper-breadcrumbs">
+        <Link to="/" className="link-breadcrumbs">
+          <Text className="breadcrumbs" content="Main" />
+        </Link>
+        <Text className="breadcrumbs" content=">" />
+        <Link to="/catalog" className="link-breadcrumbs">
+          <Text className="breadcrumbs" content="Shop" />
+        </Link>
+        <Text className="breadcrumbs" content=">" />
+        <Text
+          className="breadcrumbs breadcrumbs-active"
+          content={product.name?.en}
+        />
+      </Wrapper>
       <Wrapper className="wrapper-product">
         <ImgSlider imgUrls={images.length > 0 ? images : [testImg, testImg2]} />
         <Wrapper className="wrapper-product-info">

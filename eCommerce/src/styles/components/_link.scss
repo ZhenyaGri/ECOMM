@@ -94,10 +94,31 @@
 }
 
 .link-catalog-card:link,
-.link-catalog-card:visited {
+.link-catalog-card:visited,
+.link-breadcrumbs {
   text-decoration: none;
 }
 
 .link-hidden {
   display: none;
+}
+
+.link-breadcrumbs {
+  & .breadcrumbs {
+    color: var(--color-breadcrumbs);
+    transition: color 0.2s ease-in-out;
+  }
+}
+
+.link-breadcrumbs:link,
+.link-breadcrumbs:visited {
+  font-family: "Grot12", sans-serif;
+  color: var(--color-breadcrumbs);
+}
+
+.link-breadcrumbs:hover,
+.link-breadcrumbs:active {
+  & .breadcrumbs {
+    color: var(--color-black);
+  }
 }

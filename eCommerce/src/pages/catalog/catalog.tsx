@@ -4,12 +4,14 @@ import { Section } from '../../components/section/section';
 import house from '../../assets/img/house.jpg';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Wrapper } from '../../components/wrapper/wrapper';
+import { Text } from '../../components/text/text';
 import { useEffect, useState } from 'react';
 import { getPublishedProducts } from '../../api/productsService';
 import {
   ProductProjection,
   ProductProjectionPagedQueryResponse,
 } from '../../api/productsType';
+import { Link } from 'react-router-dom';
 
 interface CatalogProduct {
   id: string;
@@ -88,6 +90,13 @@ export const Catalog = (): React.ReactNode => {
   return (
     <main className="main">
       <Section className="heading-content">
+        <Wrapper className="wrapper-breadcrumbs">
+          <Link to="/" className="link-breadcrumbs">
+            <Text className="breadcrumbs" content="Main" />
+          </Link>
+          <Text className="breadcrumbs" content=">" />
+          <Text className="breadcrumbs breadcrumbs-active" content="Shop" />
+        </Wrapper>
         <Heading tag="h1" content="All Products" />
       </Section>
       <Section className="section-products">

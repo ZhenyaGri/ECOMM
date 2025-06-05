@@ -53,3 +53,14 @@
     max-width: 30rem;
   }
 }
+
+.breadcrumbs {
+  font-family: "Grot12", sans-serif;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+  color: var(--color-breadcrumbs);
+}
+
+.breadcrumbs-active {
+  color: var(--color-black);
+}

@@ -268,3 +268,8 @@
   justify-content: space-between;
   font-family: 'Grot12';
 }
+
+.wrapper-breadcrumbs {
+  flex-direction: row;
+  gap: 1.5rem;
+}
