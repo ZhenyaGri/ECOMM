@@ -76,7 +76,7 @@ const CreateUserComponent = ({
                 className={fieldObj.classNameInput}
                 id={fieldObj.inputId}
                 type={fieldObj.inputType}
-                defaultValue={authUserData.newUser?.birthDate}
+                defaultValue={authUserData.newUser?.dateOfBirth || '2000-01-01'}
                 placeholder={fieldObj.placeholder}
                 onInput={(e) => {
                   const ref = warnRefAccount[fieldObj.type];

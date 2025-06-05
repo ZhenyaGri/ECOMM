@@ -59,13 +59,21 @@ export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
     password: data.password!,
     firstName: data.firstName,
     lastName: data.lastName,
-    dateOfBirth: data.birthDate,
+    dateOfBirth: data.dateOfBirth,
     addresses: [
+      //billing address
       {
         streetName: data.street,
         city: data.city,
-        postalCode: data.postCode,
+        postalCode: data.postalCode,
         country: data.country || 'RU',
+      },
+      //shipping address
+      {
+        streetName: data.shippingStreet,
+        city: data.shippingCity,
+        postalCode: data.shippingPostalCode,
+        country: data.shippingCountry || 'RU',
       },
     ],
   };
@@ -77,11 +85,15 @@ function isCreateAccount(data: IUserData | undefined): data is INewUser {
     !!data &&
     'firstName' in data &&
     'lastName' in data &&
-    'birthDate' in data &&
+    'dateOfBirth' in data &&
     'street' in data &&
     'city' in data &&
-    'postCode' in data &&
-    'country' in data
+    'postalCode' in data &&
+    'country' in data &&
+    'shippingStreet' in data &&
+    'shippingCity' in data &&
+    'shippingPostalCode' in data &&
+    'shippingCountry' in data
   );
 }
 
