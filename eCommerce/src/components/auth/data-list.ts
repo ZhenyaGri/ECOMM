@@ -198,6 +198,7 @@ export const countries = [
 
 export const accountFields: IFieldObj[] = [
   {
+    title: 'Update your Name',
     type: 'firstName',
     inputId: 'first-name',
     inputType: 'text',
@@ -216,8 +217,9 @@ export const accountFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
-    type: 'birthDate',
-    inputId: 'birthDate',
+    title: 'Choose your date of birth',
+    type: 'dateOfBirth',
+    inputId: 'dateOfBirth',
     inputType: 'date',
     placeholder: 'Select birth date',
     classNameInput: 'create-account__input',
@@ -225,6 +227,7 @@ export const accountFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Update your email address',
     type: 'email',
     inputId: 'email',
     inputType: 'email',
@@ -234,6 +237,7 @@ export const accountFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Set a new password',
     type: 'password',
     inputId: 'password',
     inputType: 'password',
@@ -246,6 +250,7 @@ export const accountFields: IFieldObj[] = [
 
 export const addressFields: IFieldObj[] = [
   {
+    title: 'Enter your street address',
     type: 'street',
     inputId: 'street',
     inputType: 'text',
@@ -255,6 +260,7 @@ export const addressFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Enter your city',
     type: 'city',
     inputId: 'city',
     inputType: 'text',
@@ -264,8 +270,9 @@ export const addressFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
-    type: 'postCode',
-    inputId: 'postcode',
+    title: 'Enter your postal code',
+    type: 'postalCode',
+    inputId: 'postalcode',
     inputType: 'text',
     placeholder: 'Enter postal code',
     classNameInput: 'create-account__input',
@@ -273,6 +280,7 @@ export const addressFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Select your country',
     type: 'country',
     inputId: 'country',
     inputType: 'select',
@@ -285,6 +293,7 @@ export const addressFields: IFieldObj[] = [
 
 export const shippingFields: IFieldObj[] = [
   {
+    title: 'Enter shipping street address',
     type: 'shippingStreet',
     inputId: 'shipping-street',
     inputType: 'text',
@@ -294,6 +303,7 @@ export const shippingFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Enter shipping city',
     type: 'shippingCity',
     inputId: 'shipping-city',
     inputType: 'text',
@@ -303,7 +313,8 @@ export const shippingFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
-    type: 'shippingPostCode',
+    title: 'Enter shipping postal code',
+    type: 'shippingPostalCode',
     inputId: 'shipping-postcode',
     inputType: 'text',
     placeholder: 'Enter shipping postal code',
@@ -312,6 +323,7 @@ export const shippingFields: IFieldObj[] = [
     classNameWarning: 'input-item-warning',
   },
   {
+    title: 'Select shipping country',
     type: 'shippingCountry',
     inputId: 'shipping-country',
     inputType: 'select',
@@ -325,19 +337,19 @@ export const shippingFields: IFieldObj[] = [
 export const errorFields: IErrorField[] = [
   { key: 'firstName', message: 'Please enter your first name' },
   { key: 'lastName', message: 'Please enter your last name' },
-  { key: 'birthDate', message: 'please chose your date birth' },
+  { key: 'dateOfBirth', message: 'please chose your date birth' },
   { key: 'email', message: 'Please enter your email' },
   { key: 'password', message: 'Please enter your password' },
 
   { key: 'street', message: 'Please enter your street' },
   { key: 'city', message: 'Please enter your city' },
-  { key: 'postCode', message: 'Please enter your postal code' },
+  { key: 'postalCode', message: 'Please enter your postal code' },
   { key: 'country', message: 'Please chose your country' },
 
   { key: 'shippingStreet', message: 'Please enter your shipping street' },
   { key: 'shippingCity', message: 'Please enter your shipping city' },
   {
-    key: 'shippingPostCode',
+    key: 'shippingPostalCode',
     message: 'Please enter your shipping postal code',
   },
   { key: 'shippingCountry', message: 'Please choose your shipping country' },
@@ -346,18 +358,18 @@ export const errorFields: IErrorField[] = [
 export const validationData = [
   {
     type: 'firstName',
-    err: 'First name: Must contain at least one character and no special characters or numbers',
-    isValid: (value: string): boolean => value.length > 0,
+    err: 'First name: Must contain more than one character and no special characters or numbers',
+    isValid: (value: string): boolean => value.length > 1,
   },
 
   {
     type: 'lastName',
-    err: 'Last name: Must contain at least one character and no special characters or numbers',
-    isValid: (value: string): boolean => value.length > 0,
+    err: 'Last name: Must contain contain more than one character and no special characters or numbers',
+    isValid: (value: string): boolean => value.length > 1,
   },
 
   {
-    type: 'birthDate',
+    type: 'dateOfBirth',
     err: 'Date of birth: A valid date input ensuring the user is above a certain age (e.g., 13 years old or older)',
     isValid: (value: string): boolean =>
       /^(19\d{2}|200\d|201[0-2])-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01])$/.test(
@@ -381,18 +393,18 @@ export const validationData = [
 
   {
     type: 'street',
-    err: 'Street: Must contain at least one character',
-    isValid: (value: string): boolean => value.length > 0,
+    err: 'Street: Must contain contain more than one character and no special characters',
+    isValid: (value: string): boolean => value.length > 1,
   },
 
   {
     type: 'city',
-    err: 'City: Must contain at least one character and no special characters or numbers',
-    isValid: (value: string): boolean => value.length > 0,
+    err: 'City: Must contain contain more than one character and no special characters',
+    isValid: (value: string): boolean => value.length > 1,
   },
 
   {
-    type: 'postCode',
+    type: 'postalCode',
     err: 'Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)',
     isValid: (value: string): boolean => /^[A-Za-z0-9\s-]{3,10}$/.test(value),
   },
@@ -405,18 +417,18 @@ export const validationData = [
 
   {
     type: 'shippingStreet',
-    err: 'Street: Must contain at least one character',
-    isValid: (value: string): boolean => value.length > 0,
+    err: 'Street: Must contain contain more than one character and no special characters',
+    isValid: (value: string): boolean => value.length > 1,
   },
 
   {
     type: 'shippingCity',
-    err: 'City: Must contain at least one character and no special characters or numbers',
-    isValid: (value: string): boolean => value.length > 0,
+    err: 'City: MMust contain contain more than one character and no special characters',
+    isValid: (value: string): boolean => value.length > 1,
   },
 
   {
-    type: 'shippingPostCode',
+    type: 'shippingPostalCode',
     err: 'Postal code: Must follow the format for the country (e.g., 12345 or A1B 2C3 for the U.S. and Canada, respectively)',
     isValid: (value: string): boolean => /^[A-Za-z0-9\s-]{3,10}$/.test(value),
   },
@@ -432,19 +444,24 @@ export const authUserData: IAuthUserData = {
   newUser: {
     firstName: undefined,
     lastName: undefined,
-    birthDate: '2000-01-01',
+    dateOfBirth: '2000-01-01',
     email: undefined,
     password: undefined,
 
     street: undefined,
     city: undefined,
-    postCode: undefined,
+    postalCode: undefined,
     country: undefined,
 
     shippingStreet: undefined,
     shippingCity: undefined,
-    shippingPostCode: undefined,
+    shippingPostalCode: undefined,
     shippingCountry: undefined,
+  },
+
+  addressDefaults: {
+    isBillingAddressDef: false,
+    isShippingAddress: false,
   },
 
   logIn: {

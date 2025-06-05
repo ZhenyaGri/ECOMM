@@ -16,6 +16,7 @@ import sofa from '../../assets/img/modular-sofa.jpg';
 import { collectionText } from './main-text-data';
 import { newItemsText } from './main-text-data';
 import { audoHouseText } from './main-text-data';
+import { Link } from 'react-router-dom';
 
 export class Main extends Component {
   render(): React.ReactNode {
@@ -65,7 +66,7 @@ export class Main extends Component {
             content="Shop by category"
           />
           <Wrapper className="wrapper-shop">
-            <AnchorLink className="link-shop" href="#">
+            <Link to="/catalog" className="link-shop">
               <Wrapper className="wrapper-shop-img">
                 <Heading
                   tag="h3"
@@ -74,8 +75,8 @@ export class Main extends Component {
                 />
                 <Img className="shop-img" src={furniture} alt="Furniture" />
               </Wrapper>
-            </AnchorLink>
-            <AnchorLink className="link-shop" href="#">
+            </Link>
+            <Link to="/catalog" className="link-shop">
               <Wrapper className="wrapper-shop-img">
                 <Heading
                   tag="h3"
@@ -84,8 +85,8 @@ export class Main extends Component {
                 />
                 <Img className="shop-img" src={lighting} alt="Lighting" />
               </Wrapper>
-            </AnchorLink>
-            <AnchorLink className="link-shop" href="#">
+            </Link>
+            <Link to="/catalog" className="link-shop">
               <Wrapper className="wrapper-shop-img">
                 <Heading
                   tag="h3"
@@ -94,7 +95,7 @@ export class Main extends Component {
                 />
                 <Img className="shop-img" src={accessories} alt="Accessories" />
               </Wrapper>
-            </AnchorLink>
+            </Link>
           </Wrapper>
         </Section>
         <Section className="section-banner">

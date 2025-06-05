@@ -7,7 +7,6 @@ import {
 import { IUserData, IWarnRefObj } from './type/auth-types';
 
 let validformDataObj: IUserData | undefined = undefined;
-
 //function to get object with data after validation
 export const getUserDataObj = (): IUserData | undefined => {
   if (validformDataObj) {
@@ -48,14 +47,14 @@ const updateFormState = (
   const inputVal = getValidInputValue(value, inputType, ref);
   if (userDataObj) {
     if (inputType in userDataObj) {
-      userDataObj[inputType] = inputVal;
+      userDataObj[inputType] = inputVal?.trim();
       validformDataObj = userDataObj;
     }
   }
 };
 
 // validation engine
-const getValidInputValue = (
+export const getValidInputValue = (
   value: string,
   inputType: string,
   ref: HTMLHeadingElement | null
@@ -118,12 +117,12 @@ export const setShippingAddress = (
     if (userDataObj) {
       const street = userDataObj.street;
       const city = userDataObj.city;
-      const postalAddress = userDataObj.postCode;
+      const postalAddress = userDataObj.postalCode;
       const country = userDataObj.country;
 
       userDataObj.shippingStreet = street;
       userDataObj.shippingCity = city;
-      userDataObj.shippingPostCode = postalAddress;
+      userDataObj.shippingPostalCode = postalAddress;
       userDataObj.shippingCountry = country;
     }
   }
@@ -131,5 +130,4 @@ export const setShippingAddress = (
 
 export const dataReset = (): void => {
   Object.assign(authUserData, defaultCopyAuthUserData);
-  console.log(authUserData);
 };
