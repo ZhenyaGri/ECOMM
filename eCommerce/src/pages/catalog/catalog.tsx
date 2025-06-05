@@ -16,6 +16,7 @@ interface CatalogProduct {
   name: string;
   price: number;
   imageUrl: string;
+  urlSlug: string;
 }
 
 export const Catalog = (): React.ReactNode => {
@@ -32,12 +33,14 @@ export const Catalog = (): React.ReactNode => {
       const price = priceValue?.centAmount ? priceValue.centAmount / 100 : 0;
       const imageVariant = product.masterVariant || product.variants?.[0];
       const imageUrl = imageVariant?.images?.[0]?.url || house;
+      const urlSlug = product.slug.en || product.id;
 
       return {
         id: product.id,
         name: product.name?.en || 'Unnamed Product',
         price,
         imageUrl,
+        urlSlug,
       };
     });
   };
@@ -92,10 +95,11 @@ export const Catalog = (): React.ReactNode => {
         <Wrapper className="products-container">
           {products.map((product) => (
             <ProductCard
-              key={product.id}
+              id={product.id}
               name={product.name}
               price={product.price}
               imageUrl={product.imageUrl}
+              urlSlug={product.urlSlug}
             />
           ))}
         </Wrapper>
