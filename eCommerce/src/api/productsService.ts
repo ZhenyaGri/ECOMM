@@ -69,6 +69,66 @@ export async function getPublishedProducts(
   return fetchProducts(queryParams, sortByPrice ? '/search' : '');
 }
 
+export async function fetchProductsWithFacets(
+  filterParams: string[],
+  otherParams: FetchProductsParams = {}
+): Promise<ProductProjectionPagedQueryResponse> {
+  const params: FetchProductsParams = {
+    ...otherParams,
+    limit: otherParams.limit || 20,
+    where: otherParams.where || ['published = true'],
+  };
+
+  if (filterParams.length > 0) {
+    const attributeFilters: string[] = [];
+    const categoryFilters: string[] = [];
+
+    filterParams.forEach((filter) => {
+      if (filter.startsWith('categories.')) {
+        categoryFilters.push(filter);
+      } else {
+        attributeFilters.push(filter);
+      }
+    });
+
+    if (attributeFilters.length > 0) {
+      const filterGroups: Record<string, string[]> = {};
+
+      attributeFilters.forEach((filter) => {
+        const cleanFilter = filter.replace(/^variants\.attributes\./, '');
+        const [attr, value] = cleanFilter.split(':');
+
+        if (!attr) return;
+
+        if (!filterGroups[attr]) {
+          filterGroups[attr] = [];
+        }
+
+        if (value) {
+          const cleanValue = value.replace(/^"+|"+$/g, '');
+          filterGroups[attr].push(cleanValue);
+        }
+      });
+
+      const attributeFilterStrings = Object.entries(filterGroups).map(
+        ([attr, values]) => {
+          if (values.length > 0) {
+            return `variants.attributes.${attr}:"${values.join('","')}"`;
+          }
+          return `variants.attributes.${attr}`;
+        }
+      );
+      params.filter = [...(params.filter || []), ...attributeFilterStrings];
+    }
+
+    if (categoryFilters.length > 0) {
+      params.filter = [...(params.filter || []), ...categoryFilters];
+    }
+  }
+
+  return fetchProducts(params, '/search');
+}
+
 export async function getProductById(
   productId: string
 ): Promise<ProductProjection> {

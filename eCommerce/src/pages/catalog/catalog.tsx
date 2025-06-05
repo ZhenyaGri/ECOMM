@@ -6,7 +6,10 @@ import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Wrapper } from '../../components/wrapper/wrapper';
 import { Text } from '../../components/text/text';
 import { useEffect, useState } from 'react';
-import { getPublishedProducts } from '../../api/productsService';
+import {
+  fetchProductsWithFacets,
+  getPublishedProducts,
+} from '../../api/productsService';
 import {
   ProductProjection,
   ProductProjectionPagedQueryResponse,
@@ -45,6 +48,19 @@ export const Catalog = (): React.ReactNode => {
         urlSlug,
       };
     });
+  };
+
+  const handleFacetFilter = async (newFilters: string[]): Promise<void> => {
+    try {
+      setLoading(true);
+      const response = await fetchProductsWithFacets(newFilters);
+      setProducts(formatProducts(response));
+    } catch (err) {
+      setError('Failed to filter products. Please try again later.');
+      console.error('Error filtering products:', err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -100,7 +116,10 @@ export const Catalog = (): React.ReactNode => {
         <Heading tag="h1" content="All Products" />
       </Section>
       <Section className="section-products">
-        <CatalogToolbar onProductsSorted={handleProductsSorted} />
+        <CatalogToolbar
+          onProductsSorted={handleProductsSorted}
+          onFacetFilter={handleFacetFilter}
+        />
         <Wrapper className="products-container">
           {products.map((product) => (
             <ProductCard
