@@ -15,7 +15,7 @@ export const ProductCard: React.FC<Product> = ({
 }) => {
   return (
     <Link
-      to={`/product/${urlSlug}`}
+      to={`/catalog/${urlSlug}`}
       className="link-catalog-card"
       state={{ product: { id, name, price, imageUrl } }}
     >

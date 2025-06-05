@@ -68,7 +68,7 @@ function App(): React.ReactNode {
       />
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/product/:slug" element={<ProductPage />} />
+        <Route path="/catalog/:slug" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         {!isLoggedIn ? (
           <>
