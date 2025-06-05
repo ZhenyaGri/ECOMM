@@ -6,16 +6,18 @@ import { Header } from './components/header/header';
 import { Text } from './components/text/text';
 import { Footer } from './components/footer/footer';
 import { Main } from './pages/page-main/page-main';
+
 import LogInComponent from './components/auth/auth-log-in';
 import CreateUserComponent from './components/auth/auth-reg';
 import PassRecoveryComponent from './components/auth/auth-reset-pass';
 import { Page404 } from './pages/page-404/page-404';
+import { Catalog } from './pages/catalog/catalog';
+import { ProductPage } from './pages/page-product/page-product';
+import { ProtectedRoute } from './utils/protected-route';
+import { ProfileComponent } from './components/profile/profile';
 
 import { getToken, removeToken } from './api/authHandlers';
-import { Catalog } from './pages/catalog/catalog';
-import { ProtectedRoute } from './utils/protected-route';
 import { dataReset } from './components/auth/form-handler';
-import { ProfileComponent } from './components/profile/profile';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -66,6 +68,7 @@ function App(): React.ReactNode {
       />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/catalog/:slug" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         {!isLoggedIn ? (
           <>
