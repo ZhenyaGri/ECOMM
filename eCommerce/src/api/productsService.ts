@@ -2,6 +2,7 @@ import { getToken } from './authHandlers';
 import {
   ProductProjectionPagedQueryResponse,
   PublishedProductsParams,
+  ProductProjection,
 } from './productsType';
 import { ImportMetaEnv } from './type';
 import { FetchProductsParams } from './type';
@@ -66,4 +67,57 @@ export async function getPublishedProducts(
   const queryParams = params ? { ...params } : { ...defaultParams };
 
   return fetchProducts(queryParams, sortByPrice ? '/search' : '');
+}
+
+export async function getProductById(
+  productId: string
+): Promise<ProductProjection> {
+  const token =
+    (await getToken('authToken'))?.access_token ||
+    (await getToken('anonymousToken'))?.access_token;
+
+  const url = `${EnvParams.VITE_CTP_API_URL}/${EnvParams.VITE_CTP_PROJECT_KEY}/product-projections/${productId}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw errorData;
+  }
+
+  return response.json();
+}
+
+export async function getProductBySlug(
+  slug: string,
+  locale: string = 'en'
+): Promise<ProductProjection | null> {
+  try {
+    const response = await fetchProducts(
+      {
+        where: [`slug(${locale}="${slug}")`],
+        limit: 20,
+      },
+      '/search'
+    );
+
+    if (response.results.length === 0) {
+      return null;
+    }
+
+    const product = response.results.find(
+      (p) => p.slug && p.slug[locale] === slug
+    );
+
+    return product || null;
+  } catch (error) {
+    console.error(`Error fetching product by slug '${slug}':`, error);
+    throw error;
+  }
 }

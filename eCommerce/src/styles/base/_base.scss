@@ -17,6 +17,7 @@ html {
   --color-background: #f5f3eb;
   --color-footer-background: #c0b7b0;
   --color-footer-text: #121212;
+  --color-breadcrumbs: #696460;
 }
 
 @font-face {
@@ -53,6 +54,7 @@ html {
   background-color: var(--color-background);
   font-family: 'CenturyOld', serif;
   font-weight: 400;
+  overflow-x: hidden;
 }
 
 .root {
@@ -76,4 +78,14 @@ html {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   z-index: 1;
   font-weight: bold;
+}
+
+.product-count {
+  padding: 1.5rem;
+  width: 12rem;
+
+  @media screen and (max-width: 1100px) {
+    padding: 1rem;
+    width: 9rem;
+  }
 }

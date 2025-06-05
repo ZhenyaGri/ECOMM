@@ -78,6 +78,42 @@
   }
 }
 
+.btn-product {
+  width: 45rem;
+  height: 5rem;
+  margin: 1rem 0;
+
+  @media screen and (max-width: 1330px) {
+    max-width: 35rem;
+  }
+
+  @media screen and (max-width: 460px) {
+    max-width: 30rem;
+  }
+}
+
+.btn-arrow-left,
+.btn-arrow-right {
+  height: 5rem;
+  position: absolute;
+}
+
+.btn-arrow-right {
+  right: 1.5rem;
+}
+
+.btn-arrow-left {
+  left: 1.5rem;
+}
+
+.btn-modal {
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+  z-index: 20;
+  user-select: none;
+}
+
 .btn-form-facets {
   border: none;
 }

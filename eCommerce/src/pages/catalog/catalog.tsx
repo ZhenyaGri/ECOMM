@@ -4,18 +4,21 @@ import { Section } from '../../components/section/section';
 import house from '../../assets/img/house.jpg';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Wrapper } from '../../components/wrapper/wrapper';
+import { Text } from '../../components/text/text';
 import { useEffect, useState } from 'react';
 import { getPublishedProducts } from '../../api/productsService';
 import {
   ProductProjection,
   ProductProjectionPagedQueryResponse,
 } from '../../api/productsType';
+import { Link } from 'react-router-dom';
 
 interface CatalogProduct {
   id: string;
   name: string;
   price: number;
   imageUrl: string;
+  urlSlug: string;
 }
 
 export const Catalog = (): React.ReactNode => {
@@ -32,12 +35,14 @@ export const Catalog = (): React.ReactNode => {
       const price = priceValue?.centAmount ? priceValue.centAmount / 100 : 0;
       const imageVariant = product.masterVariant || product.variants?.[0];
       const imageUrl = imageVariant?.images?.[0]?.url || house;
+      const urlSlug = product.slug.en || product.id;
 
       return {
         id: product.id,
         name: product.name?.en || 'Unnamed Product',
         price,
         imageUrl,
+        urlSlug,
       };
     });
   };
@@ -85,6 +90,13 @@ export const Catalog = (): React.ReactNode => {
   return (
     <main className="main">
       <Section className="heading-content">
+        <Wrapper className="wrapper-breadcrumbs">
+          <Link to="/" className="link-breadcrumbs">
+            <Text className="breadcrumbs" content="Main" />
+          </Link>
+          <Text className="breadcrumbs" content=">" />
+          <Text className="breadcrumbs breadcrumbs-active" content="Shop" />
+        </Wrapper>
         <Heading tag="h1" content="All Products" />
       </Section>
       <Section className="section-products">
@@ -93,9 +105,11 @@ export const Catalog = (): React.ReactNode => {
           {products.map((product) => (
             <ProductCard
               key={product.id}
+              id={product.id}
               name={product.name}
               price={product.price}
               imageUrl={product.imageUrl}
+              urlSlug={product.urlSlug}
             />
           ))}
         </Wrapper>
