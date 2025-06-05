@@ -108,7 +108,7 @@ export const createInputObj = async (
     customerData.addresses[1][addressField] = validValue;
   }
 
-  console.log('Updated customerData:', customerData);
+
 };
 
 type CustomerAction =
@@ -209,7 +209,6 @@ export async function updateCustomer(): Promise<Customer> {
 
   customerData = updatedCustomer;
 
-  console.log('Customer successfully updated:', customerData);
 
   return customerData;
 }

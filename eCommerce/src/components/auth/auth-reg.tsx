@@ -201,7 +201,6 @@ const CreateUserComponent = ({
             checked={isBillgAddreasDef}
             onChange={(e) => {
               setBillAddreasAsDef(e.target.checked);
-              console.log(isBillgAddreasDef);
             }}
           />
           <label htmlFor="default-address">

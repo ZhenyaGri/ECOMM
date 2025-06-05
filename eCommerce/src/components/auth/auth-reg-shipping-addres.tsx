@@ -88,7 +88,6 @@ const ShippingAddressComponent = ({
             checked={isShipAddreasDef}
             onChange={(e) => {
               setShipAddresAsDef(e.target.checked);
-              console.log(isShipAddreasDef);
             }}
           />
           <label htmlFor="default-address">

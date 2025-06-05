@@ -9,7 +9,7 @@ import {
 } from '../auth/data-list';
 import { getUserProfileData } from './core/get-data';
 import { IUserProfileDataValues } from './types/types';
-import { createInputObj, updateCustomer } from './core/validate-datainputs';
+import { createInputObj, updateCustomer } from './core/update-data';
 export const ProfileComponent = (): ReactElement => {
   const [isEditMode, setEditMode] = useState<boolean>(false);
   const [editUserDetailsIndex, setEditUserDetailsIndex] = useState<
@@ -26,7 +26,6 @@ export const ProfileComponent = (): ReactElement => {
 
   const fetchData = async (): Promise<void> => {
     const profileData = await getUserProfileData();
-    console.log(profileData);
     setUserProfileDataValues(profileData);
   };
 

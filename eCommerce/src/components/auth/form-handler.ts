@@ -130,5 +130,4 @@ export const setShippingAddress = (
 
 export const dataReset = (): void => {
   Object.assign(authUserData, defaultCopyAuthUserData);
-  console.log(authUserData);
 };
