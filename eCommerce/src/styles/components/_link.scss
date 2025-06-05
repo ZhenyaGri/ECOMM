@@ -93,6 +93,11 @@
   }
 }
 
+.link-catalog-card:link,
+.link-catalog-card:visited {
+  text-decoration: none;
+}
+
 .link-hidden {
   display: none;
 }
