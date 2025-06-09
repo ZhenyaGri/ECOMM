@@ -11,7 +11,7 @@ export const ProductCard: React.FC<Product> = ({
   price,
   imageUrl,
   urlSlug,
-  discount = 0,
+  discount,
 }) => {
   return (
     <Link
@@ -29,11 +29,20 @@ export const ProductCard: React.FC<Product> = ({
             className="product-card-name"
             content={name.toUpperCase()}
           />
-          <Heading
-            tag="h3"
-            className="product-card-price"
-            content={`€ ${price.toFixed(2) || discount}`}
-          />
+          <Wrapper>
+            {discount && discount !== 0 ? (
+              <Heading
+                tag="h2"
+                className="product-card-discount"
+                content={`€ ${discount.toFixed(2)}`}
+              />
+            ) : null}
+            <Heading
+              tag="h3"
+              className="product-card-price"
+              content={`€ ${price.toFixed(2)}`}
+            />
+          </Wrapper>
         </Wrapper>
       </div>
     </Link>

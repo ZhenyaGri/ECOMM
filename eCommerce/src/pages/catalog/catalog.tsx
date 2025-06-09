@@ -22,6 +22,7 @@ interface CatalogProduct {
   price: number;
   imageUrl: string;
   urlSlug: string;
+  discount: number;
 }
 
 export const Catalog = (): React.ReactNode => {
@@ -33,9 +34,14 @@ export const Catalog = (): React.ReactNode => {
     response: ProductProjectionPagedQueryResponse
   ): CatalogProduct[] => {
     return response.results.map((product: ProductProjection) => {
+      let discount = 0;
       const priceVariant = product.masterVariant || product.variants?.[0];
       const priceValue = priceVariant?.prices?.[0]?.value;
+      if (priceVariant.prices?.[0]?.discounted?.value.centAmount) {
+        discount = priceVariant.prices?.[0]?.discounted?.value.centAmount / 100;
+      }
       const price = priceValue?.centAmount ? priceValue.centAmount / 100 : 0;
+
       const imageVariant = product.masterVariant || product.variants?.[0];
       const imageUrl = imageVariant?.images?.[0]?.url || house;
       const urlSlug = product.slug.en || product.id;
@@ -46,6 +52,7 @@ export const Catalog = (): React.ReactNode => {
         price,
         imageUrl,
         urlSlug,
+        discount,
       };
     });
   };
@@ -70,6 +77,7 @@ export const Catalog = (): React.ReactNode => {
         const response: ProductProjectionPagedQueryResponse =
           await getPublishedProducts(params);
         setProducts(formatProducts(response));
+        console.log(response);
       } catch (err) {
         setError('Failed to load products. Please try again later.');
         console.error('Error fetching products:', err);
@@ -129,6 +137,7 @@ export const Catalog = (): React.ReactNode => {
               price={product.price}
               imageUrl={product.imageUrl}
               urlSlug={product.urlSlug}
+              discount={product.discount}
             />
           ))}
         </Wrapper>
