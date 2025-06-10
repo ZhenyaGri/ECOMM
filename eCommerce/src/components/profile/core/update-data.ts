@@ -1,3 +1,7 @@
+//TODO: rewrite the code 
+//remove that object that I has driven 
+//remove tha object that  I get from teh server to rewrite the data 
+
 import { getValidInputValue } from '../../auth/form-handler';
 import { Customer, Address } from '../../../api/type';
 import { getUserDataObj } from './get-data';
@@ -87,7 +91,7 @@ export const createInputObj = async (
   if (!validValue) return;
 
   if (isPersonalField(inputType)) {
-    // customerData точно есть и inputType это PersonalField
+
     customerData[inputType] = validValue;
   }
 
@@ -210,3 +214,16 @@ export async function updateCustomer(retry = true): Promise<Customer> {
   customerData = updatedCustomer;
   return customerData;
 }
+
+
+
+/*
+
+
+
+
+
+
+
+
+*/
