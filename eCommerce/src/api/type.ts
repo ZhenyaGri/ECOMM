@@ -132,4 +132,6 @@ export type FetchProductsParams = {
   where?: string[];
   sort?: string[];
   expand?: string[];
+  facet?: string[];
+  filter?: string[];
 };

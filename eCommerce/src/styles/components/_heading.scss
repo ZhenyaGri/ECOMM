@@ -8,6 +8,7 @@
 h1.heading {
   font-size: clamp(4rem, 4vw + 2rem, 5rem);
   padding: 8rem 0;
+  padding-top: 4rem;
 }
 
 .heading-secondary {
@@ -52,4 +53,10 @@ h1.heading {
   @media screen and (max-width: 855px) {
     font-size: 2.8rem;
   }
+}
+
+.heading-product {
+  font-family: 'Grot12', sans-serif;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
 }

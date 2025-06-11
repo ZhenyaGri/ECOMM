@@ -43,6 +43,26 @@
   padding: 8rem;
 }
 
+.section-product {
+  padding: 4rem 5rem;
+
+  & .heading-primary {
+    padding: 0;
+    font-size: 3rem;
+    font-family: 'Grot12', sans-serif;
+    text-transform: uppercase;
+    margin-bottom: 4rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    padding: 4rem 3rem;
+  }
+}
+
 .section-products {
   padding: 0 5rem;
+}
+
+.heading-content {
+  margin: 0 5rem;
 }
