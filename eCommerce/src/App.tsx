@@ -16,6 +16,7 @@ import { Catalog } from './pages/catalog/catalog';
 import { ProtectedRoute } from './utils/protected-route';
 import { dataReset } from './components/auth/form-handler';
 import { ProfileComponent } from './components/profile/profile';
+import { BasketComponent } from './components/busket/bsket';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -119,6 +120,7 @@ function App(): React.ReactNode {
         />
         <Route path="*" element={<Page404 />} />
       </Routes>
+
       <Footer />
       {successMessage && (
         <div className="success-message">{successMessage}</div>
