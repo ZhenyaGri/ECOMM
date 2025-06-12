@@ -41,7 +41,9 @@ export class Nav extends Component<{ state?: boolean }, INavState> {
               <AnchorLink children="Samples" href="#" />
             </ListItem>
             <ListItem>
-              <AnchorLink children="Professionals" href="#" />
+              <Link to="/about-us" className="link" onClick={this.closeNav}>
+                About Us
+              </Link>
             </ListItem>
           </List>
         </nav>

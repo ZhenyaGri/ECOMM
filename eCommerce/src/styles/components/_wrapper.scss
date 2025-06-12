@@ -277,3 +277,42 @@
   flex-direction: row;
   gap: 1.5rem;
 }
+
+.wrapper-about {
+  justify-content: center;
+  gap: 5rem;
+  margin-bottom: 7rem;
+
+  @media screen and (max-width: 855px) {
+    flex-wrap: wrap;
+    margin-bottom: 5rem;
+  }
+}
+
+.wrapper-person {
+  flex-direction: column;
+  align-items: center;
+  width: 40rem;
+  padding: 2rem;
+}
+
+.wrapper-photo {
+  background-color: var(--color-footer-background);
+  width: 20rem;
+  height: 20rem;
+  border-radius: 50%;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 650px) {
+    width: 15rem;
+    height: 15rem;
+  }
+}
+
+.wrapper-collaboration {
+  background-color: var(--color-collab);
+  max-width: 90rem;
+  margin: 0 auto;
+  margin-bottom: 7rem;
+  padding: 3rem;
+}

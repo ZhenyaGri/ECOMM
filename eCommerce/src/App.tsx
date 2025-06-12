@@ -15,6 +15,7 @@ import { Catalog } from './pages/catalog/catalog';
 import { ProductPage } from './pages/page-product/page-product';
 import { ProtectedRoute } from './utils/protected-route';
 import { ProfileComponent } from './components/profile/profile';
+import { AboutUs } from './pages/page-about-us/page-about-us';
 
 import { getToken, removeToken } from './api/authHandlers';
 import { dataReset } from './components/auth/form-handler';
@@ -68,6 +69,7 @@ function App(): React.ReactNode {
       />
       <Routes>
         <Route path="/" element={<Main />} />
+        <Route path="/about-us" element={<AboutUs />} />
         <Route path="/catalog/:slug" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
         {!isLoggedIn ? (
