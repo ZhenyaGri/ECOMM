@@ -52,10 +52,11 @@ interface LocalizedString {
   [locale: string]: string;
 }
 
-interface ProductVariant {
+export interface ProductVariant {
   id: number;
   key?: string;
   sku?: string;
+  description?: string;
   prices?: Price[];
   attributes?: ProductAttribute[];
   price?: Price;

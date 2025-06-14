@@ -1,0 +1,22 @@
+.facet__item {
+  gap: 1rem;
+}
+
+.facet-category,
+.facet-color,
+.facet-new {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1rem;
+  flex-wrap: wrap;
+
+  .btn {
+    padding: 0.5rem 1rem;
+  }
+}
+
+.facet__item {
+  .btn-facet-selector {
+    border: none;
+  }
+}

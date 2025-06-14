@@ -2,6 +2,7 @@ import { getToken } from './authHandlers';
 import {
   ProductProjectionPagedQueryResponse,
   PublishedProductsParams,
+  ProductProjection,
 } from './productsType';
 import { ImportMetaEnv } from './type';
 import { FetchProductsParams } from './type';
@@ -66,4 +67,117 @@ export async function getPublishedProducts(
   const queryParams = params ? { ...params } : { ...defaultParams };
 
   return fetchProducts(queryParams, sortByPrice ? '/search' : '');
+}
+
+export async function fetchProductsWithFacets(
+  filterParams: string[],
+  otherParams: FetchProductsParams = {}
+): Promise<ProductProjectionPagedQueryResponse> {
+  const params: FetchProductsParams = {
+    ...otherParams,
+    limit: otherParams.limit || 20,
+    where: otherParams.where || ['published = true'],
+  };
+
+  if (filterParams.length > 0) {
+    const attributeFilters: string[] = [];
+    const categoryFilters: string[] = [];
+
+    filterParams.forEach((filter) => {
+      if (filter.startsWith('categories.')) {
+        categoryFilters.push(filter);
+      } else {
+        attributeFilters.push(filter);
+      }
+    });
+
+    if (attributeFilters.length > 0) {
+      const filterGroups: Record<string, string[]> = {};
+
+      attributeFilters.forEach((filter) => {
+        const cleanFilter = filter.replace(/^variants\.attributes\./, '');
+        const [attr, value] = cleanFilter.split(':');
+
+        if (!attr) return;
+
+        if (!filterGroups[attr]) {
+          filterGroups[attr] = [];
+        }
+
+        if (value) {
+          const cleanValue = value.replace(/^"+|"+$/g, '');
+          filterGroups[attr].push(cleanValue);
+        }
+      });
+
+      const attributeFilterStrings = Object.entries(filterGroups).map(
+        ([attr, values]) => {
+          if (values.length > 0) {
+            return `variants.attributes.${attr}:"${values.join('","')}"`;
+          }
+          return `variants.attributes.${attr}`;
+        }
+      );
+      params.filter = [...(params.filter || []), ...attributeFilterStrings];
+    }
+
+    if (categoryFilters.length > 0) {
+      params.filter = [...(params.filter || []), ...categoryFilters];
+    }
+  }
+
+  return fetchProducts(params, '/search');
+}
+
+export async function getProductById(
+  productId: string
+): Promise<ProductProjection> {
+  const token =
+    (await getToken('authToken'))?.access_token ||
+    (await getToken('anonymousToken'))?.access_token;
+
+  const url = `${EnvParams.VITE_CTP_API_URL}/${EnvParams.VITE_CTP_PROJECT_KEY}/product-projections/${productId}`;
+
+  const response = await fetch(url, {
+    method: 'GET',
+    headers: {
+      Authorization: `Bearer ${token}`,
+      'Content-Type': 'application/json',
+    },
+  });
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    throw errorData;
+  }
+
+  return response.json();
+}
+
+export async function getProductBySlug(
+  slug: string,
+  locale: string = 'en'
+): Promise<ProductProjection | null> {
+  try {
+    const response = await fetchProducts(
+      {
+        where: [`slug(${locale}="${slug}")`],
+        limit: 20,
+      },
+      '/search'
+    );
+
+    if (response.results.length === 0) {
+      return null;
+    }
+
+    const product = response.results.find(
+      (p) => p.slug && p.slug[locale] === slug
+    );
+
+    return product || null;
+  } catch (error) {
+    console.error(`Error fetching product by slug '${slug}':`, error);
+    throw error;
+  }
 }

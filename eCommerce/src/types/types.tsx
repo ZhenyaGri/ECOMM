@@ -1,6 +1,7 @@
 export type BaseProps = {
   className?: string;
   children?: React.ReactNode;
+  style?: React.CSSProperties;
 };
 
 export type ButtonProps = {
@@ -20,6 +21,7 @@ export type ImgProps = {
   className: string;
   src: string;
   alt: string;
+  style?: React.CSSProperties;
 };
 
 export type LinkProps = {
@@ -34,8 +36,10 @@ export type textProps = {
 };
 
 export type Product = {
+  id?: string;
   name: string;
   price: number;
   imageUrl: string;
+  urlSlug?: string;
   discount?: number;
 };
