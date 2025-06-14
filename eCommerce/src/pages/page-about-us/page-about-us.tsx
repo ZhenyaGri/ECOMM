@@ -8,6 +8,35 @@ import github from '../../assets/icons/logo-github.svg';
 import { Heading } from '../../components/heading/heading';
 import { Text } from '../../components/text/text';
 import { lorem } from './lorem-ipsum';
+import { personalInfo } from './about-us-data';
+
+const aboutUsCards = (): React.ReactNode[] => {
+  const cards = [];
+
+  for (let i = 0; i < personalInfo.length; i++) {
+    cards.push(
+      <Wrapper className="wrapper-person">
+        <Wrapper className="wrapper-photo">{/* <Img /> */}</Wrapper>
+        <Heading
+          tag="h4"
+          className="heading-person"
+          content={personalInfo[i].name}
+        />
+        <AnchorLink
+          className="link-person"
+          href={personalInfo[i].link}
+          target="_blank"
+        >
+          <Img className="github-logo" src={github} alt="GitHub Logo" />
+          {personalInfo[i].githubName}
+        </AnchorLink>
+        <Text className="person-text" content={personalInfo[i].description} />
+      </Wrapper>
+    );
+  }
+
+  return cards;
+};
 
 export class AboutUs extends Component {
   render(): React.ReactNode {
@@ -16,59 +45,7 @@ export class AboutUs extends Component {
         <Wrapper className="wrapper-collaboration">
           <Text className="collaboration-text" content={lorem} />
         </Wrapper>
-        <Wrapper className="wrapper-about">
-          <Wrapper className="wrapper-person">
-            <Wrapper className="wrapper-photo"></Wrapper>
-            <Heading
-              tag="h4"
-              className="heading-person"
-              content="Evgeniya Gribova"
-            />
-            <AnchorLink
-              className="link-person"
-              href="https://github.com/zhenyagri"
-              target="_blank"
-            >
-              <Img className="github-logo" src={github} alt="GitHub Logo" />
-              zhenyagri
-            </AnchorLink>
-            <Text className="person-text" content={lorem} />
-          </Wrapper>
-          <Wrapper className="wrapper-person">
-            <Wrapper className="wrapper-photo"></Wrapper>
-            <Heading
-              tag="h4"
-              className="heading-person"
-              content="Andrei Sparish"
-            />
-            <AnchorLink
-              className="link-person"
-              href="https://github.com/rabbitdrew"
-              target="_blank"
-            >
-              <Img className="github-logo" src={github} alt="GitHub Logo" />
-              rabbitdrew
-            </AnchorLink>
-            <Text className="person-text" content={lorem} />
-          </Wrapper>
-          <Wrapper className="wrapper-person">
-            <Wrapper className="wrapper-photo"></Wrapper>
-            <Heading
-              tag="h4"
-              className="heading-person"
-              content="Olga Mokeeva"
-            />
-            <AnchorLink
-              className="link-person"
-              href="https://github.com/electriccrimson"
-              target="_blank"
-            >
-              <Img className="github-logo" src={github} alt="GitHub Logo" />
-              electriccrimson
-            </AnchorLink>
-            <Text className="person-text" content={lorem} />
-          </Wrapper>
-        </Wrapper>
+        <Wrapper className="wrapper-about">{aboutUsCards()}</Wrapper>
         <AnchorLink
           className="link-school"
           href="https://rs.school/"
