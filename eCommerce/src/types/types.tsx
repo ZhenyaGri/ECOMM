@@ -9,6 +9,7 @@ export type ButtonProps = {
   className?: string;
   children: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled: boolean;
 };
 
 export type headingProps = {
@@ -36,7 +37,7 @@ export type textProps = {
 };
 
 export type Product = {
-  id?: string;
+  id: string;
   name: string;
   price: number;
   imageUrls: Array<string>;

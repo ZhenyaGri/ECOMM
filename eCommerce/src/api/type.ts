@@ -1,4 +1,4 @@
-import { Cart } from './cartType';
+import { Cart, CartDraft } from './cartType';
 
 export type TokenResponse = {
   access_token: string;
@@ -122,3 +122,10 @@ export type FetchProductsParams = {
   facet?: string[];
   filter?: string[];
 };
+
+export type BodyRequest =
+  | URLSearchParams
+  | CustomerDraft
+  | CartDraft
+  | { [key: string]: unknown }
+  | string;

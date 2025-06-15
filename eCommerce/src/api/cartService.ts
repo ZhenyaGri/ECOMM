@@ -1,6 +1,6 @@
 import { getToken } from './authHandlers';
 import { Cart, CartDraft } from './cartType';
-import { ImportMetaEnv } from './type';
+import { BodyRequest, ImportMetaEnv } from './type';
 
 const EnvParams: ImportMetaEnv = {
   VITE_CTP_PROJECT_KEY: import.meta.env.VITE_CTP_PROJECT_KEY,
@@ -11,11 +11,11 @@ const EnvParams: ImportMetaEnv = {
   VITE_CTP_SCOPES: import.meta.env.VITE_CTP_SCOPES,
 };
 
-export async function sendHTTPRequest(
+export async function sendHTTPRequest<T>(
   endpoint: string,
   method: string = 'GET',
-  body?: BodyInit
-): Promise<BodyInit> {
+  body?: BodyRequest
+): Promise<T> {
   const token =
     (await getToken('authToken'))?.access_token ||
     (await getToken('anonymousToken'))?.access_token;
@@ -128,4 +128,44 @@ export async function getCart({
   }
 
   return response.json();
+}
+
+export async function addLineItem(
+  cartId: string,
+  cartVersion: number,
+  productId: string,
+  variantId: number,
+  quantity: number = 1
+): Promise<Cart> {
+  const body = {
+    version: cartVersion,
+    actions: [
+      {
+        action: 'addLineItem',
+        productId,
+        variantId,
+        quantity,
+      },
+    ],
+  };
+  return sendHTTPRequest<Cart>(`/me/carts/${cartId}`, 'POST', body);
+}
+
+export async function removeLineItem(
+  cartId: string,
+  cartVersion: number,
+  lineItemId: string,
+  quantity?: number
+): Promise<Cart> {
+  const body = {
+    version: cartVersion,
+    actions: [
+      {
+        action: 'removeLineItem',
+        lineItemId,
+        ...(quantity && { quantity }),
+      },
+    ],
+  };
+  return sendHTTPRequest<Cart>(`/me/carts/${cartId}`, 'POST', body);
 }
