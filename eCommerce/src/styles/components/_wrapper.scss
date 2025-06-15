@@ -276,3 +276,13 @@
   flex-direction: row;
   gap: 1.5rem;
 }
+
+.wrapper-prices {
+  gap: 1rem;
+  align-self: flex-start;
+
+  @media screen and (max-width: 1490px) {
+    margin-bottom: 1rem;
+    align-self: center;
+  }
+}
