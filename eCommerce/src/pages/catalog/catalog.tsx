@@ -38,7 +38,6 @@ export const Catalog = (): React.ReactNode => {
       if (imageVariant?.images) {
         imageVariant?.images.forEach((image) => imageUrls.push(image.url));
       }
-      //const imageUrl = imageVariant?.images?.[0]?.url || house;
       const urlSlug = product.slug.en || product.id;
 
       return {
@@ -72,7 +71,6 @@ export const Catalog = (): React.ReactNode => {
         const response: ProductProjectionPagedQueryResponse =
           await getPublishedProducts(params);
         setProducts(formatProducts(response));
-        console.log(response);
       } catch (err) {
         setError('Failed to load products. Please try again later.');
         console.error('Error fetching products:', err);

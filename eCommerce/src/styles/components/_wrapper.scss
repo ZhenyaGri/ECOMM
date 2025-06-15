@@ -244,13 +244,14 @@
   }
 }
 
-.product-card {
-  width: 100%;
+.wrapper-catalog-card {
+  flex-direction: column;
 }
 
 .wrapper-catalog-img {
   cursor: pointer;
   overflow: hidden;
+  aspect-ratio: 0.8/1;
 
   & .product-card {
     object-fit: cover;

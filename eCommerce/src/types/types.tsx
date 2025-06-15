@@ -8,7 +8,7 @@ export type ButtonProps = {
   type: 'button' | 'submit' | 'reset';
   className?: string;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
 };
 
 export type headingProps = {
