@@ -14,7 +14,7 @@ import {
   ProductProjectionPagedQueryResponse,
 } from '../../api/productsType';
 import { Link } from 'react-router-dom';
-import { CatalogProduct } from './constants';
+import { CatalogProduct, pageLimit } from './constants';
 
 export const Catalog = (): React.ReactNode => {
   const [products, setProducts] = useState<CatalogProduct[]>([]);
@@ -65,7 +65,9 @@ export const Catalog = (): React.ReactNode => {
   };
 
   useEffect(() => {
-    const fetchProducts = async (params = { limit: 30 }): Promise<void> => {
+    const fetchProducts = async (
+      params = { limit: pageLimit }
+    ): Promise<void> => {
       try {
         setLoading(true);
         const response: ProductProjectionPagedQueryResponse =
