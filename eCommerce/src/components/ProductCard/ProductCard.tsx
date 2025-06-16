@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Img } from '../img/img';
 import { Wrapper } from '../wrapper/wrapper';
 import { Product } from '../../types/types';
@@ -6,7 +6,6 @@ import { Heading } from '../heading/heading';
 import { Link } from 'react-router-dom';
 import { Button } from '../button/button';
 import { addLineItem, getCart, removeLineItem } from '../../api/cartService';
-import { getToken } from '../../api/authHandlers';
 import {
   getCartId,
   handleAnonymousUserCart,
@@ -14,6 +13,7 @@ import {
   setCartId,
 } from '../../api/cartHandlers';
 import { Cart } from '../../api/cartType';
+import { useCart } from '../../context/useCart';
 
 export const ProductCard: React.FC<Product> = ({
   id,
@@ -25,7 +25,7 @@ export const ProductCard: React.FC<Product> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [cart, setCart] = useState<Cart | null>(null);
+  const { cart, updateCart } = useCart();
   const [isAddedToCart, setIsAddedToCart] = useState(false);
 
   const hasSecondImage = imageUrls.length > 1;
@@ -35,7 +35,6 @@ export const ProductCard: React.FC<Product> = ({
   const handleAddToCart = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const token = await getToken('authToken');
       const existingCartId = getCartId();
 
       let currentCart: Cart;
@@ -44,12 +43,12 @@ export const ProductCard: React.FC<Product> = ({
         try {
           currentCart = await getCart({ cartId: existingCartId });
         } catch {
-          currentCart = token
+          currentCart = sessionStorage.getItem('loggedIn')
             ? await handleAuthenticatedUserCart()
             : await handleAnonymousUserCart();
         }
       } else {
-        currentCart = token
+        currentCart = sessionStorage.getItem('loggedIn')
           ? await handleAuthenticatedUserCart()
           : await handleAnonymousUserCart();
       }
@@ -73,28 +72,13 @@ export const ProductCard: React.FC<Product> = ({
         setIsAddedToCart(true);
       }
       setCartId(updatedCart.id);
-      setCart(updatedCart);
+      updateCart(updatedCart);
     } catch (error) {
       console.error('Error updating cart:', error);
     } finally {
       setIsLoading(false);
     }
   };
-
-  useEffect(() => {
-    const loadCart = async (): Promise<void> => {
-      const cartId = getCartId();
-      if (cartId) {
-        try {
-          const currentCart = await getCart({ cartId });
-          setCart(currentCart);
-        } catch (error) {
-          console.error('Error loading cart:', error);
-        }
-      }
-    };
-    loadCart();
-  }, [id]);
 
   return (
     <Wrapper className="wrapper-catalog-card">
