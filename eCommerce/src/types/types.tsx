@@ -9,7 +9,7 @@ export type ButtonProps = {
   className?: string;
   children: React.ReactNode;
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 export type headingProps = {
