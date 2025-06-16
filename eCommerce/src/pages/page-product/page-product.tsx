@@ -69,6 +69,11 @@ export const ProductPage = (): React.ReactNode => {
     ? variant.prices[0].value.centAmount / 100
     : 0;
   const annotation = product.description?.en || '';
+  let discount = 0;
+
+  if (variant.prices?.[0]?.discounted?.value?.centAmount) {
+    discount = variant.prices[0].discounted.value.centAmount / 100;
+  }
 
   return (
     <Section className="section-product">
@@ -90,7 +95,15 @@ export const ProductPage = (): React.ReactNode => {
         <ImgSlider imgUrls={images.length > 0 ? images : [testImg, testImg2]} />
         <Wrapper className="wrapper-product-info">
           <h1 className="heading heading-primary">{product.name?.en}</h1>
-          <Text className="price-text" content={`€ ${price.toFixed(2)}`} />
+          <Wrapper className="wrapper-prices">
+            {discount && discount !== 0 ? (
+              <Text
+                className="discount-price"
+                content={`€ ${discount.toFixed(2)}`}
+              />
+            ) : null}
+            <Text className="price-text" content={`€ ${price.toFixed(2)}`} />
+          </Wrapper>
           <Wrapper className="wrapper-add-button">
             <label>
               <input

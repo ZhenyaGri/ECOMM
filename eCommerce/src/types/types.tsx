@@ -8,7 +8,8 @@ export type ButtonProps = {
   type: 'button' | 'submit' | 'reset';
   className?: string;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
+  disabled?: boolean;
 };
 
 export type headingProps = {
@@ -36,10 +37,10 @@ export type textProps = {
 };
 
 export type Product = {
-  id?: string;
+  id: string;
   name: string;
   price: number;
-  imageUrl: string;
+  imageUrls: Array<string>;
   urlSlug?: string;
   discount?: number;
 };

@@ -16,7 +16,7 @@ export const getUserProfileData = async (): Promise<
   if (localStorageData !== null) {
     const token = JSON.parse(localStorageData);
     const data = await getCustomerInfo(token.access_token);
-    console.log(data)
+    console.log(data);
     return await userData(data);
   }
 };

@@ -147,29 +147,6 @@ export async function signUpCustomer(
   return await response.json();
 }
 
-export async function getClientCredentialsToken(): Promise<TokenResponse> {
-  const url = `${EnvParams.VITE_CTP_AUTH_URL}/oauth/token`;
-
-  const response = await fetch(url, {
-    method: 'POST',
-    headers: {
-      Authorization: `Basic ${credentials}`,
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    body: new URLSearchParams({
-      grant_type: 'client_credentials',
-      scope: `manage_customers:${EnvParams.VITE_CTP_PROJECT_KEY}`,
-    }),
-  });
-
-  if (!response.ok) {
-    const errorData = await response.json();
-    throw errorData;
-  }
-
-  return await response.json();
-}
-
 export async function getCustomerInfo(token: string): Promise<Customer> {
   const response = await fetch(
     `${EnvParams.VITE_CTP_API_URL}/${EnvParams.VITE_CTP_PROJECT_KEY}/me`,
