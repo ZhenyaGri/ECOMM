@@ -53,7 +53,9 @@ export const handleSignup = async (
 
 export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
   if (!isCreateAccount(data)) {
-    throw new Error('Invalid data: expected ICreateAccount');
+    throw new Error(
+      `Please check your input: some fields are missing or invalid`
+    );
   }
   const CustomerDraft = {
     email: data.email!,
