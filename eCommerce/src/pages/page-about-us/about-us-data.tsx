@@ -10,6 +10,7 @@ const Evgeniya = {
   role: 'Team Lead / Developer',
   imgSrc: `${EvgeniyaPhoto}`,
   description: `Hi! My name is Zhenya, and I'm currently finishing my 3rd year as a Systems Analyst student in Moscow while simultaneously studying frontend development. Thanks to our close-knit team on this project, I've developed many professional skills, been inspired by my teammates' qualities, and learned to communicate my ideas effectively. Working with the API required deep diving into documentation, and the results were worth it! I'm grateful to this course not only for the technical skills I've gained but also for the inspiring community of like-minded people.`,
+  tags: ['CommerceTools', 'API', 'Catalog Page'],
 };
 
 const Andrei = {
@@ -19,6 +20,7 @@ const Andrei = {
   role: 'Developer',
   imgSrc: `${templatePhoto}`,
   description: lorem,
+  tags: ['Login Page', 'Registration Page', 'User Profile Page', 'Basket Page'],
 };
 
 const Olga = {
@@ -28,6 +30,7 @@ const Olga = {
   role: 'Developer',
   imgSrc: `${OlgaPhoto}`,
   description: `Hi! My name is Olga. I'm a graphic designer interested not only in design, but also in frontend development. This course was a great opportunity for me to gain new skills and meet new people. The final project was really interesting, and I’m grateful to my awesome teammates for such an amazing collaborative experience! I enjoyed creating pages (main page, product page, 404) using React, and I’ll definitely continue learning it.`,
+  tags: ['Main Page', 'Routing', 'Detailed Product Page', 'About Us Page'],
 };
 
 export const teamText: string =

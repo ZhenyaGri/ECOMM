@@ -38,6 +38,15 @@ const aboutUsCards = (): React.ReactNode[] => {
         </AnchorLink>
         <Text className="person-role" content={personalInfo[i].role} />
         <Text className="person-text" content={personalInfo[i].description} />
+        {personalInfo[i].tags && (
+          <Wrapper className="wrapper-tags">
+            {personalInfo[i].tags.map((tag, index) => (
+              <span className="person-tag" key={`tag-${index}`}>
+                {tag}
+              </span>
+            ))}
+          </Wrapper>
+        )}
       </Wrapper>
     );
   }
