@@ -65,6 +65,18 @@
   color: var(--color-black);
 }
 
+.person-role,
 .person-text {
-  margin-top: 2rem;
+  margin-top: 1.5rem;
+}
+
+.person-role {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--color-breadcrumbs);
+  letter-spacing: 0.6px;
+}
+
+.person-text {
+  line-height: 1.5;
 }

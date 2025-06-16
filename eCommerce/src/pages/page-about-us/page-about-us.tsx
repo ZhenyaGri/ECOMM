@@ -7,7 +7,7 @@ import rsschool from '../../assets/icons/logo-rsschool.svg';
 import github from '../../assets/icons/logo-github.svg';
 import { Heading } from '../../components/heading/heading';
 import { Text } from '../../components/text/text';
-import { lorem } from './lorem-ipsum';
+import { teamText } from './about-us-data';
 import { personalInfo } from './about-us-data';
 
 const aboutUsCards = (): React.ReactNode[] => {
@@ -15,8 +15,14 @@ const aboutUsCards = (): React.ReactNode[] => {
 
   for (let i = 0; i < personalInfo.length; i++) {
     cards.push(
-      <Wrapper className="wrapper-person">
-        <Wrapper className="wrapper-photo">{/* <Img /> */}</Wrapper>
+      <Wrapper className="wrapper-person" key={`person-${i}`}>
+        <Wrapper className="wrapper-photo">
+          <Img
+            className="person-photo"
+            src={personalInfo[i].imgSrc}
+            alt="Photo of team member"
+          />
+        </Wrapper>
         <Heading
           tag="h4"
           className="heading-person"
@@ -30,6 +36,7 @@ const aboutUsCards = (): React.ReactNode[] => {
           <Img className="github-logo" src={github} alt="GitHub Logo" />
           {personalInfo[i].githubName}
         </AnchorLink>
+        <Text className="person-role" content={personalInfo[i].role} />
         <Text className="person-text" content={personalInfo[i].description} />
       </Wrapper>
     );
@@ -43,7 +50,7 @@ export class AboutUs extends Component {
     return (
       <Section className="section-about-us">
         <Wrapper className="wrapper-collaboration">
-          <Text className="collaboration-text" content={lorem} />
+          <Text className="collaboration-text" content={teamText} />
         </Wrapper>
         <Wrapper className="wrapper-about">{aboutUsCards()}</Wrapper>
         <AnchorLink
