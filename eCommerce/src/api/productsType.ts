@@ -8,6 +8,7 @@ export type ProductProjectionPagedQueryResponse = {
 
 export type ProductProjection = {
   id: string;
+  productId?: string;
   version: number;
   key?: string;
   productType: ProductTypeReference;

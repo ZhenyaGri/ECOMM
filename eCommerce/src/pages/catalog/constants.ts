@@ -8,3 +8,5 @@ export type CatalogProduct = {
   urlSlug: string;
   discount: number;
 };
+
+export const pageLimit = 9;

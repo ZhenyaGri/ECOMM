@@ -5,14 +5,15 @@ import { Product } from '../../types/types';
 import { Heading } from '../heading/heading';
 import { Link } from 'react-router-dom';
 import { Button } from '../button/button';
-import { getCart } from '../../api/cartService';
-import { getToken } from '../../api/authHandlers';
+import { addLineItem, getCart, removeLineItem } from '../../api/cartService';
 import {
   getCartId,
   handleAnonymousUserCart,
   handleAuthenticatedUserCart,
   setCartId,
 } from '../../api/cartHandlers';
+import { Cart } from '../../api/cartType';
+import { useCart } from '../../context/useCart';
 
 export const ProductCard: React.FC<Product> = ({
   id,
@@ -24,26 +25,56 @@ export const ProductCard: React.FC<Product> = ({
 }) => {
   const [isHovered, setIsHovered] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { cart, updateCart } = useCart();
+  const [isAddedToCart, setIsAddedToCart] = useState(false);
+
   const hasSecondImage = imageUrls.length > 1;
+  const lineItem = cart?.lineItems?.find((item) => item.productId === id);
+  const lineItemId = lineItem?.id || '';
 
   const handleAddToCart = async (): Promise<void> => {
     setIsLoading(true);
     try {
-      const token = await getToken('authToken');
       const existingCartId = getCartId();
 
-      if (existingCartId && (await getCart({ cartId: existingCartId }))) return;
+      let currentCart: Cart;
 
-      const cart = token
-        ? await handleAuthenticatedUserCart()
-        : await handleAnonymousUserCart(existingCartId);
-
-      if (cart?.id) {
-        setCartId(cart.id);
-        // await addLineItem(cart.id, id);
+      if (existingCartId) {
+        try {
+          currentCart = await getCart({ cartId: existingCartId });
+        } catch {
+          currentCart = sessionStorage.getItem('loggedIn')
+            ? await handleAuthenticatedUserCart()
+            : await handleAnonymousUserCart();
+        }
+      } else {
+        currentCart = sessionStorage.getItem('loggedIn')
+          ? await handleAuthenticatedUserCart()
+          : await handleAnonymousUserCart();
       }
+      let updatedCart: Cart;
+      if (isAddedToCart) {
+        updatedCart = await removeLineItem(
+          currentCart.id,
+          currentCart.version,
+          lineItemId,
+          1
+        );
+        setIsAddedToCart(false);
+      } else {
+        updatedCart = await addLineItem(
+          currentCart.id,
+          currentCart.version,
+          id,
+          1,
+          1
+        );
+        setIsAddedToCart(true);
+      }
+      setCartId(updatedCart.id);
+      updateCart(updatedCart);
     } catch (error) {
-      console.error('Error in cart handling:', error);
+      console.error('Error updating cart:', error);
     } finally {
       setIsLoading(false);
     }
@@ -93,12 +124,17 @@ export const ProductCard: React.FC<Product> = ({
       </Link>
       <Button
         type="button"
-        children={isLoading ? 'ADDING...' : 'ADD TO CART'}
-        onClick={() => {
-          handleAddToCart();
-        }}
-        className="btn-dark btn-cart-catalog"
-      ></Button>
+        children={
+          isAddedToCart
+            ? 'REMOVE FROM CART'
+            : isLoading
+              ? 'ADDING...'
+              : 'ADD TO CART'
+        }
+        onClick={handleAddToCart}
+        className={`btn-dark btn-cart-catalog ${isAddedToCart ? 'btn-in-cart' : ''}`}
+        disabled={isLoading}
+      />
     </Wrapper>
   );
 };
