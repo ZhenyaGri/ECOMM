@@ -1,7 +1,6 @@
 import { CatalogToolbar } from '../../components/CatalogToolbar/CatalogToolbar';
 import { Heading } from '../../components/heading/heading';
 import { Section } from '../../components/section/section';
-import house from '../../assets/img/house.jpg';
 import { ProductCard } from '../../components/ProductCard/ProductCard';
 import { Wrapper } from '../../components/wrapper/wrapper';
 import { Text } from '../../components/text/text';
@@ -15,14 +14,7 @@ import {
   ProductProjectionPagedQueryResponse,
 } from '../../api/productsType';
 import { Link } from 'react-router-dom';
-
-interface CatalogProduct {
-  id: string;
-  name: string;
-  price: number;
-  imageUrl: string;
-  urlSlug: string;
-}
+import { CatalogProduct } from './constants';
 
 export const Catalog = (): React.ReactNode => {
   const [products, setProducts] = useState<CatalogProduct[]>([]);
@@ -33,19 +25,28 @@ export const Catalog = (): React.ReactNode => {
     response: ProductProjectionPagedQueryResponse
   ): CatalogProduct[] => {
     return response.results.map((product: ProductProjection) => {
+      let discount = 0;
       const priceVariant = product.masterVariant || product.variants?.[0];
       const priceValue = priceVariant?.prices?.[0]?.value;
+      if (priceVariant.prices?.[0]?.discounted?.value.centAmount) {
+        discount = priceVariant.prices?.[0]?.discounted?.value.centAmount / 100;
+      }
       const price = priceValue?.centAmount ? priceValue.centAmount / 100 : 0;
+
       const imageVariant = product.masterVariant || product.variants?.[0];
-      const imageUrl = imageVariant?.images?.[0]?.url || house;
+      const imageUrls: Array<string> = [];
+      if (imageVariant?.images) {
+        imageVariant?.images.forEach((image) => imageUrls.push(image.url));
+      }
       const urlSlug = product.slug.en || product.id;
 
       return {
         id: product.id,
         name: product.name?.en || 'Unnamed Product',
         price,
-        imageUrl,
+        imageUrls,
         urlSlug,
+        discount,
       };
     });
   };
@@ -127,8 +128,9 @@ export const Catalog = (): React.ReactNode => {
               id={product.id}
               name={product.name}
               price={product.price}
-              imageUrl={product.imageUrl}
+              imageUrls={product.imageUrls}
               urlSlug={product.urlSlug}
+              discount={product.discount}
             />
           ))}
         </Wrapper>

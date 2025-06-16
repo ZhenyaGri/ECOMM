@@ -1,3 +1,5 @@
+import { Cart } from './cartType';
+
 export type TokenResponse = {
   access_token: string;
   expires_in: number;
@@ -33,7 +35,7 @@ export type ErrorResponse = {
 };
 
 export type ErrorObject = {
-  code: number;
+  code: string;
   message: string;
 };
 
@@ -102,21 +104,6 @@ export type Address = {
   email?: string;
   fax?: string;
   additionalAddressInfo?: string;
-};
-
-export type Cart = {
-  email: string;
-  password: string;
-  firstName?: string;
-  lastName?: string;
-  middleName?: string;
-  title?: string;
-  anonymousCart?: string;
-  anonymousId?: string;
-  dateOfBirth?: string;
-  companyName?: string;
-  vatId?: string;
-  addresses?: string;
 };
 
 export type CustomerSignInResult = {

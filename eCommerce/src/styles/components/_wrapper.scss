@@ -244,14 +244,14 @@
   }
 }
 
-.product-card {
-  width: 100%;
+.wrapper-catalog-card {
+  flex-direction: column;
 }
 
 .wrapper-catalog-img {
   cursor: pointer;
   overflow: hidden;
-  height: 61.4rem;
+  aspect-ratio: 0.8/1;
 
   & .product-card {
     object-fit: cover;
@@ -276,4 +276,14 @@
 .wrapper-breadcrumbs {
   flex-direction: row;
   gap: 1.5rem;
+}
+
+.wrapper-prices {
+  gap: 1rem;
+  align-self: flex-start;
+
+  @media screen and (max-width: 1490px) {
+    margin-bottom: 1rem;
+    align-self: center;
+  }
 }
