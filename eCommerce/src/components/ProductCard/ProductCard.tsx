@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Img } from '../img/img';
 import { Wrapper } from '../wrapper/wrapper';
 import { Product } from '../../types/types';
@@ -31,6 +31,13 @@ export const ProductCard: React.FC<Product> = ({
   const hasSecondImage = imageUrls.length > 1;
   const lineItem = cart?.lineItems?.find((item) => item.productId === id);
   const lineItemId = lineItem?.id || '';
+
+  useEffect(() => {
+    if (cart?.lineItems) {
+      const itemInCart = cart.lineItems.some((item) => item.productId === id);
+      setIsAddedToCart(itemInCart);
+    }
+  }, [cart, id]);
 
   const handleAddToCart = async (): Promise<void> => {
     setIsLoading(true);
