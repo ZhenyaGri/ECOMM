@@ -26,8 +26,8 @@ function App(): React.ReactNode {
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     return sessionStorage.getItem('loggedIn') === 'true';
   });
-
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const basketPaths: string[] = ['cart', 'basket'];
 
   useEffect(() => {
     const checkAuth = async (): Promise<void> => {
@@ -72,6 +72,9 @@ function App(): React.ReactNode {
         <Route path="/" element={<Main />} />
         <Route path="/catalog/:slug" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
+        {basketPaths.map((path) => (
+          <Route key={path} path={`/${path}`} element={<BasketComponent />} />
+        ))}
         {!isLoggedIn ? (
           <>
             <Route
@@ -124,7 +127,6 @@ function App(): React.ReactNode {
         />
         <Route path="*" element={<Page404 />} />
       </Routes>
-      <BasketComponent />
       <Footer />
       {successMessage && (
         <div className="success-message">{successMessage}</div>
