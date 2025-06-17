@@ -17,12 +17,17 @@ export function removeCartId(): void {
 export const handleAuthenticatedUserCart = async (): Promise<Cart> => {
   const customerId = localStorage.getItem('userId');
   if (!customerId) throw new Error('Customer ID not found');
-
   try {
+    const test = await getCart({ customerId });
+    console.log('exist', test);
+    //test
     return await getCart({ customerId });
   } catch (error) {
     const parsedError = parseError(error);
     if ('statusCode' in parsedError && parsedError.statusCode === 404) {
+      // test
+      const test = await createCart();
+      console.log('new', test);
       return await createCart();
     }
     throw error;

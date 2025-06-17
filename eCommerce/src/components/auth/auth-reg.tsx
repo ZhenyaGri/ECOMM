@@ -19,6 +19,7 @@ import {
 } from '../../api/authHandlers';
 import { parseError } from '../../api/errorHandler';
 import { useRefs } from './refs';
+import { handleAuthenticatedUserCart } from '../../api/cartHandlers';
 
 type CreateAccountProps = {
   onCreateAccount: () => void;
@@ -58,6 +59,7 @@ const CreateUserComponent = ({
       if (authToken) {
         setToken(authToken, 'authToken');
       }
+      handleAuthenticatedUserCart();
     } catch (error) {
       const errorMsg = parseError(error);
       setSignupError(errorMsg.message);

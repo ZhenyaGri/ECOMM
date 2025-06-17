@@ -11,16 +11,20 @@ export type ProductProjection = {
   productId?: string;
   version: number;
   key?: string;
+  price?: Price;
   productType: ProductTypeReference;
   name: LocalizedString;
   description?: LocalizedString;
+  quantity?: number;
   slug: LocalizedString;
   categories: CategoryReference[];
   searchKeywords?: SearchKeywords;
   hasStagedChanges: boolean;
   published: boolean;
   masterVariant: ProductVariant;
+  variant?: ProductVariant;
   variants: ProductVariant[];
+  totalPrice?: TypedMoney;
   taxCategory?: TaxCategoryReference;
   priceMode: ProductPriceModeEnum;
   createdAt: string; // DateTime

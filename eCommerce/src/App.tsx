@@ -19,6 +19,7 @@ import { ProfileComponent } from './components/profile/profile';
 import { getToken, removeToken } from './api/authHandlers';
 import { dataReset } from './components/auth/form-handler';
 import { CartProvider } from './context/CartContext';
+import { BasketComponent } from './components/basket/bsket';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -123,7 +124,7 @@ function App(): React.ReactNode {
         />
         <Route path="*" element={<Page404 />} />
       </Routes>
-
+      <BasketComponent />
       <Footer />
       {successMessage && (
         <div className="success-message">{successMessage}</div>
