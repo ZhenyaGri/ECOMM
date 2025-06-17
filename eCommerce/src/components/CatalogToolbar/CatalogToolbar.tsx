@@ -13,6 +13,7 @@ import {
 } from './constants';
 
 export const CatalogToolbar = ({
+  pageSize,
   onProductsSorted,
   onFacetFilter,
 }: CatalogToolbarProps): React.ReactNode => {
@@ -46,7 +47,7 @@ export const CatalogToolbar = ({
     const response: ProductProjectionPagedQueryResponse =
       await getPublishedProducts(
         {
-          limit: 30,
+          limit: pageSize,
           sort: [sortOption === 'featured' ? 'createdAt asc' : sortOption],
         },
         sortOption === 'price asc' || sortOption === 'price desc'

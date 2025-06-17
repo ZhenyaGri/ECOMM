@@ -44,3 +44,20 @@ export type Product = {
   urlSlug?: string;
   discount?: number;
 };
+
+export type PaginationControlsProps = {
+  currentPage: number;
+  totalPages: number;
+  pageSize?: number;
+  onPageChange: (page: number) => void;
+  onPageSizeChange?: (size: number) => void;
+};
+
+export type UsePaginationReturn = {
+  currentPage: number;
+  pageSize: number;
+  totalItems: number;
+  totalPages: number;
+  handlePageChange: (newPage: number) => void;
+  setTotalItems: (total: number) => void;
+};

@@ -9,53 +9,28 @@ import {
   fetchProductsWithFacets,
   getPublishedProducts,
 } from '../../api/productsService';
-import {
-  ProductProjection,
-  ProductProjectionPagedQueryResponse,
-} from '../../api/productsType';
+import { ProductProjectionPagedQueryResponse } from '../../api/productsType';
 import { Link } from 'react-router-dom';
 import { CatalogProduct, pageLimit } from './constants';
+import { Pagination } from '../../components/pagination/Pagination';
+import { usePagination } from '../../components/pagination/usePagination';
+import { formatProducts } from './catalogUtils';
 
 export const Catalog = (): React.ReactNode => {
   const [products, setProducts] = useState<CatalogProduct[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const formatProducts = (
-    response: ProductProjectionPagedQueryResponse
-  ): CatalogProduct[] => {
-    return response.results.map((product: ProductProjection) => {
-      let discount = 0;
-      const priceVariant = product.masterVariant || product.variants?.[0];
-      const priceValue = priceVariant?.prices?.[0]?.value;
-      if (priceVariant.prices?.[0]?.discounted?.value.centAmount) {
-        discount = priceVariant.prices?.[0]?.discounted?.value.centAmount / 100;
-      }
-      const price = priceValue?.centAmount ? priceValue.centAmount / 100 : 0;
-
-      const imageVariant = product.masterVariant || product.variants?.[0];
-      const imageUrls: Array<string> = [];
-      if (imageVariant?.images) {
-        imageVariant?.images.forEach((image) => imageUrls.push(image.url));
-      }
-      const urlSlug = product.slug.en || product.id;
-
-      return {
-        id: product.id,
-        name: product.name?.en || 'Unnamed Product',
-        price,
-        imageUrls,
-        urlSlug,
-        discount,
-      };
-    });
-  };
+  const { currentPage, pageSize, totalPages, handlePageChange, setTotalItems } =
+    usePagination(1, pageLimit);
 
   const handleFacetFilter = async (newFilters: string[]): Promise<void> => {
     try {
       setLoading(true);
-      const response = await fetchProductsWithFacets(newFilters);
-      setProducts(formatProducts(response));
+      const response = await fetchProductsWithFacets(newFilters, {
+        limit: pageLimit,
+      });
+      setProducts(formatProducts(response, setTotalItems));
     } catch (err) {
       setError('Failed to filter products. Please try again later.');
       console.error('Error filtering products:', err);
@@ -71,8 +46,12 @@ export const Catalog = (): React.ReactNode => {
       try {
         setLoading(true);
         const response: ProductProjectionPagedQueryResponse =
-          await getPublishedProducts(params);
-        setProducts(formatProducts(response));
+          await getPublishedProducts({
+            ...params,
+            limit: pageLimit,
+            offset: (currentPage - 1) * pageSize,
+          });
+        setProducts(formatProducts(response, setTotalItems));
       } catch (err) {
         setError('Failed to load products. Please try again later.');
         console.error('Error fetching products:', err);
@@ -82,12 +61,12 @@ export const Catalog = (): React.ReactNode => {
     };
 
     fetchProducts();
-  }, []);
+  }, [currentPage, pageSize, setTotalItems]);
 
   const handleProductsSorted = (
     response: ProductProjectionPagedQueryResponse
   ): void => {
-    setProducts(formatProducts(response));
+    setProducts(formatProducts(response, setTotalItems));
   };
 
   if (loading) {
@@ -120,23 +99,22 @@ export const Catalog = (): React.ReactNode => {
       </Section>
       <Section className="section-products">
         <CatalogToolbar
+          pageSize={pageSize}
           onProductsSorted={handleProductsSorted}
           onFacetFilter={handleFacetFilter}
         />
         <Wrapper className="products-container">
           {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              id={product.id}
-              name={product.name}
-              price={product.price}
-              imageUrls={product.imageUrls}
-              urlSlug={product.urlSlug}
-              discount={product.discount}
-            />
+            <ProductCard key={product.id} {...product} />
           ))}
         </Wrapper>
       </Section>
+      <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        pageSize={pageSize}
+        onPageChange={handlePageChange}
+      />
     </main>
   );
 };

@@ -1,6 +1,7 @@
 import { ProductProjectionPagedQueryResponse } from '../../api/productsType';
 
 export type CatalogToolbarProps = {
+  pageSize: number;
   onProductsSorted: (products: ProductProjectionPagedQueryResponse) => void;
   onFacetFilter: (filters: string[]) => void;
 };

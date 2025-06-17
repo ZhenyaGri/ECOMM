@@ -246,6 +246,7 @@
 
 .wrapper-catalog-card {
   flex-direction: column;
+  justify-content: space-between;
 }
 
 .wrapper-catalog-img {
@@ -286,4 +287,9 @@
     margin-bottom: 1rem;
     align-self: center;
   }
+}
+
+.pagination {
+  justify-content: center;
+  margin: 4rem 0;
 }
