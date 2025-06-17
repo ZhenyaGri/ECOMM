@@ -14,7 +14,7 @@
 
 .link-logo {
   padding: 0 0.75rem;
-  margin-right: 25rem;
+  margin-right: 20rem;
 
   @media screen and (max-width: 1330px) {
     margin-right: 0;
@@ -111,8 +111,10 @@
 }
 
 .link-breadcrumbs:link,
-.link-breadcrumbs:visited {
-  font-family: 'Grot12', sans-serif;
+.link-breadcrumbs:visited,
+.link-person:link,
+.link-person:visited {
+  font-family: "Grot12", sans-serif;
   color: var(--color-breadcrumbs);
 }
 
@@ -121,4 +123,20 @@
   & .breadcrumbs {
     color: var(--color-black);
   }
+}
+
+.link-person {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+  font-weight: 500;
+}
+
+.link-school {
+  display: block;
+  width: 5rem;
+  height: 5rem;
+  margin: 0 auto;
 }

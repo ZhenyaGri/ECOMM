@@ -66,3 +66,11 @@
 .heading-content {
   margin: 0 5rem;
 }
+
+.section-about-us {
+  padding: 4rem 5rem;
+
+  @media screen and (max-width: 650px) {
+    padding: 3rem;
+  }
+}
