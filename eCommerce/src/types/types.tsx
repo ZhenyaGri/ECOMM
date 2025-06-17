@@ -62,3 +62,9 @@ export type UsePaginationReturn = {
   handlePageChange: (newPage: number) => void;
   setTotalItems: (total: number) => void;
 };
+
+export type AddToCartProps = {
+  handleAddToCart: () => Promise<void>;
+  isAddedToCart: boolean;
+  isLoading: boolean;
+};

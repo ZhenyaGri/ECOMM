@@ -10,6 +10,7 @@ import testImg2 from '../../assets/img/modular-sofa.jpg';
 import { ImgSlider } from '../../components/slider/slider';
 import { getProductById, getProductBySlug } from '../../api/productsService';
 import { ProductProjection, ProductVariant } from '../../api/productsType';
+import { useAddToCart } from '../../components/ProductCard/ProductCardUtils';
 
 export const ProductPage = (): React.ReactNode => {
   const location = useLocation();
@@ -19,6 +20,7 @@ export const ProductPage = (): React.ReactNode => {
   const [product, setProduct] = useState<ProductProjection | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [productId, setProductId] = useState<string | null>(null);
 
   useEffect(() => {
     async function fetchProductDetails(): Promise<void> {
@@ -39,9 +41,11 @@ export const ProductPage = (): React.ReactNode => {
           }
         }
         setProduct(fetchedProduct);
+        setProductId(fetchedProduct?.id || null);
       } catch (err) {
         setError('Failed to load product details');
         console.error(err);
+        setProductId(null);
       } finally {
         setLoading(false);
       }
@@ -104,22 +108,7 @@ export const ProductPage = (): React.ReactNode => {
             ) : null}
             <Text className="price-text" content={`€ ${price.toFixed(2)}`} />
           </Wrapper>
-          <Wrapper className="wrapper-add-button">
-            <label>
-              <input
-                className="product-count"
-                type="number"
-                name="quantity"
-                min="1"
-                placeholder="1"
-              />
-            </label>
-            <Button
-              className="btn-dark btn-product"
-              type="button"
-              children="Add to cart"
-            />
-          </Wrapper>
+          {productId && <AddToCartButton productId={productId} />}
           {variant.attributes?.slice(2).map((attr) => (
             <Wrapper key={attr.name} className="wrapper-product-text">
               <Heading
@@ -136,5 +125,25 @@ export const ProductPage = (): React.ReactNode => {
         </Wrapper>
       </Wrapper>
     </Section>
+  );
+};
+
+const AddToCartButton: React.FC<{ productId: string }> = ({ productId }) => {
+  const { handleAddToCart, isAddedToCart, isLoading } = useAddToCart(productId);
+  return (
+    <Wrapper className="wrapper-add-button">
+      <Button
+        type="button"
+        className={`btn-dark btn-product ${isAddedToCart ? 'btn-in-cart' : ''}`}
+        onClick={handleAddToCart}
+        disabled={isLoading}
+      >
+        {isAddedToCart
+          ? 'Remove from Cart'
+          : isLoading
+            ? 'Adding...'
+            : 'Add to Cart'}
+      </Button>
+    </Wrapper>
   );
 };

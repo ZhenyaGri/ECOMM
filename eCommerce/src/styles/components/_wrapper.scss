@@ -204,7 +204,7 @@
 
 .wrapper-add-button {
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
 
   @media screen and (max-width: 1490px) {
     flex-direction: column;
@@ -281,11 +281,11 @@
 
 .wrapper-prices {
   gap: 1rem;
-  align-self: flex-start;
+  align-self: center;
+  margin-bottom: 1rem;
 
   @media screen and (max-width: 1490px) {
     margin-bottom: 1rem;
-    align-self: center;
   }
 }
 
