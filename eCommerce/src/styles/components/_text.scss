@@ -25,15 +25,23 @@
   }
 }
 
-.price-text {
+.price-text,
+.discount-price {
   font-size: 1.8rem;
   letter-spacing: 0.13rem;
-  text-align: start;
 
   @media screen and (max-width: 1330px) {
-    text-align: center;
     margin-bottom: 1rem;
   }
+}
+
+.discount-price {
+  color: var(--color-red);
+}
+
+.discount-price + .price-text {
+  text-decoration: line-through;
+  font-size: 1.5rem;
 }
 
 .product-text {
@@ -55,7 +63,7 @@
 }
 
 .breadcrumbs {
-  font-family: "Grot12", sans-serif;
+  font-family: 'Grot12', sans-serif;
   font-size: 1.5rem;
   margin: 2rem 0;
   color: var(--color-breadcrumbs);

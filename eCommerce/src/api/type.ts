@@ -1,3 +1,5 @@
+import { Cart, CartDraft } from './cartType';
+
 export type TokenResponse = {
   access_token: string;
   expires_in: number;
@@ -33,7 +35,7 @@ export type ErrorResponse = {
 };
 
 export type ErrorObject = {
-  code: number;
+  code: string;
   message: string;
 };
 
@@ -104,21 +106,6 @@ export type Address = {
   additionalAddressInfo?: string;
 };
 
-export type Cart = {
-  email: string;
-  password: string;
-  firstName?: string;
-  lastName?: string;
-  middleName?: string;
-  title?: string;
-  anonymousCart?: string;
-  anonymousId?: string;
-  dateOfBirth?: string;
-  companyName?: string;
-  vatId?: string;
-  addresses?: string;
-};
-
 export type CustomerSignInResult = {
   customer: Customer;
   cart?: Cart;
@@ -135,3 +122,10 @@ export type FetchProductsParams = {
   facet?: string[];
   filter?: string[];
 };
+
+export type BodyRequest =
+  | URLSearchParams
+  | CustomerDraft
+  | CartDraft
+  | { [key: string]: unknown }
+  | string;

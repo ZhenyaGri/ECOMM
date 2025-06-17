@@ -60,7 +60,7 @@ const CreateUserComponent = ({
       }
     } catch (error) {
       const errorMsg = parseError(error);
-      setSignupError(errorMsg);
+      setSignupError(errorMsg.message);
     }
   };
 

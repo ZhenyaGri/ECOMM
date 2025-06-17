@@ -19,6 +19,7 @@ import { AboutUs } from './pages/page-about-us/page-about-us';
 
 import { getToken, removeToken } from './api/authHandlers';
 import { dataReset } from './components/auth/form-handler';
+import { CartProvider } from './context/CartContext';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
@@ -50,7 +51,7 @@ function App(): React.ReactNode {
   }, [successMessage]);
 
   return (
-    <>
+    <CartProvider>
       <Wrapper className="wrapper-shipping">
         <Text content="Free shipping above €150" />
       </Wrapper>
@@ -128,7 +129,7 @@ function App(): React.ReactNode {
       {successMessage && (
         <div className="success-message">{successMessage}</div>
       )}
-    </>
+    </CartProvider>
   );
 }
 

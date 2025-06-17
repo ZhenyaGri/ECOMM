@@ -15,11 +15,11 @@ export const handleLogin = async (
   const response = await getToken('anonymousToken');
   if (response && 'access_token' in response) {
     const authResponse = await createAuthCustomer(email, password);
-    console.log('LogIn Success:', authResponse);
 
     if (authResponse && authResponse.access_token) {
       const userInfo = await getCustomerInfo(authResponse.access_token);
-      console.log('Customer Info:', userInfo);
+      localStorage.setItem('userId', userInfo.id);
+      localStorage.removeItem('cartId');
     }
     return authResponse;
   }
@@ -34,8 +34,7 @@ export const handleSignup = async (
   if (response && 'access_token' in response) {
     const token = response.access_token;
 
-    const signupResponse = await signUpCustomer(customerDraft, token);
-    console.log('SignUp Success:', signupResponse);
+    await signUpCustomer(customerDraft, token);
 
     const authResponse = await createAuthCustomer(
       customerDraft.email,
@@ -44,7 +43,9 @@ export const handleSignup = async (
     const authorizedToken = authResponse.access_token;
 
     const userInfo = await getCustomerInfo(authorizedToken);
-    console.log('Customer Info:', userInfo);
+    localStorage.setItem('userId', userInfo.id);
+    localStorage.removeItem('cartId');
+
     return authResponse;
   }
   return null;
@@ -52,7 +53,9 @@ export const handleSignup = async (
 
 export function mapToCustomerDraft(data: IUserData | undefined): CustomerDraft {
   if (!isCreateAccount(data)) {
-    throw new Error('Invalid data: expected ICreateAccount');
+    throw new Error(
+      `Please check your input: some fields are missing or invalid`
+    );
   }
   const CustomerDraft = {
     email: data.email!,
@@ -134,5 +137,7 @@ export async function getToken(
 
 export async function removeToken(): Promise<void> {
   localStorage.removeItem('authToken');
+  localStorage.removeItem('userId');
+  localStorage.removeItem('cartId');
   getToken('anonymousToken');
 }

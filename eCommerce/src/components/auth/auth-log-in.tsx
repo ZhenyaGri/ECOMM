@@ -40,7 +40,7 @@ const LogInComponent = ({
       setLoginError('');
     } catch (error) {
       const errorMessage = parseError(error);
-      setLoginError(errorMessage);
+      setLoginError(errorMessage.message);
     }
   };
   return (
