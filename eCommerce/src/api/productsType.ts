@@ -1,7 +1,7 @@
 export type ProductProjectionPagedQueryResponse = {
   limit: number;
   count: number;
-  total?: number;
+  total: number;
   offset: number;
   results: ProductProjection[];
 };

@@ -127,3 +127,14 @@
   background-color: var(--color-breadcrumbs);
   border-color: var(--color-breadcrumbs);
 }
+
+.btn-pagination {
+  border: none;
+  &.active {
+    color: var(--color-breadcrumbs);
+    text-decoration: underline;
+  }
+  &:hover {
+    text-decoration: underline;
+  }
+}
