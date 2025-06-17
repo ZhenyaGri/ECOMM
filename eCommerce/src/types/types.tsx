@@ -29,6 +29,7 @@ export type LinkProps = {
   children: React.ReactNode;
   href: string;
   className?: string;
+  target?: '_blank';
 };
 
 export type textProps = {
