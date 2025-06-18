@@ -1,6 +1,7 @@
 import { ReactElement, useEffect, useState } from 'react';
 import { getCurrentLineItems } from './core/get-item-list';
 import { ProductProjection } from '../../api/productsType';
+import { decrease, increase } from './core/calc';
 
 export const BasketProductListComponent = (): ReactElement => {
   const [lineItems, setLineItems] = useState<ProductProjection[] | undefined>(
@@ -58,13 +59,25 @@ export const BasketProductListComponent = (): ReactElement => {
                 </h2>
 
                 <div className="item-quantity__wrapper">
-                  <div className="itme-quantity-btn__reduce">
+                  <div
+                    className="itme-quantity-btn__reduce"
+                    onClick={() => {
+                      const newLineArr = decrease(lineItems, index);
+                      setLineItems(newLineArr);
+                    }}
+                  >
                     <h2 className="reduce"> - </h2>
                   </div>
                   <div className="itme-quantity__display">
                     <h2 className="reduce">{itemObj.quantity}</h2>
                   </div>
-                  <div className="itme-quantity-btn__increase">
+                  <div
+                    className="itme-quantity-btn__increase "
+                    onClick={() => {
+                      const newLineArr = increase(lineItems, index);
+                      setLineItems(newLineArr);
+                    }}
+                  >
                     <h2 className="increase"> + </h2>
                   </div>
                 </div>
@@ -72,8 +85,11 @@ export const BasketProductListComponent = (): ReactElement => {
                 <div className="item-totla-price__wrapper">
                   <h2 className="item-totla-price">
                     {' '}
-                    {itemObj.totalPrice?.centAmount
-                      ? (itemObj.totalPrice?.centAmount / 100).toFixed(2)
+                    {itemObj.price?.value.centAmount && itemObj.quantity
+                      ? (
+                          (itemObj.price?.value.centAmount * itemObj.quantity) /
+                          100
+                        ).toFixed(2)
                       : 'there is no any price'}
                   </h2>
                 </div>
@@ -89,44 +105,3 @@ export const BasketProductListComponent = (): ReactElement => {
     </div>
   );
 };
-/*
-
-   <li className="buscket-product-item">
-            <div className="item-product__wrapper">
-              <div className="item-produc-info">
-                <div className="itme-img__wrapper">
-                  <img
-                    className="img"
-                    src=''
-                    alt="product-photo"
-                  />
-                </div>
-                <div className="item-title__wrapper">
-                  <h2 className="itme-title">product</h2>
-                </div>
-              </div>
-
-              <div className="item-product__delete-btn">
-                <h2 className="item-product-delete-btn-title">Delete</h2>
-              </div>
-            </div>
-
-            <h2 className="price-title">0.00</h2>
-
-            <div className="item-quantity__wrapper">
-              <div className="itme-quantity-btn__reduce">
-                <h2 className="reduce"> - </h2>
-              </div>
-              <div className="itme-quantity__display">
-                <h2 className="reduce"> 0 </h2>
-              </div>
-              <div className="itme-quantity-btn__increase">
-                <h2 className="increase"> + </h2>
-              </div>
-            </div>
-
-            <div className="item-totla-price__wrapper">
-              <h2 className="item-totla-price">0.00</h2>
-            </div>
-    </li>
-*/
