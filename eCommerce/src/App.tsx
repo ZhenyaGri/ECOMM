@@ -54,7 +54,7 @@ function App(): React.ReactNode {
   return (
     <CartProvider>
       <Wrapper className="wrapper-shipping">
-        <Text content="Free shipping above €150" />
+        <Text content="Buy 5 items and save 5%! Use code: CART5" />
       </Wrapper>
       <Header
         isLoggedIn={isLoggedIn}
