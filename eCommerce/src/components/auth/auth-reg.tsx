@@ -19,6 +19,7 @@ import {
 } from '../../api/authHandlers';
 import { parseError } from '../../api/errorHandler';
 import { useRefs } from './refs';
+import { handleAuthenticatedUserCart } from '../../api/cartHandlers';
 
 type CreateAccountProps = {
   onCreateAccount: () => void;
@@ -58,6 +59,7 @@ const CreateUserComponent = ({
       if (authToken) {
         setToken(authToken, 'authToken');
       }
+      handleAuthenticatedUserCart();
     } catch (error) {
       const errorMsg = parseError(error);
       setSignupError(errorMsg.message);
@@ -76,7 +78,7 @@ const CreateUserComponent = ({
                 className={fieldObj.classNameInput}
                 id={fieldObj.inputId}
                 type={fieldObj.inputType}
-                defaultValue={authUserData.newUser?.birthDate}
+                defaultValue={authUserData.newUser?.dateOfBirth || '2000-01-01'}
                 placeholder={fieldObj.placeholder}
                 onInput={(e) => {
                   const ref = warnRefAccount[fieldObj.type];
@@ -201,7 +203,6 @@ const CreateUserComponent = ({
             checked={isBillgAddreasDef}
             onChange={(e) => {
               setBillAddreasAsDef(e.target.checked);
-              console.log(isBillgAddreasDef);
             }}
           />
           <label htmlFor="default-address">

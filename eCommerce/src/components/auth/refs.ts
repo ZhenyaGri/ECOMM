@@ -5,7 +5,7 @@ export const useRefs = (): IRefs => {
   const warnRefAccount = {
     firstName: useRef(null),
     lastName: useRef(null),
-    birthDate: useRef(null),
+    dateOfBirth: useRef(null),
     email: useRef(null),
     password: useRef(null),
   };
@@ -13,14 +13,14 @@ export const useRefs = (): IRefs => {
   const warnRefAddress = {
     street: useRef(null),
     city: useRef(null),
-    postCode: useRef(null),
+    postalCode: useRef(null),
     country: useRef(null),
   };
 
   const warnRefShiping = {
     shippingStreet: useRef(null),
     shippingCity: useRef(null),
-    shippingPostCode: useRef(null),
+    shippingPostalCode: useRef(null),
     shippingCountry: useRef(null),
   };
 

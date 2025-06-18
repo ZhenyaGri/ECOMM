@@ -38,10 +38,10 @@ const userData = async (data: Customer): Promise<IUserProfileDataValues> => {
   };
 
   const userShippingAddress: IUserShippingAddress = {
-    shippingStreet: data.addresses[0].streetName,
-    shippingCity: data.addresses[0].city,
-    shippingPostalCode: data.addresses[0].postalCode,
-    shippingCountry: transformData(data.addresses[0].country)!,
+    shippingStreet: data.addresses[1].streetName,
+    shippingCity: data.addresses[1].city,
+    shippingPostalCode: data.addresses[1].postalCode,
+    shippingCountry: transformData(data.addresses[1].country)!,
   };
 
   const resultValues: IUserProfileDataValues = {
@@ -56,3 +56,15 @@ const transformData = (value: string): string | undefined => {
   const country = countries.find((obj) => obj.code === value);
   return country ? country.name : undefined;
 };
+
+export const getUserDataObj = async (): Promise<Customer | undefined> => {
+  const localStorageData = localStorage.getItem('authToken');
+
+  if (localStorageData !== null) {
+    const token = JSON.parse(localStorageData);
+    const data = await getCustomerInfo(token.access_token);
+    return data;
+  }
+};
+
+getUserDataObj();

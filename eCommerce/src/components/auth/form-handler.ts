@@ -54,7 +54,7 @@ const updateFormState = (
 };
 
 // validation engine
-const getValidInputValue = (
+export const getValidInputValue = (
   value: string,
   inputType: string,
   ref: HTMLHeadingElement | null
@@ -117,12 +117,12 @@ export const setShippingAddress = (
     if (userDataObj) {
       const street = userDataObj.street;
       const city = userDataObj.city;
-      const postalAddress = userDataObj.postCode;
+      const postalAddress = userDataObj.postalCode;
       const country = userDataObj.country;
 
       userDataObj.shippingStreet = street;
       userDataObj.shippingCity = city;
-      userDataObj.shippingPostCode = postalAddress;
+      userDataObj.shippingPostalCode = postalAddress;
       userDataObj.shippingCountry = country;
     }
   }
@@ -130,5 +130,4 @@ export const setShippingAddress = (
 
 export const dataReset = (): void => {
   Object.assign(authUserData, defaultCopyAuthUserData);
-  console.log(authUserData);
 };

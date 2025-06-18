@@ -10,6 +10,7 @@ import { handleLogin, setToken } from '../../api/authHandlers';
 import { parseError } from '../../api/errorHandler';
 import { authUserData } from './data-list';
 import { useRefs } from './refs';
+import { handleAuthenticatedUserCart } from '../../api/cartHandlers';
 
 type logInProps = {
   onSignUp: () => void;
@@ -35,7 +36,7 @@ const LogInComponent = ({
         if (authToken) {
           setToken(authToken, 'authToken');
         }
-        /*TEST*/
+        handleAuthenticatedUserCart();
       }
       setLoginError('');
     } catch (error) {

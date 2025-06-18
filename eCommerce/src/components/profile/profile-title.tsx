@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, useRef } from 'react';
 import { IFieldObj } from '../auth/type/auth-types';
 
 type profileVieweProps = {
@@ -30,27 +30,76 @@ export const ProfileTitleVieweMode = ({
 
 type profileEditProps = {
   switchVieweMode: (prev: boolean) => void;
-  inputAttributes: IFieldObj;
+  firstNameAttributes: IFieldObj;
+  lastNameAttributes: IFieldObj;
+  createInputObj: (
+    value: string,
+    inputType: string,
+    ref: HTMLHeadingElement
+  ) => void;
+  updateCustomer: () => void;
+  updateData: () => void;
 };
+
 export const ProfileTitleEditMode = ({
   switchVieweMode,
-  inputAttributes,
+  firstNameAttributes,
+  lastNameAttributes,
+  createInputObj,
+  updateCustomer,
+  updateData,
 }: profileEditProps): ReactElement => {
+  const errRefTitleFirstName = useRef<HTMLHeadingElement>(null);
+  const errRefTitleLastName = useRef<HTMLHeadingElement>(null);
   return (
     <div className="profile-title__edit-mode">
-      <h2 className="title">{inputAttributes.title}</h2>
+      <h2 className="title">{firstNameAttributes.title}</h2>
       <input
         className="profile-title-input"
-        type={inputAttributes.inputType}
+        type={firstNameAttributes.inputType}
         placeholder="Enter first name"
+        onChange={(e) => {
+          const val = e.target.value;
+          if (val && errRefTitleFirstName.current) {
+            createInputObj(
+              val,
+              firstNameAttributes.type,
+              errRefTitleFirstName.current
+            );
+          }
+        }}
       />
+      <h2 className="error__message" ref={errRefTitleFirstName}></h2>
       <input
         className="profile-title-input"
-        type={inputAttributes.inputType}
+        type={lastNameAttributes.inputType}
         placeholder="Enter last name"
+        onChange={(e) => {
+          const val = e.target.value;
+          if (val && errRefTitleLastName.current) {
+            createInputObj(
+              val,
+              lastNameAttributes.type,
+              errRefTitleLastName.current
+            );
+          }
+        }}
       />
+      <h2 className="error__message" ref={errRefTitleLastName}></h2>
       <div className="profile-title-name-btns__wrapper">
-        <div className="profile-title__btn--submit">
+        <div
+          className="profile-title__btn--submit"
+          onClick={async () => {
+            try {
+              await updateCustomer();
+              await updateData();
+            } catch (error) {
+              console.error(error);
+            } finally {
+              switchVieweMode(false);
+            }
+          }}
+        >
           <h2 className="profile-title__btn--submit-title">Submit</h2>
         </div>
         <h2

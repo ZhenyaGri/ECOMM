@@ -20,14 +20,15 @@ import { AboutUs } from './pages/page-about-us/page-about-us';
 import { getToken, removeToken } from './api/authHandlers';
 import { dataReset } from './components/auth/form-handler';
 import { CartProvider } from './context/CartContext';
+import { BasketComponent } from './components/basket/bsket';
 
 function App(): React.ReactNode {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(() => {
     return sessionStorage.getItem('loggedIn') === 'true';
   });
-
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const basketPaths: string[] = ['cart', 'basket'];
 
   useEffect(() => {
     const checkAuth = async (): Promise<void> => {
@@ -73,6 +74,9 @@ function App(): React.ReactNode {
         <Route path="/about-us" element={<AboutUs />} />
         <Route path="/catalog/:slug" element={<ProductPage />} />
         <Route path="/catalog" element={<Catalog />} />
+        {basketPaths.map((path) => (
+          <Route key={path} path={`/${path}`} element={<BasketComponent />} />
+        ))}
         {!isLoggedIn ? (
           <>
             <Route

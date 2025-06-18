@@ -9,7 +9,7 @@ import {
 } from '../auth/data-list';
 import { getUserProfileData } from './core/get-data';
 import { IUserProfileDataValues } from './types/types';
-
+import { createInputObj, updateCustomer } from './core/update-data';
 export const ProfileComponent = (): ReactElement => {
   const [isEditMode, setEditMode] = useState<boolean>(false);
   const [editUserDetailsIndex, setEditUserDetailsIndex] = useState<
@@ -24,13 +24,22 @@ export const ProfileComponent = (): ReactElement => {
     IUserProfileDataValues | undefined
   >();
 
+  const fetchData = async (): Promise<void> => {
+    const profileData = await getUserProfileData();
+    setUserProfileDataValues(profileData);
+  };
+
   useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      const profileData = await getUserProfileData();
-      setUserProfileDataValues(profileData);
-    };
     fetchData();
   }, []);
+
+  const updateData = async (): Promise<void> => {
+    try {
+      await fetchData();
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   return (
     <div className="profile">
@@ -58,7 +67,11 @@ export const ProfileComponent = (): ReactElement => {
                 ) : (
                   <ProfileTitleEditMode
                     switchVieweMode={setEditMode}
-                    inputAttributes={accountFields[0]}
+                    firstNameAttributes={accountFields[0]}
+                    lastNameAttributes={accountFields[1]}
+                    createInputObj={createInputObj}
+                    updateCustomer={updateCustomer}
+                    updateData={updateData}
                   />
                 )}
               </div>
@@ -78,6 +91,9 @@ export const ProfileComponent = (): ReactElement => {
                       <DataEditMode
                         switchVieweMode={() => setEditUserDetailsIndex(null)}
                         inputAttributes={objAttributes}
+                        createInputObj={createInputObj}
+                        updateCustomer={updateCustomer}
+                        updateData={updateData}
                       />
                     )}
                   </li>
@@ -108,6 +124,9 @@ export const ProfileComponent = (): ReactElement => {
                   <DataEditMode
                     switchVieweMode={() => setEditBillingIndex(null)}
                     inputAttributes={objAttributes}
+                    createInputObj={createInputObj}
+                    updateCustomer={updateCustomer}
+                    updateData={updateData}
                   />
                 )}
               </li>
@@ -132,14 +151,15 @@ export const ProfileComponent = (): ReactElement => {
                 {editShippingIndex !== index ? (
                   <DataVieweMode
                     switchEditMode={() => setEditShippingIndex(index)}
-                    title={
-                      userProfileDataValues?.userBillingAddressValue[index]
-                    }
+                    title={userProfileDataValues?.userShippingAddress[index]}
                   />
                 ) : (
                   <DataEditMode
                     switchVieweMode={() => setEditShippingIndex(null)}
                     inputAttributes={objAttributes}
+                    createInputObj={createInputObj}
+                    updateCustomer={updateCustomer}
+                    updateData={updateData}
                   />
                 )}
               </li>
