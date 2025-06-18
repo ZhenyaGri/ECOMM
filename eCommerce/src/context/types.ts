@@ -3,14 +3,18 @@ import { Cart } from '../api/cartType';
 
 export type CartContextType = {
   cart: Cart | null;
+  cartCount: number;
   updateCart: (cart: Cart) => void;
+  refreshCart: () => Promise<void>;
   isLoading: boolean;
   error: string | null;
 };
 
 export const CartContext = createContext<CartContextType>({
   cart: null,
+  cartCount: 0,
   updateCart: () => {},
+  refreshCart: async () => {},
   isLoading: false,
   error: null,
 });

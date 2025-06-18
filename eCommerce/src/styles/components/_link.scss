@@ -140,3 +140,20 @@
   height: 5rem;
   margin: 0 auto;
 }
+
+.link-cart {
+  width: 100%;
+  display: flex;
+  gap: 0.3rem;
+  text-decoration: none;
+  align-items: center;
+  letter-spacing: 1.6px;
+  margin-right: 0;
+
+  &:link .text,
+  &:visited .text {
+    font-family: 'Grot12';
+    font-size: 1.7rem;
+    color: var(--color-black);
+  }
+}

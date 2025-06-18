@@ -13,7 +13,7 @@ import { AddToCartProps } from '../../types/types';
 export const useAddToCart = (productId: string | null): AddToCartProps => {
   const [isLoading, setIsLoading] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
-  const { cart, updateCart } = useCart();
+  const { cart, updateCart, refreshCart } = useCart();
 
   const lineItem = cart?.lineItems?.find(
     (item) => item.productId === productId
@@ -72,6 +72,7 @@ export const useAddToCart = (productId: string | null): AddToCartProps => {
 
       setCartId(updatedCart.id);
       updateCart(updatedCart);
+      await refreshCart();
     } catch (error) {
       console.error('Error updating cart:', error);
     } finally {

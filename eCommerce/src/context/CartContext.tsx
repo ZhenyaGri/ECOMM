@@ -38,8 +38,19 @@ export const CartProvider = ({
     loadCart();
   }, []);
 
+  const cartCount = cart?.lineItems?.length || 0;
+
   return (
-    <CartContext.Provider value={{ cart, updateCart, isLoading, error }}>
+    <CartContext.Provider
+      value={{
+        cart,
+        cartCount,
+        updateCart,
+        refreshCart: loadCart,
+        isLoading,
+        error,
+      }}
+    >
       {children}
     </CartContext.Provider>
   );
