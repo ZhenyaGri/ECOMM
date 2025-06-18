@@ -33,8 +33,3 @@ export const decrease = (
   }
   return newArr;
 };
-
-export const totalSumObj = (
-  lineItems: ProductProjection[],
-  index: number
-) => {};
