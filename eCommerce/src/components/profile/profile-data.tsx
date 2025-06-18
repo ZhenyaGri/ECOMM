@@ -127,7 +127,7 @@ export const DataEditMode = ({
         </div>
         <h2
           className="data-item__btn data-item__btn--cancel"
-          onClick={switchVieweMode}
+          onClick={() => switchVieweMode(false)}
         >
           Cancel
         </h2>
