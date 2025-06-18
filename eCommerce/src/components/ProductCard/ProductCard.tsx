@@ -1,19 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Img } from '../img/img';
 import { Wrapper } from '../wrapper/wrapper';
 import { Product } from '../../types/types';
 import { Heading } from '../heading/heading';
 import { Link } from 'react-router-dom';
 import { Button } from '../button/button';
-import { addLineItem, getCart, removeLineItem } from '../../api/cartService';
-import {
-  getCartId,
-  handleAnonymousUserCart,
-  handleAuthenticatedUserCart,
-  setCartId,
-} from '../../api/cartHandlers';
-import { Cart } from '../../api/cartType';
-import { useCart } from '../../context/useCart';
+import { useAddToCart } from './ProductCardUtils';
 
 export const ProductCard: React.FC<Product> = ({
   id,
@@ -24,68 +16,8 @@ export const ProductCard: React.FC<Product> = ({
   discount,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const { cart, updateCart } = useCart();
-  const [isAddedToCart, setIsAddedToCart] = useState(false);
-
   const hasSecondImage = imageUrls.length > 1;
-  const lineItem = cart?.lineItems?.find((item) => item.productId === id);
-  const lineItemId = lineItem?.id || '';
-
-  useEffect(() => {
-    if (cart?.lineItems) {
-      const itemInCart = cart.lineItems.some((item) => item.productId === id);
-      setIsAddedToCart(itemInCart);
-    }
-  }, [cart, id]);
-
-  const handleAddToCart = async (): Promise<void> => {
-    setIsLoading(true);
-    try {
-      const existingCartId = getCartId();
-
-      let currentCart: Cart;
-
-      if (existingCartId) {
-        try {
-          currentCart = await getCart({ cartId: existingCartId });
-        } catch {
-          currentCart = sessionStorage.getItem('loggedIn')
-            ? await handleAuthenticatedUserCart()
-            : await handleAnonymousUserCart();
-        }
-      } else {
-        currentCart = sessionStorage.getItem('loggedIn')
-          ? await handleAuthenticatedUserCart()
-          : await handleAnonymousUserCart();
-      }
-      let updatedCart: Cart;
-      if (isAddedToCart) {
-        updatedCart = await removeLineItem(
-          currentCart.id,
-          currentCart.version,
-          lineItemId,
-          1
-        );
-        setIsAddedToCart(false);
-      } else {
-        updatedCart = await addLineItem(
-          currentCart.id,
-          currentCart.version,
-          id,
-          1,
-          1
-        );
-        setIsAddedToCart(true);
-      }
-      setCartId(updatedCart.id);
-      updateCart(updatedCart);
-    } catch (error) {
-      console.error('Error updating cart:', error);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { handleAddToCart, isAddedToCart, isLoading } = useAddToCart(id);
 
   return (
     <Wrapper className="wrapper-catalog-card">
