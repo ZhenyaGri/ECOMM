@@ -13,10 +13,9 @@ export const cartQuantityUpdate = async (
   itemObjId: string,
   quantity: number
 ): Promise<void> => {
-  const token = getUserToken('authToken');
+  let token = getUserToken('authToken');
   if (!token) {
-    console.error('No auth token found');
-    return;
+    token = getUserToken('anonymousToken');
   }
   const cartObj = await getCartObj();
   if (cartObj) {
