@@ -13,7 +13,8 @@
   .busket-product-list-title {
     width: 100%;
     text-align: center;
-    @include fontStyle(16px, 400, 1px, #121212d9);
+    cursor: pointer;
+    @include fontStyle(18px, 600, 1px, #121212d9);
   }
 
   .buscket-product-list {
