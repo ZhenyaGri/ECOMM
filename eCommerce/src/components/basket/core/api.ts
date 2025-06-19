@@ -1,5 +1,6 @@
 import { getCartObj } from './get-item-list';
-import { EnvParams } from '../../../api/cartService';
+import { EnvParams, removeLineItem } from '../../../api/cartService';
+
 const getUserToken = (key: string): string | undefined => {
   const localStorageData = localStorage.getItem(key);
   if (localStorageData) {
@@ -41,7 +42,40 @@ export const cartQuantityUpdate = async (
     });
 
     if (!response.ok) console.error('quantity hasn`t been sent');
-    //const updatedCart = await response.json();
-    //console.log('Updated lineItems:', updatedCart.lineItems);
+  }
+};
+
+export const removeItem = async (
+  itemObjId: string,
+  quantity: number | undefined
+): Promise<void> => {
+  const cartObj = await getCartObj();
+  if (cartObj) {
+    if (quantity) {
+      const updatedCart = await removeLineItem(
+        cartObj.id,
+        cartObj.version,
+        itemObjId,
+        quantity
+      );
+      console.log(updatedCart);
+    }
+  }
+};
+
+export const clearItemLine = async (): Promise<void> => {
+  const cartObj = await getCartObj();
+  if (cartObj) {
+    if (cartObj.lineItems) {
+      for (const obj of cartObj.lineItems) {
+        const updatedCart = await removeLineItem(
+          cartObj.id,
+          cartObj.version,
+          obj.id,
+          obj.quantity
+        );
+        cartObj.version = updatedCart.version;
+      }
+    }
   }
 };

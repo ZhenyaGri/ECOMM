@@ -6,7 +6,7 @@ import {
   increase,
   setStartPrice,
 } from './core/calc';
-import { cartQuantityUpdate } from './core/api';
+import { cartQuantityUpdate, clearItemLine, removeItem } from './core/api';
 
 type Props = {
   lineItems: ProductProjection[] | undefined;
@@ -46,7 +46,32 @@ export const BasketProductListComponent = ({
                     </div>
                   </div>
 
-                  <div className="item-product__delete-btn">
+                  <div
+                    className="item-product__delete-btn"
+                    onClick={async () => {
+                      const getRemovedItem = lineItems[index];
+                      if (getRemovedItem) {
+                        try {
+                          if (getRemovedItem.quantity) {
+                            setTimeout(() => {
+                              removeItem(
+                                getRemovedItem.id,
+                                getRemovedItem.quantity
+                              );
+                            }, 0);
+                          }
+
+                          const newLineItemsArr = [...lineItems];
+                          newLineItemsArr.splice(index, 1);
+                          setTimeout(() => {
+                            setLineItems(newLineItemsArr);
+                          }, 200);
+                        } catch {
+                          console.error('data hasnt been sent');
+                        }
+                      }
+                    }}
+                  >
                     <h2 className="item-product-delete-btn-title">Delete</h2>
                   </div>
                 </div>
@@ -94,7 +119,22 @@ export const BasketProductListComponent = ({
         </ul>
       )}
 
-      <div className="basket-delete-items-btn">
+      <div
+        className="basket-delete-items-btn"
+        onClick={async () => {
+          try {
+            const newArr: ProductProjection[] = [];
+            setTimeout(() => {
+              clearItemLine();
+            }, 0);
+            setTimeout(() => {
+              setLineItems(newArr);
+            }, 100);
+          } catch {
+            console.error('item list is empty');
+          }
+        }}
+      >
         <h2 className="basket-delete-items-btn-title">Delete all items</h2>
       </div>
     </div>
