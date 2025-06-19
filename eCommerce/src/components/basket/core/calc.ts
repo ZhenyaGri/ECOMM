@@ -27,7 +27,7 @@ export const increase = (
     newArr[index].totalPrice.centAmount =
       newArr[index].price.value.centAmount * newArr[index].quantity;
   }
-  console.log(newArr);
+  //console.log(newArr);
   return newArr;
 };
 
@@ -51,7 +51,7 @@ export const decrease = (
     newArr[index].totalPrice.centAmount =
       newArr[index].price.value.centAmount * newArr[index].quantity;
   }
-  console.log(newArr);
+  // console.log(newArr);
   return newArr;
 };
 
