@@ -7,6 +7,8 @@ import {
   setStartPrice,
 } from './core/calc';
 import { cartQuantityUpdate, clearItemLine, removeItem } from './core/api';
+import { useContext } from 'react';
+import { CartContext } from '../../context/types';
 
 type Props = {
   lineItems: ProductProjection[] | undefined;
@@ -19,6 +21,8 @@ export const BasketProductListComponent = ({
   lineItems,
   setLineItems,
 }: Props): ReactElement => {
+  const { cart, updateCart, clearCart } = useContext(CartContext);
+
   return (
     <div className="basket-product-list__wrapper">
       {/* main product list */}
@@ -66,6 +70,13 @@ export const BasketProductListComponent = ({
                           setTimeout(() => {
                             setLineItems(newLineItemsArr);
                           }, 200);
+
+                          if (cart) {
+                            updateCart({
+                              ...cart,
+                              lineItems: newLineItemsArr,
+                            });
+                          }
                         } catch {
                           console.error('data hasnt been sent');
                         }
@@ -86,6 +97,9 @@ export const BasketProductListComponent = ({
                       setLineItems(newLineArr);
                       if (itemObj.quantity) {
                         await cartQuantityUpdate(itemObj.id, itemObj.quantity);
+                        if (cart) {
+                          updateCart({ ...cart, lineItems: newLineArr });
+                        }
                       }
                     }}
                   >
@@ -101,6 +115,9 @@ export const BasketProductListComponent = ({
                       await setLineItems(newLineArr);
                       if (itemObj.quantity) {
                         await cartQuantityUpdate(itemObj.id, itemObj.quantity);
+                        if (cart) {
+                          updateCart({ ...cart, lineItems: newLineArr });
+                        }
                       }
                     }}
                   >
@@ -130,6 +147,7 @@ export const BasketProductListComponent = ({
             setTimeout(() => {
               setLineItems(newArr);
             }, 100);
+            clearCart();
           } catch {
             console.error('item list is empty');
           }
