@@ -51,13 +51,7 @@ export const removeItem = async (
   const cartObj = await getCartObj();
   if (cartObj) {
     if (quantity) {
-      const updatedCart = await removeLineItem(
-        cartObj.id,
-        cartObj.version,
-        itemObjId,
-        quantity
-      );
-      console.log(updatedCart);
+      await removeLineItem(cartObj.id, cartObj.version, itemObjId, quantity);
     }
   }
 };
