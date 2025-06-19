@@ -4,10 +4,19 @@ import { Cart } from '../../../api/cartType';
 
 export const getCartObj = async (): Promise<Cart | undefined> => {
   const customerId = localStorage.getItem('userId');
-  if (!customerId) throw new Error('Customer ID not found');
-  const cartObj = await getCart({ customerId });
-  console.log(cartObj);
-  return cartObj;
+  const cartId = localStorage.getItem('cartId');
+  if (cartId) {
+    const cartObj = await getCart({ cartId });
+    console.log(cartObj);
+    return cartObj;
+  } else if (customerId) {
+    const cartObj = await getCart({ customerId });
+    console.log(cartObj);
+    return cartObj;
+  } else {
+    console.warn('No cartId or customerId found');
+    return undefined;
+  }
 };
 
 export const getCurrentLineItems = async (): Promise<
