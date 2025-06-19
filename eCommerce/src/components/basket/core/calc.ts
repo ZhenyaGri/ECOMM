@@ -1,3 +1,4 @@
+import { Cart } from '../../../api/cartType';
 import { ProductProjection } from '../../../api/productsType';
 import { ITotalPriceObj } from './type';
 export const setStartPrice = (
@@ -26,7 +27,7 @@ export const increase = (
     newArr[index].totalPrice.centAmount =
       newArr[index].price.value.centAmount * newArr[index].quantity;
   }
-  console.log(newArr);
+  //console.log(newArr);
   return newArr;
 };
 
@@ -50,7 +51,7 @@ export const decrease = (
     newArr[index].totalPrice.centAmount =
       newArr[index].price.value.centAmount * newArr[index].quantity;
   }
-  console.log(newArr);
+  // console.log(newArr);
   return newArr;
 };
 
@@ -77,7 +78,8 @@ export const getTotalItemPrice = (
 };
 
 export const calculationTotal = (
-  itemLine: ProductProjection[]
+  itemLine: ProductProjection[],
+  cart?: Cart
 ): ITotalPriceObj => {
   const totalPriceObj: ITotalPriceObj = {
     subtotal: 0,
@@ -98,6 +100,15 @@ export const calculationTotal = (
   totalPriceObj.salesTax = (
     parseFloat(totalPriceObj.total) - parseFloat(totalPriceObj.subtotal)
   ).toFixed(2);
+
+  if (!cart || !cart.discountCodes?.[0]) return totalPriceObj;
+
+  if (cart.discountCodes?.[0].state === 'MatchesCart') {
+    if (cart.discountOnTotalPrice) {
+      totalPriceObj.discount =
+        cart.discountOnTotalPrice.discountedAmount.centAmount / 100;
+    }
+  }
 
   return totalPriceObj;
 };

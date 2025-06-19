@@ -12,7 +12,6 @@ export const BasketComponent = (): ReactElement => {
     const fetchData = async (): Promise<void> => {
       const currLineItem = await getCurrentLineItems();
       if (currLineItem) {
-        console.log(currLineItem);
         setLineItems(currLineItem);
       }
     };

@@ -7,6 +7,7 @@ export type CartContextType = {
   updateCart: (cart: Cart) => void;
   refreshCart: () => Promise<void>;
   clearCart: () => void;
+  loadCart: () => void;
   isLoading: boolean;
   error: string | null;
 };
@@ -17,6 +18,7 @@ export const CartContext = createContext<CartContextType>({
   updateCart: () => {},
   refreshCart: async () => {},
   clearCart: () => {},
+  loadCart: () => {},
   isLoading: false,
   error: null,
 });

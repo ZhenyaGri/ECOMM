@@ -52,6 +52,7 @@ export const CartProvider = ({
         updateCart,
         refreshCart: loadCart,
         clearCart,
+        loadCart,
         isLoading,
         error,
       }}
