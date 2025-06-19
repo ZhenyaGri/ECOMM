@@ -7,11 +7,9 @@ export const getCartObj = async (): Promise<Cart | undefined> => {
   const cartId = localStorage.getItem('cartId');
   if (cartId) {
     const cartObj = await getCart({ cartId });
-    console.log(cartObj);
     return cartObj;
   } else if (customerId) {
     const cartObj = await getCart({ customerId });
-    console.log(cartObj);
     return cartObj;
   } else {
     console.warn('No cartId or customerId found');
