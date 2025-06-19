@@ -12,7 +12,7 @@ export const setStartPrice = (
   }
 };
 
-export const increase =  (
+export const increase = (
   itemLine: ProductProjection[],
   index: number
 ): ProductProjection[] => {
@@ -24,7 +24,7 @@ export const increase =  (
   ) {
     newArr[index].quantity += 1;
     newArr[index].totalPrice.centAmount =
-    newArr[index].price.value.centAmount * newArr[index].quantity;
+      newArr[index].price.value.centAmount * newArr[index].quantity;
   }
   console.log(newArr);
   return newArr;

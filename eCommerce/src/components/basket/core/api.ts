@@ -41,7 +41,7 @@ export const cartQuantityUpdate = async (
     });
 
     if (!response.ok) console.error('quantity hasn`t been sent');
-    const updatedCart = await response.json();
-    console.log('Updated lineItems:', updatedCart.lineItems);
+    //const updatedCart = await response.json();
+    //console.log('Updated lineItems:', updatedCart.lineItems);
   }
 };

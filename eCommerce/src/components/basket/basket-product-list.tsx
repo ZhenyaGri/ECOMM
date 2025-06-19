@@ -56,11 +56,11 @@ export const BasketProductListComponent = ({
                 <div className="item-quantity__wrapper">
                   <div
                     className="itme-quantity-btn__reduce"
-                    onClick={async() => {
+                    onClick={async () => {
                       const newLineArr = decrease(lineItems, index);
                       setLineItems(newLineArr);
                       if (itemObj.quantity) {
-                        await cartQuantityUpdate(itemObj.id, itemObj.quantity)
+                        await cartQuantityUpdate(itemObj.id, itemObj.quantity);
                       }
                     }}
                   >
@@ -71,11 +71,11 @@ export const BasketProductListComponent = ({
                   </div>
                   <div
                     className="itme-quantity-btn__increase "
-                    onClick={ async () => {
+                    onClick={async () => {
                       const newLineArr = await increase(lineItems, index);
                       await setLineItems(newLineArr);
-                        if (itemObj.quantity) {
-                        await cartQuantityUpdate(itemObj.id, itemObj.quantity)
+                      if (itemObj.quantity) {
+                        await cartQuantityUpdate(itemObj.id, itemObj.quantity);
                       }
                     }}
                   >
