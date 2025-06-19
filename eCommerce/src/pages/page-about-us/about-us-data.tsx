@@ -1,6 +1,5 @@
-import { lorem } from './lorem-ipsum';
 import EvgeniyaPhoto from '../../assets/img/about-us-evgeniya.jpg';
-import templatePhoto from '../../assets/img/house.jpg';
+import AndreiPhoto from '../../assets/img/about-us-andrei.jpg';
 import OlgaPhoto from '../../assets/img/about-us-olga.jpg';
 
 const Evgeniya = {
@@ -18,8 +17,8 @@ const Andrei = {
   link: 'https://github.com/rabbitdrew',
   githubName: 'rabbitdrew',
   role: 'Developer',
-  imgSrc: `${templatePhoto}`,
-  description: lorem,
+  imgSrc: `${AndreiPhoto}`,
+  description: `I am highly interested in web development, including building applications, services, and related technologies. I am eager to expand my skills in these areas and grow as a developer. Currently, I work as a sales manager at a private company, where I handle customer relations, purchasing, product delivery coordination, and commodity trading. My background gives me strong organizational and multitasking skills, which I’m excited to apply to my development career.`,
   tags: ['Login Page', 'Registration Page', 'User Profile Page', 'Basket Page'],
 };
 
