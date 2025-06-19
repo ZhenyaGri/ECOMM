@@ -1,6 +1,6 @@
-import { getCart } from '../../../api/cartService';
 import { ProductProjection } from '../../../api/productsType';
 import { Cart } from '../../../api/cartType';
+import { getCart } from '../../../api/cartService';
 
 export const getCartObj = async (): Promise<Cart | undefined> => {
   const customerId = localStorage.getItem('userId');

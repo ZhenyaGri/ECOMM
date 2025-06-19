@@ -26,7 +26,6 @@
     }
 
     .promo_input {
-      width: 100px;
       height: 30px;
       padding: 5px;
       @include fontStyle(14px, 600, 1px, #121212d9);
@@ -69,4 +68,8 @@
 
     gap: 20px;
   }
+}
+
+.error-message {
+  color: rgb(212, 0, 0);
 }

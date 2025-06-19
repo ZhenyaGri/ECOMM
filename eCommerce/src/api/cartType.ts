@@ -17,6 +17,27 @@ export type Cart = {
   vatId?: string;
   addresses?: string;
   lineItems?: ProductProjection[];
+  discountCodes?: CartDiscountCode[];
+  discountOnTotalPrice?: discountedAmount;
+};
+
+type discountedAmount = {
+  discountedAmount: {
+    centAmount: number;
+    currencyCode: string;
+    fractionDigits: number;
+    type: string;
+  };
+};
+
+type DiscountCodeReference = {
+  typeId: 'discount-code';
+  id: string;
+};
+
+type CartDiscountCode = {
+  discountCode: DiscountCodeReference;
+  state: string;
 };
 
 export type CartDraft = {

@@ -1,5 +1,6 @@
 import { getToken } from './authHandlers';
 import { Cart, CartDraft } from './cartType';
+import { parseError } from './errorHandler';
 import { BodyRequest, ImportMetaEnv } from './type';
 
 export const EnvParams: ImportMetaEnv = {
@@ -37,7 +38,6 @@ export async function sendHTTPRequest<T>(
 
   if (!response.ok) {
     const errorData = await response.json();
-    console.error('API Error:', errorData);
     throw errorData;
   }
 
@@ -168,4 +168,78 @@ export async function removeLineItem(
     ],
   };
   return sendHTTPRequest<Cart>(`/me/carts/${cartId}`, 'POST', body);
+}
+
+export async function applyDiscountCode(
+  cartId: string,
+  cartVersion: number,
+  discountCode: string
+): Promise<Cart> {
+  if (!discountCode.trim()) {
+    throw new Error('Please enter a promo code');
+  }
+
+  const body = {
+    version: cartVersion,
+    actions: [
+      {
+        action: 'addDiscountCode',
+        code: discountCode.trim(),
+      },
+    ],
+  };
+
+  try {
+    const response = await sendHTTPRequest<Cart>(
+      `/me/carts/${cartId}`,
+      'POST',
+      body
+    );
+    const appliedCode = (await getCart({ cartId: cartId })).discountCodes?.[0];
+    if (!appliedCode || appliedCode.state !== 'MatchesCart') {
+      throw new Error('Discount code is not valid for this cart');
+    }
+
+    return response;
+  } catch (error) {
+    const errorDiscount = parseError(error);
+
+    throw new Error(errorDiscount.message || 'Failed to apply promo code.');
+  }
+}
+
+export async function removeDiscountCode(
+  cartId: string,
+  cartVersion: number,
+  discountCode: string
+): Promise<Cart> {
+  if (!discountCode.trim()) {
+    throw new Error('Please enter a promo code');
+  }
+
+  const body = {
+    version: cartVersion,
+    actions: [
+      {
+        action: 'removeDiscountCode',
+        discountCode: {
+          typeId: 'discount-code',
+          id: discountCode,
+        },
+      },
+    ],
+  };
+
+  try {
+    const response = await sendHTTPRequest<Cart>(
+      `/me/carts/${cartId}`,
+      'POST',
+      body
+    );
+
+    return response;
+  } catch (error) {
+    const errorDiscount = parseError(error);
+    throw new Error(errorDiscount.message || 'Failed to apply promo code.');
+  }
 }
