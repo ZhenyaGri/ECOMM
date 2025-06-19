@@ -8,7 +8,6 @@ export const BasketComponent = (): ReactElement => {
   const [lineItems, setLineItems] = useState<ProductProjection[] | undefined>(
     undefined
   );
-
   useEffect(() => {
     const fetchData = async (): Promise<void> => {
       const currLineItem = await getCurrentLineItems();
@@ -50,7 +49,6 @@ export const BasketComponent = (): ReactElement => {
         lineItems={lineItems}
         setLineItems={setLineItems}
       />
-
       {/*detales*/}
       <BasketTotalDetales lineItems={lineItems} />
     </section>

@@ -6,6 +6,7 @@ import {
   increase,
   setStartPrice,
 } from './core/calc';
+import { cartQuantityUpdate } from './core/api';
 
 type Props = {
   lineItems: ProductProjection[] | undefined;
@@ -55,9 +56,12 @@ export const BasketProductListComponent = ({
                 <div className="item-quantity__wrapper">
                   <div
                     className="itme-quantity-btn__reduce"
-                    onClick={() => {
+                    onClick={async() => {
                       const newLineArr = decrease(lineItems, index);
                       setLineItems(newLineArr);
+                      if (itemObj.quantity) {
+                        await cartQuantityUpdate(itemObj.id, itemObj.quantity)
+                      }
                     }}
                   >
                     <h2 className="reduce"> - </h2>
@@ -67,9 +71,12 @@ export const BasketProductListComponent = ({
                   </div>
                   <div
                     className="itme-quantity-btn__increase "
-                    onClick={() => {
-                      const newLineArr = increase(lineItems, index);
-                      setLineItems(newLineArr);
+                    onClick={ async () => {
+                      const newLineArr = await increase(lineItems, index);
+                      await setLineItems(newLineArr);
+                        if (itemObj.quantity) {
+                        await cartQuantityUpdate(itemObj.id, itemObj.quantity)
+                      }
                     }}
                   >
                     <h2 className="increase"> + </h2>
