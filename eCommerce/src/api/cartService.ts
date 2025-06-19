@@ -2,7 +2,7 @@ import { getToken } from './authHandlers';
 import { Cart, CartDraft } from './cartType';
 import { BodyRequest, ImportMetaEnv } from './type';
 
-const EnvParams: ImportMetaEnv = {
+export const EnvParams: ImportMetaEnv = {
   VITE_CTP_PROJECT_KEY: import.meta.env.VITE_CTP_PROJECT_KEY,
   VITE_CTP_CLIENT_ID: import.meta.env.VITE_CTP_CLIENT_ID,
   VITE_CTP_CLIENT_SECRET: import.meta.env.VITE_CTP_CLIENT_SECRET,
