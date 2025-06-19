@@ -94,3 +94,21 @@
     align-items: center;
   }
 }
+
+.basket-link {
+  text-decoration: none;
+}
+
+.basket-link .busket-product-list-title{
+  transition: all 0.3s ease-in-out;
+}
+
+.basket-link:link .busket-product-list-title,
+.basket-link:visited .busket-product-list-title {
+  color: var(--color-black);
+}
+
+.basket-link:hover .busket-product-list-title,
+.basket-link:active .busket-product-list-title {
+  color: var(--color-breadcrumbs);
+}
