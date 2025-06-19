@@ -7,6 +7,7 @@ import {
   setStartPrice,
 } from './core/calc';
 import { cartQuantityUpdate, clearItemLine, removeItem } from './core/api';
+import { Link } from 'react-router-dom';
 
 type Props = {
   lineItems: ProductProjection[] | undefined;
@@ -23,10 +24,12 @@ export const BasketProductListComponent = ({
     <div className="basket-product-list__wrapper">
       {/* main product list */}
       {lineItems === undefined || lineItems.length === 0 ? (
-        <h2 className="busket-product-list-title">
-          Your cart is empty. <br />
-          Start shopping to add items!
-        </h2>
+        <Link to="/catalog" className="basket-link">
+          <h2 className="busket-product-list-title">
+            Your cart is empty. <br />
+            Start shopping to add items!
+          </h2>
+        </Link>
       ) : (
         <ul className="buscket-product-list">
           {lineItems.map((itemObj, index) => {
