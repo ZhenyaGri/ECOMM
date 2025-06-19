@@ -1,8 +1,24 @@
 import './style/basket.scss';
-import { ReactElement } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { BasketProductListComponent } from './basket-product-list';
 import { BasketTotalDetales } from './basket-total-detales';
+import { getCurrentLineItems } from './core/get-item-list';
+import { ProductProjection } from '../../api/productsType';
 export const BasketComponent = (): ReactElement => {
+  const [lineItems, setLineItems] = useState<ProductProjection[] | undefined>(
+    undefined
+  );
+  useEffect(() => {
+    const fetchData = async (): Promise<void> => {
+      const currLineItem = await getCurrentLineItems();
+      if (currLineItem) {
+        console.log(currLineItem);
+        setLineItems(currLineItem);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
     <section className="basket">
       <h2 className="basket-title">Shopping Cart</h2>
@@ -29,10 +45,12 @@ export const BasketComponent = (): ReactElement => {
       </div>
 
       {/*product-list*/}
-      <BasketProductListComponent />
-
+      <BasketProductListComponent
+        lineItems={lineItems}
+        setLineItems={setLineItems}
+      />
       {/*detales*/}
-      <BasketTotalDetales />
+      <BasketTotalDetales lineItems={lineItems} />
     </section>
   );
 };

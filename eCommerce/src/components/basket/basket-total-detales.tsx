@@ -1,6 +1,10 @@
 import { ReactElement } from 'react';
-
-export const BasketTotalDetales = (): ReactElement => {
+import { ProductProjection } from '../../api/productsType';
+import { calculationTotal } from './core/calc';
+type Props = {
+  lineItems: ProductProjection[] | undefined;
+};
+export const BasketTotalDetales = ({ lineItems }: Props): ReactElement => {
   return (
     <div className="basket-total-detales__wrapper">
       {/*detales-promo*/}
@@ -20,22 +24,31 @@ export const BasketTotalDetales = (): ReactElement => {
       <ul className="total-detales-list">
         <li className="detales-list-item subtotla">
           <h2 className="detales-list-item-title">Subtotal</h2>
-          <h2 className="detales-list-item-prce">0.00</h2>
+          <h2 className="detales-list-item-prce">
+            {lineItems ? calculationTotal(lineItems).subtotal : null}
+          </h2>
         </li>
 
         <li className="detales-list-item sales-tax">
           <h2 className="detales-list-item-title">Sales Tax</h2>
-          <h2 className="detales-list-item-prce">0.00</h2>
+          <h2 className="detales-list-item-prce">
+            {' '}
+            {lineItems ? calculationTotal(lineItems).salesTax : null}
+          </h2>
         </li>
 
         <li className="detales-list-item discont">
           <h2 className="detales-list-item-title">Discount</h2>
-          <h2 className="detales-list-item-prce">0%</h2>
+          <h2 className="detales-list-item-prce">
+            {lineItems ? calculationTotal(lineItems).discount : null}
+          </h2>
         </li>
 
         <li className="detales-list-item total">
           <h2 className="detales-list-item-title">Total</h2>
-          <h2 className="detales-list-item-prce">0.00</h2>
+          <h2 className="detales-list-item-prce">
+            {lineItems ? calculationTotal(lineItems).total : null}
+          </h2>
         </li>
       </ul>
     </div>

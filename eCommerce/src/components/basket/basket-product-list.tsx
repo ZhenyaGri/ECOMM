@@ -1,24 +1,24 @@
-import { ReactElement, useEffect, useState } from 'react';
-import { getCurrentLineItems } from './core/get-item-list';
+import { ReactElement } from 'react';
 import { ProductProjection } from '../../api/productsType';
-import { decrease, increase } from './core/calc';
+import {
+  decrease,
+  getTotalItemPrice,
+  increase,
+  setStartPrice,
+} from './core/calc';
+import { cartQuantityUpdate } from './core/api';
 
-export const BasketProductListComponent = (): ReactElement => {
-  const [lineItems, setLineItems] = useState<ProductProjection[] | undefined>(
-    undefined
-  );
+type Props = {
+  lineItems: ProductProjection[] | undefined;
+  setLineItems: React.Dispatch<
+    React.SetStateAction<ProductProjection[] | undefined>
+  >;
+};
 
-  useEffect(() => {
-    const fetchData = async (): Promise<void> => {
-      const currLineItem = await getCurrentLineItems();
-      if (currLineItem) {
-        console.log(currLineItem);
-        setLineItems(currLineItem);
-      }
-    };
-    fetchData();
-  }, []);
-
+export const BasketProductListComponent = ({
+  lineItems,
+  setLineItems,
+}: Props): ReactElement => {
   return (
     <div className="basket-product-list__wrapper">
       {/* main product list */}
@@ -51,19 +51,17 @@ export const BasketProductListComponent = (): ReactElement => {
                   </div>
                 </div>
 
-                <h2 className="price-title">
-                  {' '}
-                  {itemObj.price?.value.centAmount
-                    ? (itemObj.price?.value.centAmount / 100).toFixed(2)
-                    : 'there is no any price'}
-                </h2>
+                <h2 className="price-title">{setStartPrice(itemObj)}</h2>
 
                 <div className="item-quantity__wrapper">
                   <div
                     className="itme-quantity-btn__reduce"
-                    onClick={() => {
+                    onClick={async () => {
                       const newLineArr = decrease(lineItems, index);
                       setLineItems(newLineArr);
+                      if (itemObj.quantity) {
+                        await cartQuantityUpdate(itemObj.id, itemObj.quantity);
+                      }
                     }}
                   >
                     <h2 className="reduce"> - </h2>
@@ -73,9 +71,12 @@ export const BasketProductListComponent = (): ReactElement => {
                   </div>
                   <div
                     className="itme-quantity-btn__increase "
-                    onClick={() => {
-                      const newLineArr = increase(lineItems, index);
-                      setLineItems(newLineArr);
+                    onClick={async () => {
+                      const newLineArr = await increase(lineItems, index);
+                      await setLineItems(newLineArr);
+                      if (itemObj.quantity) {
+                        await cartQuantityUpdate(itemObj.id, itemObj.quantity);
+                      }
                     }}
                   >
                     <h2 className="increase"> + </h2>
@@ -84,13 +85,7 @@ export const BasketProductListComponent = (): ReactElement => {
 
                 <div className="item-totla-price__wrapper">
                   <h2 className="item-totla-price">
-                    {' '}
-                    {itemObj.price?.value.centAmount && itemObj.quantity
-                      ? (
-                          (itemObj.price?.value.centAmount * itemObj.quantity) /
-                          100
-                        ).toFixed(2)
-                      : 'there is no any price'}
+                    {getTotalItemPrice(itemObj)}
                   </h2>
                 </div>
               </li>
