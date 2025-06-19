@@ -20,6 +20,7 @@ import {
 import { parseError } from '../../api/errorHandler';
 import { useRefs } from './refs';
 import { handleAuthenticatedUserCart } from '../../api/cartHandlers';
+import { useCart } from '../../context/useCart';
 
 type CreateAccountProps = {
   onCreateAccount: () => void;
@@ -39,6 +40,7 @@ const CreateUserComponent = ({
 
   const [isBillgAddreasDef, setBillAddreasAsDef] = useState(false);
   const [isShipAddreasDef, setShipAddreasAsDef] = useState(false);
+  const { updateCart } = useCart();
 
   const onSigInClick = async (): Promise<void> => {
     setShippingAddress(authUserData.newUser, isShippingAddressVisible);
@@ -59,7 +61,8 @@ const CreateUserComponent = ({
       if (authToken) {
         setToken(authToken, 'authToken');
       }
-      handleAuthenticatedUserCart();
+      const authenticatedCart = await handleAuthenticatedUserCart();
+      updateCart(authenticatedCart);
     } catch (error) {
       const errorMsg = parseError(error);
       setSignupError(errorMsg.message);

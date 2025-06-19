@@ -34,13 +34,28 @@ export const CartProvider = ({
     }
   };
 
+  const clearCart = (): void => {
+    setCart(null);
+  };
+
   useEffect(() => {
     loadCart();
   }, []);
 
+  const cartCount = cart?.lineItems?.length || 0;
+
   return (
     <CartContext.Provider
-      value={{ cart, updateCart, loadCart, isLoading, error }}
+      value={{
+        cart,
+        cartCount,
+        updateCart,
+        refreshCart: loadCart,
+        clearCart,
+        loadCart,
+        isLoading,
+        error,
+      }}
     >
       {children}
     </CartContext.Provider>
