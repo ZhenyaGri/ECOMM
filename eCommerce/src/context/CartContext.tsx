@@ -34,6 +34,10 @@ export const CartProvider = ({
     }
   };
 
+  const clearCart = (): void => {
+    setCart(null);
+  };
+
   useEffect(() => {
     loadCart();
   }, []);
@@ -47,6 +51,7 @@ export const CartProvider = ({
         cartCount,
         updateCart,
         refreshCart: loadCart,
+        clearCart,
         isLoading,
         error,
       }}

@@ -10,6 +10,7 @@ import iconSearch from '../../assets/icons/icon-search.svg';
 import iconBag from '../../assets/icons/icon-bag.svg';
 import iconProfile from '../../assets/icons/icon-profile.svg';
 import { CartContext } from '../../context/types';
+import { useCart } from '../../context/useCart';
 
 type HeaderProps = {
   isLoggedIn: boolean;
@@ -25,6 +26,7 @@ export const Header: React.FC<HeaderProps> = ({
   onLogOut,
 }) => {
   const { cartCount } = useContext(CartContext);
+  const { clearCart } = useCart();
 
   return (
     <header className="header">
@@ -62,7 +64,10 @@ export const Header: React.FC<HeaderProps> = ({
         <Button
           className={`btn-light ${isLoggedIn ? '' : 'hidden'}`}
           type="button"
-          onClick={onLogOut}
+          onClick={() => {
+            onLogOut();
+            clearCart();
+          }}
         >
           Log Out
         </Button>

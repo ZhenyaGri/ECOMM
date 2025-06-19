@@ -11,6 +11,7 @@ import { parseError } from '../../api/errorHandler';
 import { authUserData } from './data-list';
 import { useRefs } from './refs';
 import { handleAuthenticatedUserCart } from '../../api/cartHandlers';
+import { useCart } from '../../context/useCart';
 
 type logInProps = {
   onSignUp: () => void;
@@ -25,6 +26,7 @@ const LogInComponent = ({
 }: logInProps): ReactElement => {
   const [loginError, setLoginError] = useState('');
   const { warnRefLogIn } = useRefs();
+  const { updateCart } = useCart();
   const onLoginClick = async (): Promise<void> => {
     const userData = getUserDataObj();
     showErrorMessages(warnRefLogIn);
@@ -36,7 +38,8 @@ const LogInComponent = ({
         if (authToken) {
           setToken(authToken, 'authToken');
         }
-        handleAuthenticatedUserCart();
+        const authenticatedCart = await handleAuthenticatedUserCart();
+        updateCart(authenticatedCart);
       }
       setLoginError('');
     } catch (error) {
