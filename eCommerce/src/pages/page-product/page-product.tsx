@@ -1,0 +1,149 @@
+import React, { useEffect, useState } from 'react';
+import { useLocation, useParams, Link } from 'react-router-dom';
+import { Section } from '../../components/section/section';
+import { Wrapper } from '../../components/wrapper/wrapper';
+import { Heading } from '../../components/heading/heading';
+import { Text } from '../../components/text/text';
+import { Button } from '../../components/button/button';
+import testImg from '../../assets/img/table-and-lamp.jpg';
+import testImg2 from '../../assets/img/modular-sofa.jpg';
+import { ImgSlider } from '../../components/slider/slider';
+import { getProductById, getProductBySlug } from '../../api/productsService';
+import { ProductProjection, ProductVariant } from '../../api/productsType';
+import { useAddToCart } from '../../components/ProductCard/ProductCardUtils';
+
+export const ProductPage = (): React.ReactNode => {
+  const location = useLocation();
+  const productFromState = location.state?.product;
+  const { slug } = useParams<{ slug: string }>();
+
+  const [product, setProduct] = useState<ProductProjection | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [productId, setProductId] = useState<string | null>(null);
+
+  useEffect(() => {
+    async function fetchProductDetails(): Promise<void> {
+      setLoading(true);
+      setError(null);
+
+      try {
+        let fetchedProduct: ProductProjection | null = null;
+        if (productFromState?.id) {
+          fetchedProduct = await getProductById(productFromState.id);
+          if (!fetchedProduct) {
+            setError('Product ID missing');
+          }
+        } else if (slug) {
+          fetchedProduct = await getProductBySlug(slug);
+          if (!fetchedProduct) {
+            setError('Product Slug missing');
+          }
+        }
+        setProduct(fetchedProduct);
+        setProductId(fetchedProduct?.id || null);
+      } catch (err) {
+        setError('Failed to load product details');
+        console.error(err);
+        setProductId(null);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchProductDetails();
+  }, [slug, productFromState]);
+
+  if (loading) {
+    return <p>Loading product details...</p>;
+  }
+
+  if (error) {
+    return <p>{error}</p>;
+  }
+
+  if (!product) {
+    return <p>Oops! Product not found</p>;
+  }
+
+  const variant: ProductVariant =
+    product.masterVariant || product.variants?.[0];
+  const images = variant?.images?.map((img) => img.url) || [];
+  const price = variant?.prices?.[0]?.value?.centAmount
+    ? variant.prices[0].value.centAmount / 100
+    : 0;
+  const annotation = product.description?.en || '';
+  let discount = 0;
+
+  if (variant.prices?.[0]?.discounted?.value?.centAmount) {
+    discount = variant.prices[0].discounted.value.centAmount / 100;
+  }
+
+  return (
+    <Section className="section-product">
+      <Wrapper className="wrapper-breadcrumbs">
+        <Link to="/" className="link-breadcrumbs">
+          <Text className="breadcrumbs" content="Main" />
+        </Link>
+        <Text className="breadcrumbs" content=">" />
+        <Link to="/catalog" className="link-breadcrumbs">
+          <Text className="breadcrumbs" content="Shop" />
+        </Link>
+        <Text className="breadcrumbs" content=">" />
+        <Text
+          className="breadcrumbs breadcrumbs-active"
+          content={product.name?.en}
+        />
+      </Wrapper>
+      <Wrapper className="wrapper-product">
+        <ImgSlider imgUrls={images.length > 0 ? images : [testImg, testImg2]} />
+        <Wrapper className="wrapper-product-info">
+          <h1 className="heading heading-primary">{product.name?.en}</h1>
+          <Wrapper className="wrapper-prices">
+            {discount && discount !== 0 ? (
+              <Text
+                className="discount-price"
+                content={`€ ${discount.toFixed(2)}`}
+              />
+            ) : null}
+            <Text className="price-text" content={`€ ${price.toFixed(2)}`} />
+          </Wrapper>
+          {productId && <AddToCartButton productId={productId} />}
+          {variant.attributes?.slice(2).map((attr) => (
+            <Wrapper key={attr.name} className="wrapper-product-text">
+              <Heading
+                tag="h2"
+                className="heading-product"
+                content={`${attr.name}`}
+              />
+              <Text className="product-text" content={`${attr.value}`} />
+            </Wrapper>
+          ))}
+          <Wrapper className="wrapper-product-text">
+            <Text className="product-text" content={`${annotation}`} />
+          </Wrapper>
+        </Wrapper>
+      </Wrapper>
+    </Section>
+  );
+};
+
+const AddToCartButton: React.FC<{ productId: string }> = ({ productId }) => {
+  const { handleAddToCart, isAddedToCart, isLoading } = useAddToCart(productId);
+  return (
+    <Wrapper className="wrapper-add-button">
+      <Button
+        type="button"
+        className={`btn-dark btn-product ${isAddedToCart ? 'btn-in-cart' : ''}`}
+        onClick={handleAddToCart}
+        disabled={isLoading}
+      >
+        {isAddedToCart
+          ? 'Remove from Cart'
+          : isLoading
+            ? 'Adding...'
+            : 'Add to Cart'}
+      </Button>
+    </Wrapper>
+  );
+};

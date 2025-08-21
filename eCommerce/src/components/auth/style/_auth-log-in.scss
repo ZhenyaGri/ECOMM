@@ -1,0 +1,60 @@
+@use './mixins' as *;
+@use './auth_mixin' as *;
+.auth-log-in__list-wrapper {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+
+  .auth-log-in__input-list {
+    width: 100%; //!
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    @include input-item-style(
+      '.auth-log-in__input-item',
+      '.auth-log-in__input'
+    );
+  }
+  .auth-log-in__forgot-password-btn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    .auth-log-in__forgot-password {
+      position: relative;
+      cursor: pointer;
+      @include fontStyle(14px, 400, 1px, #121212d9);
+      @include underlineOnHover;
+    }
+  }
+}
+
+.auth-log-in__btn-wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  @include btn-base('.auth-log-in__btn', '.auth-log-in__btn-title');
+  .auth-log-in__to-create-account-btn {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .auth-log-in__to-create-account {
+      position: relative;
+      cursor: pointer;
+      @include fontStyle(14px, 400, 1px, #121212d9);
+      @include underlineOnHover;
+    }
+  }
+}
