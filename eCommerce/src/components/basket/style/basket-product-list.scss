@@ -1,0 +1,114 @@
+@use '../../auth/style/mixins' as *;
+
+.basket-product-list__wrapper {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 20px;
+
+  .busket-product-list-title {
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    @include fontStyle(18px, 600, 1px, #121212d9);
+  }
+
+  .buscket-product-list {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .buscket-product-item {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+  }
+
+  .item-product__wrapper {
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: start;
+    gap: 5px;
+
+    .item-produc-info {
+      width: 100%;
+      display: flex;
+      gap: 10px;
+
+      .img {
+        aspect-ratio: 1/1;
+        width: 45px;
+        height: 45px;
+      }
+
+      .item-title__wrapper {
+        display: flex;
+        flex: 1;
+
+        .itme-title {
+          white-space: normal;
+          word-break: break-word;
+          @include fontStyle(16px, 400, 1px, #121212d9);
+        }
+      }
+    }
+
+    .item-product__delete-btn {
+      cursor: pointer;
+
+      .item-product-delete-btn-title {
+        @include fontStyle(14px, 400, 1px, #121212d9);
+      }
+    }
+  }
+
+  .price-title {
+    width: 20%;
+    text-align: center;
+    @include fontStyle(16px, 600, 1px, #121212d9);
+  }
+
+  .item-quantity__wrapper {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .item-totla-price__wrapper {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.basket-link {
+  text-decoration: none;
+}
+
+.basket-link .busket-product-list-title {
+  transition: all 0.3s ease-in-out;
+}
+
+.basket-link:link .busket-product-list-title,
+.basket-link:visited .busket-product-list-title {
+  color: var(--color-black);
+}
+
+.basket-link:hover .busket-product-list-title,
+.basket-link:active .busket-product-list-title {
+  color: var(--color-breadcrumbs);
+}

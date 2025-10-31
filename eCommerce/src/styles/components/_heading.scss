@@ -1,0 +1,75 @@
+.heading {
+  font-weight: 400;
+  letter-spacing: 0.1rem;
+  color: var(--color-black);
+  text-align: center;
+}
+
+h1.heading {
+  font-size: clamp(4rem, 4vw + 2rem, 5rem);
+  padding: 8rem 0;
+  padding-top: 4rem;
+}
+
+.heading-secondary {
+  font-size: 4rem;
+  margin-bottom: 0.5rem;
+
+  @media screen and (max-width: 855px) {
+    font-size: 3rem;
+  }
+}
+
+.heading-tertiary {
+  font-size: 3rem;
+
+  @media screen and (max-width: 855px) {
+    font-size: 2.4rem;
+  }
+}
+
+.heading-quaternary {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+
+  @media screen and (max-width: 855px) {
+    font-size: 1.6rem;
+    text-align: start;
+  }
+}
+
+.heading-light {
+  color: var(--color-background);
+}
+
+.heading-shop {
+  font-size: 3.5rem;
+  color: var(--color-background);
+  position: absolute;
+  left: 50%;
+  top: 4rem;
+  transform: translateX(-50%);
+
+  @media screen and (max-width: 855px) {
+    font-size: 2.8rem;
+  }
+}
+
+.heading-product {
+  font-family: 'Grot12', sans-serif;
+  text-transform: uppercase;
+  margin-top: 1.5rem;
+}
+
+.heading-person {
+  font-size: 2.3rem;
+  margin-bottom: 1.7rem;
+}
+
+.product-card-discount ~ .product-card-price {
+  text-decoration: line-through;
+}
+
+.product-card-discount {
+  color: var(--color-red);
+}

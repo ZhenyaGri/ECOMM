@@ -1,0 +1,99 @@
+.text {
+  font-size: 1.6rem;
+  text-align: center;
+
+  @media screen and (max-width: 650px) {
+    font-size: 1.4rem;
+  }
+}
+
+.collection-text {
+  margin-top: 1.5rem;
+
+  @media screen and (max-width: 650px) {
+    font-size: 1.4rem;
+  }
+}
+
+.accent-text {
+  font-family: 'Grot12', sans-serif;
+  font-size: 2.6rem;
+  text-transform: uppercase;
+
+  @media screen and (max-width: 650px) {
+    font-size: 2rem;
+  }
+}
+
+.price-text,
+.discount-price {
+  font-size: 1.8rem;
+  letter-spacing: 0.13rem;
+
+  @media screen and (max-width: 1330px) {
+    margin-bottom: 1rem;
+  }
+}
+
+.discount-price {
+  color: var(--color-red);
+}
+
+.discount-price + .price-text {
+  text-decoration: line-through;
+  font-size: 1.5rem;
+}
+
+.product-text {
+  margin: 1.5rem 0;
+  padding: 0 1rem;
+  line-height: 2.4rem;
+
+  @media screen and (max-width: 1330px) {
+    font-size: 1.4rem;
+  }
+
+  @media screen and (max-width: 650px) {
+    max-width: 50rem;
+  }
+
+  @media screen and (max-width: 530px) {
+    max-width: 30rem;
+  }
+}
+
+.breadcrumbs {
+  font-family: 'Grot12', sans-serif;
+  font-size: 1.5rem;
+  margin: 2rem 0;
+  color: var(--color-breadcrumbs);
+}
+
+.breadcrumbs-active {
+  color: var(--color-black);
+}
+
+.person-role,
+.person-text {
+  margin-top: 1.5rem;
+}
+
+.person-role {
+  font-size: 1.4rem;
+  font-style: italic;
+  color: var(--color-breadcrumbs);
+  letter-spacing: 0.6px;
+}
+
+.person-text {
+  line-height: 1.5;
+  flex-grow: 1;
+}
+
+.person-tag {
+  font-size: 1.2rem;
+  letter-spacing: 0.6px;
+  padding: 0.7rem;
+  border: 1px solid var(--color-footer-background);
+  color: var(--color-footer-background);
+}

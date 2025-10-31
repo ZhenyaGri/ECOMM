@@ -1,0 +1,47 @@
+@use './mixins' as *;
+@use './auth_mixin' as *;
+.create-account__input-list {
+  max-width: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  @include input-item-style(
+    '.create-account__input-item',
+    '.create-account__input'
+  );
+
+  .create-account-option {
+    @include fontStyle(14px, 400, 1px, var(--font-color));
+  }
+
+  .create-account-option-title {
+    @include fontStyle(14px, 600, 1px, var(--font-color));
+  }
+
+  .create-account__input-item-checkbox {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    gap: 5px;
+    padding: 0 15px;
+  }
+}
+.create-account__btn-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  @include btn-base('.create-account__btn', '.create-account__btn-title');
+
+  .create-account__cancel-text {
+    position: relative;
+    cursor: pointer;
+    @include fontStyle(14px, 400, 1px, #121212d9);
+    @include underlineOnHover;
+  }
+}

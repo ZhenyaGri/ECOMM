@@ -1,0 +1,48 @@
+@use './auth-create-account';
+@use './auth-log-in';
+@use './auth-reset-pass';
+@use './mixins' as *;
+.create-account,
+.auth-log-in,
+.auth-reset {
+  width: 100%;
+
+  min-height: 562px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  gap: 20px;
+
+  padding: 20px 0;
+  .create-account__title,
+  .auth-log-in__title {
+    @include fontStyle(50px, 400, 1px, var(--font-color));
+  }
+  .address-title {
+    @include fontStyle(28px, 400, 1px, var(--font-color));
+  }
+
+  li {
+    padding: 0;
+    margin: 0;
+    list-style-type: none;
+  }
+}
+
+.input-item-warning {
+  width: 100%;
+  padding: 0 15px;
+  @include fontStyle(12px, 600, 1px, rgb(212, 0, 0));
+}
+
+.auth-log-in__error-message,
+.create-account__error-message {
+  @include fontStyle(20px, 600, 1px, rgb(212, 0, 0));
+}
+
+.create-account__error-message {
+  margin-bottom: 40px;
+}

@@ -1,0 +1,39 @@
+@use '../../auth/style/mixins' as *;
+
+.basket-header__wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  .basket-header-list {
+    width: 100%;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+
+    .item--product {
+      width: 40%;
+    }
+
+    .item--price,
+    .item--quantity,
+    .item--total {
+      width: 20%;
+    }
+
+    .basket-header-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .header-item-title {
+        @include fontStyle(23px, 400, 1px, #121212d9);
+      }
+    }
+  }
+
+  .basket-style-line {
+    width: 100%;
+    height: 1px;
+    background-color: #000;
+  }
+}
